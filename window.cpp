@@ -3,6 +3,8 @@
 #include <vector>
 #include <algorithm>
 #include "keyboard.h"
+#include "maps.h"
+#include "gameboard.h"
 
 using namespace std;
 
@@ -50,6 +52,7 @@ void PrintWindow(vector<vector<string> >& board, int x, int y, int width, int he
 
 // testing
 int main() {
+    /* Example usage
     vector<vector<string> > gameBoard;
     vector<string> row1;
     row1.push_back("#");
@@ -125,9 +128,9 @@ int main() {
     row5.push_back("#");
     row5.push_back("#");
     gameBoard.push_back(row5);
-
+*/
     string content = "Hello";
-    PrintWindow(gameBoard, 1, 1, content.length(), 1, content);
+    PrintWindow(board, 1, 1, content.length(), 1, content);
 
     return 0;
 }
