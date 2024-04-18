@@ -5,7 +5,7 @@
 #include <vector>
 using namespace std;
 
-const int COLS = 20;
+const int COLS = 27;
 const int ROWS = 20;
 
 struct Player {
@@ -69,7 +69,8 @@ void player_move(string key) {
     // Animation and direction shoot
     if (player.hrz == 0 && player.vtcl == 0) {
         player.symbol = "|@|";
-    } else {
+    } 
+    else {
         if (player.hrz == 1) {
             player.symbol = "|@>";
         }
@@ -88,7 +89,7 @@ void player_move(string key) {
     player.y += player.vtcl;
 }
 
-void displayBoard(const vector<vector<string>>& board) {
+void displayBoard(const vector<vector<string> >& board) {
     for (int i = 0; i < ROWS; i++) {
         for (int j = 0; j < COLS; j++) {
             if (i == player.y && j == player.x) {
@@ -103,13 +104,16 @@ void displayBoard(const vector<vector<string>>& board) {
 
 int main() {
     string key;
-    struct termios oldSettings, newSettings;
-    tcgetattr(STDIN_FILENO, &oldSettings);
-    newSettings = oldSettings;
-    newSettings.c_lflag &= ~(ICANON | ECHO);
-    tcsetattr(STDIN_FILENO, TCSANOW, &newSettings);
+    struct termios oldSettings, newSettings;    // termios is a struct that contains terminal attributes
+    tcgetattr(STDIN_FILENO, &oldSettings);  // write the current terminal attributes into oldSettings
+    newSettings = oldSettings; 
+    newSettings.c_lflag &= ~(ICANON | ECHO);    // Disable canonical mode (buffered i/o) and local echo to read the input character by character
+    tcsetattr(STDIN_FILENO, TCSANOW, &newSettings);     // int, action (immediate adjustment), settings
 
-    vector<vector<string>> board(ROWS, vector<string>(COLS, " "));
+    player.x = 0;
+    player.y = 0;
+
+    vector<vector<string> > board(ROWS, vector<string>(COLS, " "));
 
     while (true) {
         // Clear the console
@@ -119,39 +123,46 @@ int main() {
         displayBoard(board);
 
         cout << "Enter a key: " << endl;
-        char userInput = getchar();
+        
+        // Debug: Print the player animation
+        // cout << "Player position: (" << player.x << ", " << player.y << ")" << endl;
+        // cout << "Player animation: " << player.symbol << endl; 
+
+        board[player.y][player.x] = " ";
+
+        char userInput = getchar(); // Get the user input by 1 char
+
         switch (userInput) {
-        case 'W': case 'w': case '\033[A': // Up arrow
+        case 'W': case 'w':
             player_move("UP");
-            break; // Added break statement
-        case 'A': case 'a': case '\033[D': // Left arrow
+            break;
+        case 'A': case 'a':
             player_move("LEFT");
-            break; // Added break statement
-        case 'S': case 's': case '\033[B': // Down arrow
+            break;
+        case 'S': case 's':
             player_move("DOWN");
-            break; // Added break statement
-        case 'D': case 'd': case '\033[C': // Right arrow
+            break; 
+        case 'D': case 'd':
             player_move("RIGHT");
-            break; // Added break statement
+            break; 
+        //case 'E': case 'e':
+            
+            //break;
+        
         case 'Q': case 'q':
             cout << "Exiting..." << endl;
             return 0;
+        
         default:
             cout << "Invalid key pressed" << endl;
             break;
         }
 
-        // Update the board with the player's position
-        for (int i = 0; i < ROWS; i++) {
-            for (int j = 0; j < COLS; j++) {
-                board[i][j] = " ";
-            }
-        }
         board[player.y][player.x] = player.symbol;
-        /*
-        // Print the player animation
-        cout << "Player position: (" << player.x << ", " << player.y << ")" << endl;
-        cout << "Player animation: " << player.symbol << endl; */
+
+        // Update the board with the player's position
+        displayBoard(board);
+        
     }
 
     tcsetattr(STDIN_FILENO, TCSANOW, &oldSettings);
