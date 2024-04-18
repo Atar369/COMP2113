@@ -3,60 +3,77 @@
 
 #pragma once
 
+#include <iostream>
 #include <string>
 #include <map>
 using namespace std;
 
+
 // define format codes
-#define RESET "\033[0m"
-#define BOLD "\033[1m"
-#define DIM "\033[2m"
-#define ITALIC "\033[3m"
-#define UNDERLINE "\033[4m"
-#define BLINK "\033[5m"
-#define REVERSE "\033[7m"
-#define CONCEALED "\033[8m"
+#define reset "\033[0m"
+#define bold "\033[1m"
+#define dim "\033[2m"
+#define italic "\033[3m"
+#define underline "\033[4m"
+#define blink "\033[5m"
+#define reverse "\033[7m"
+#define concealed "\033[8m"
 
 // Define font colours
-#define FONT_BLACK "\033[30m"
-#define FONT_RED "\033[31m"
-#define FONT_GREEN "\033[32m"
-#define FONT_YELLOW "\033[33m"
-#define FONT_BLUE "\033[34m"
-#define FONT_PURPLE "\033[35m"
-#define FONT_CYAN "\033[36m"
-#define FONT_WHITE "\033[37m"
+#define font_black "\033[30m"
+#define font_red "\033[31m"
+#define font_green "\033[32m"
+#define font_yellow "\033[33m"
+#define font_blue "\033[34m"
+#define font_purple "\033[35m"
+#define font_cyan "\033[36m"
+#define font_white "\033[37m"
 
 // Define background colours
-#define BACK_BLACK "\033[40m"
-#define BACK_RED "\033[41m"
-#define BACK_GREEN "\033[42m"
-#define BACK_YELLOW "\033[43m"
-#define BACK_BLUE "\033[44m"
-#define BACK_PURPLE "\033[45m"
-#define BACK_CYAN "\033[46m"
-#define BACK_WHITE "\033[47m"
+#define back_black "\033[40m"
+#define back_red "\033[41m"
+#define back_green "\033[42m"
+#define back_yellow "\033[43m"
+#define back_blue "\033[44m"
+#define back_purple "\033[45m"
+#define back_cyan "\033[46m"
+#define back_white "\033[47m"
 
 // Define printing settings
-#define MOVE_UP_BY_N "\033[nA"
-#define MOVE_DOWN_BY_N "\033[nB"
-#define MOVE_RIGHT_BY_N "\033[nC"
-#define MOVE_LEFT_BY_N "\033[nD"
-#define CLEAR_SCREEN "\033[2J"
-#define ROMOVE_WHOLE_LINE "\033[K"
+#define move_up_by_n "\033[nA"
+#define move_down_by_n "\033[nB"
+#define move_right_by_n "\033[nC"
+#define move_left_by_n "\033[nD"
+#define clear_screen "\033[2J"
+#define remove_whole_line "\033[K"
 
-const map<string, string> mod_map = {{"bold", BOLD}, {"underline", UNDERLINE}, {"blink", BLINK}, {"reverse", REVERSE}, {"concealed", CONCEALED}};
-const map<string, string> font_map = {{"black", FONT_BLACK}, {"red", FONT_RED}, {"green", FONT_GREEN}, {"yellow", FONT_YELLOW}, {"blue", FONT_BLUE}, {"purple", FONT_PURPLE}, {"cyan", FONT_CYAN}, {"white", FONT_WHITE}};
-const map<string, string> back_map = {{"black", BACK_BLACK}, {"red", BACK_RED}, {"green", BACK_GREEN}, {"yellow", BACK_YELLOW}, {"blue", BACK_BLUE}, {"purple", BACK_PURPLE}, {"cyan", BACK_CYAN}, {"white", BACK_WHITE}};
-
-
-class Format {
-    public:
-        int x;
-        int y;
-        int length;
-        string format;
-
-    public:
-        Format(int x, int y, int length, string format);
+const map<string, string> mod_map = {
+    {"bold", bold}, 
+    {"underline", underline}, 
+    {"blink", blink}, 
+    {"reverse", reverse}, 
+    {"concealed", concealed}
 };
+
+const map<string, string> font_map = {
+    {"font_black", font_black}, 
+    {"font_red", font_red}, 
+    {"font_green", font_green}, 
+    {"font_yellow", font_yellow}, 
+    {"font_blue", font_blue}, 
+    {"font_purple", font_purple}, 
+    {"font_cyan", font_cyan}, 
+    {"font_white", font_white}
+};
+
+const map<string, string> back_map = {
+    {"back_black", back_black}, 
+    {"back_red", back_red}, 
+    {"back_green", back_green}, 
+    {"back_yellow", back_yellow}, 
+    {"back_blue", back_blue}, 
+    {"back_purple", back_purple}, 
+    {"back_cyan", back_cyan}, 
+    {"back_white", back_white}
+};
+
