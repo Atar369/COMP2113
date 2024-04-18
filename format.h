@@ -47,33 +47,4 @@ using namespace std;
 #define clear_screen "\033[2J"
 #define remove_whole_line "\033[K"
 
-const map<string, string> mod_map = {
-    {"bold", bold}, 
-    {"underline", underline}, 
-    {"blink", blink}, 
-    {"reverse", reverse}, 
-    {"concealed", concealed}
-};
-
-const map<string, string> font_map = {
-    {"font_black", font_black}, 
-    {"font_red", font_red}, 
-    {"font_green", font_green}, 
-    {"font_yellow", font_yellow}, 
-    {"font_blue", font_blue}, 
-    {"font_purple", font_purple}, 
-    {"font_cyan", font_cyan}, 
-    {"font_white", font_white}
-};
-
-const map<string, string> back_map = {
-    {"back_black", back_black}, 
-    {"back_red", back_red}, 
-    {"back_green", back_green}, 
-    {"back_yellow", back_yellow}, 
-    {"back_blue", back_blue}, 
-    {"back_purple", back_purple}, 
-    {"back_cyan", back_cyan}, 
-    {"back_white", back_white}
-};
 
