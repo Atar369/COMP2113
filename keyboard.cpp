@@ -145,9 +145,9 @@ int main() {
         case 'D': case 'd':
             player_move("RIGHT");
             break; 
-        //case 'E': case 'e':
+        case 'E': case 'e':
             
-            //break;
+            break;
         
         case 'Q': case 'q':
             cout << "Exiting..." << endl;
