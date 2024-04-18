@@ -3,15 +3,15 @@
 #include <string>
 #include <map>
 #include <random>
+#include <cstdlib>
+#include <ctime>
 
 using namespace std;
 
 // Function to generate a random number within a range
-int getRandomNumber(int min, int max) {
-    static random_device rd;
-    static mt19937 gen(rd());
-    uniform_int_distribution<int> dist(min, max);
-    return dist(gen);
+int getRandomNumber(int a, int b) {
+    srand(time(NULL));
+    return rand() % b + a; // Generate a random number between a and b, to be confirmed how many lines they will say
 }
 
 const map<string, vector<string>> chat_map = {
