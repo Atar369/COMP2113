@@ -1,13 +1,16 @@
-#ifndef KEYBOARD_H
+#ifndef KEYBOARD_H // include guard
 #define KEYBOARD_H
 
-// Function declarations or class definitions go here
+#include <string>
+#include <vector>
+using namespace std;
+
 struct Player {
     int x;
     int y;
     int hrz;
     int vtcl;
-    char symbol[4];
+    char symbol;
 };
 
 Player player;
@@ -21,4 +24,9 @@ void moveLeft();
 void moveRight();
 
 void stopMovement();
+
+void player_move(string key);
+
+void displayBoard(const vector<vector<string> >& board);
+
 #endif // KEYBOARD_H
