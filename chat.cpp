@@ -101,6 +101,42 @@ string getRandomVillagerChat(bool isPlayerHero, bool isPlayerGirl, int Scn_num) 
                         return "The dragon's power is immense, but so is your determination!";
                 }
                 break;
+            case 4:
+                switch (randomNumber) {
+                    case 1:
+                        return "You did it! The dragon is slain and our village will suffer no more!";
+                    case 2:
+                        return "Thankyou for saving the girl! You are our hero!";
+                    case 3:
+                        return "It was a tough journey, isn't it?";
+                    case 4:
+                        return "Welcome back, our savior!";
+                }
+                break;
+            case 5:
+                switch (randomNumber) {
+                    case 1:
+                        return "W..What happened? Why did you kill her!!";
+                    case 2:
+                        return "YOU MONSTER!!";
+                    case 3:
+                        return "Are you out of your mind?!";
+                    case 4:
+                        return "I knew we should not have trusted you!";
+                }
+                break;
+            case 6:
+                switch (randomNumber) {
+                    case 1:
+                        return "I can't believe you are such a coward!";
+                    case 2:
+                        return "Why would you come back after failing?";
+                    case 3:
+                        return "I knew we should not have trusted you!";
+                    case 4:
+                        return "Just another liar...";
+                }
+                break;
         }
     }
     else if (isPlayerGirl) {
