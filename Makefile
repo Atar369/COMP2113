@@ -1,16 +1,13 @@
-FLAGS = -pedantic-errors -std=c++11
+flag = -pedantic-errors -std=c++11
+obj = draw_main.o draw.o keyboard.o object.o player.o 
 
-keyboard.o: keyboard.cpp keyboard.h
-	g++ $(FLAGS) $^ -o $@
+%.o: %.cpp *.h
+	g++ $(flag) -c $<
 
-player.o: player.cpp player.h
-  g++ $(FLAGS) $^ -o $@
+main: $(obj)
+	g++ $(flag) $^ -o $@
 
-object.o: object.cpp object.o
-  g++ $(FLAGS) $^ -o $@
-
-# Clean up object files and executable
 clean:
-	rm -f *.o 
+	rm -rf $(obj) main
 
-.PHONY: clean	
+.PHONY: clean
