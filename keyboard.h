@@ -1,32 +1,13 @@
-#ifndef KEYBOARD_H // include guard
-#define KEYBOARD_H
+#pragma once
 
-#include <string>
-#include <vector>
-using namespace std;
+#define KEY_UP 650
+#define KEY_DOWN 660
+#define KEY_RIGHT 670
+#define KEY_LEFT 680
+#define KEY_ENTER 10 // '\n' key
+#define KEY_ESC 27  
+#define KEY_SPACE 32
+#define KEY_ACTION 69
+#define KEY_EXIT 81
 
-struct Player {
-    int x;
-    int y;
-    int hrz;
-    int vtcl;
-    char symbol;
-};
-
-Player player;
-
-void moveUp();
-
-void moveDown();
-
-void moveLeft();
-
-void moveRight();
-
-void stopMovement();
-
-void player_move(string key);
-
-void displayBoard(const vector<vector<string> >& board);
-
-#endif // KEYBOARD_H
+void get_userInput();
