@@ -1,14 +1,6 @@
-#include <iostream>
-#include <unistd.h>
-#include <string>
-#include <cstring>
-#include <vector>
-#include "constant.h"
-#include "object.h"
+#include "player.h"
 
-using namespace std;
-
-
+object player;
 
 void moveUp() {
     player.vtrl = -1;
@@ -31,73 +23,109 @@ void stopMovement() {
     player.vtrl = 0;
 }
 
-int dir_x;
-int dir_y;
+/*
+void updatePlayercorr(short current_map[ROWS][COLS]) {
+    for (int i = 0; i < ROWS; i++) {
+        for (int j = 0; j < COLS; j++) {
+            if (current_map[i][j] == i_player) {
+                player.x = j;
+                player.y = i;
+            }
+        }
+    }
+}   */ 
 
-int player_move(const string key, short current_map[ROWS][COLS]) {
+void player_move(int key, short current_map[ROWS][COLS]) {
     // Key check
-    int key_left  = ( key == "LEFT" ) ? 1 : 0;
-    int key_right = ( key == "RIGHT" ) ? 1 : 0;
-    int key_down  = ( key == "DOWN" ) ? 1 : 0;
-    int key_up    = ( key == "UP" ) ? 1 : 0;
+    bool left  = ( key == KEY_LEFT ) ? 1 : 0;
+    bool right = ( key == KEY_RIGHT ) ? 1 : 0;
+    bool down  = ( key == KEY_DOWN ) ? 1 : 0;
+    bool up    = ( key == KEY_UP ) ? 1 : 0;
 
-    // Reset player's movement
+    // Reset player movement
     stopMovement();
 
-    // key dir
-    dir_x = key_right - key_left;
-    dir_y = key_down  - key_up;
-
     // Animation and direction shoot
-    int dir_shoot = 0;
+    //int dir_shoot = 0;
 
-    if (dir_x == 0 && dir_y == 0) {
+    if (!left && !right && !down && !up) {
         player.symbol = "|0|";
     } 
     else {
-        if (dir_x == 1) { 
+        if (right) { 
             //dir_shoot = 1; 
             player.symbol = "|0>";
         }
-        if (dir_x == -1) { 
+        if (left) { 
             //dir_shoot = -1; 
             player.symbol = "<0|"; 
         }
-        if (dir_y == -1) { 
+        if (up) { 
             //dir_shoot = -2; 
             player.symbol = "/0\\"; 
         }
-        if (dir_y == 1) { 
+        if (down) { 
             //dir_shoot = 2; 
             player.symbol = "\\0/"; 
         }
     }
 
-    player.hrz = 1 * dir_x;
-    player.vtrl = 1 * dir_y;  
+    // Move player
+    player.hrz = int(right) - int(left);
+    player.vtrl = int(down) - int(up);
+
+    // Check
+    if (player.hrz != 0) {
+        player.vtrl = 0;
+    } 
+    else if (player.vtrl != 0) {
+        player.hrz = 0;
+    }
 
     player.x += player.hrz;
     player.y += player.vtrl;
 }
 
+
+// Collsiion
+void player_collision(short current_map[][COLS]) {
+    switch(current_map[player.y][player.x]) {
+        
+        // Collision
+        case i_wall:    // wall
+        case i_npc:     // box
+        case i_lightoff:  // lightoff
+        case i_lighton:   // lighton
+        case i_monster:   // monster
+        case i_closet:    // closet
+        case i_chair:     // chair
+            player.x -= player.hrz;
+            player.y -= player.vtrl;
+            break;
+
+        // Treasure collision
+        case i_treasure:
+            current_map[player.y][player.x] = 0;
+        break;
+
+        // key collision
+        case i_key:
+            current_map[player.y][player.x] = 0;
+        break;
+    }
+}
+
 /* testing
-void displayBoard(const vector<vector<string> >& board) {
+void displayMap(short current_map[ROWS][COLS]) {
     for (int i = 0; i < ROWS; i++) {
         for (int j = 0; j < COLS; j++) {
             if (i == player.y && j == player.x) {
-                cout << player.symbol << " ";
+                cout << player.symbol << "";
             } else {
-                cout << board[i][j] << " ";
+                cout << current_map[i][j] << "";
             }
         }
         cout << endl;
     }
-}
-int main() {
-    while (true) {
-        displayBoard(board);
-        usleep(100000);
-        system("clear");
-    }
-}
-*/
+}  */
+
