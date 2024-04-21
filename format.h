@@ -8,7 +8,8 @@
 #include "constant.h"
 
 using namespace std;
-
+// Define standard 
+#define default_format "\033["
 
 // define format codes
 #define reset "\033[0m"
@@ -47,31 +48,45 @@ using namespace std;
 #define move_left_by_n "\033[nD"
 #define clear_screen "\033[2J"
 #define remove_whole_line "\033[K"
+#define save_cursor_position "\033[s"
+#define restore_cursor_position "\033[u"
+#define hide_cursor "\033[?25l"
+#define show_cursor "\033[?25h"
 
-// Define color pairs
-unordered_map<short, string> color_mapping = {
-    {c_wall       ,   font_white},
-    {c_grass      ,   italic},
-    {c_dragon     ,   bold},
-    {c_key        ,   blink},
-    {c_lightoff   ,   dim}
-};
+
+// Define color pairs 
+extern unordered_map<short, string> effect_mapping;
 
 // Define effect pairs
-unordered_map<short, string> effect_mapping = {
-    {c_treasure  ,   font_yellow},
-    {c_door      ,   font_white},
-    {c_chair     ,   font_cyan},
-    {c_npc       ,   font_white},
-    {c_player    ,   font_white},
-    {c_enemy     ,   font_blue},
-    {c_monster   ,   font_blue},
-    {c_grass     ,   font_green},
-    {c_closet    ,   font_cyan},
-    {c_dragon    ,   font_red},
-    {c_key       ,   font_white},
-    {c_table     ,   font_cyan},
-    {c_bed       ,   font_white},
-    {c_lightoff  ,   font_yellow},
-    {c_lighton   ,   font_yellow}
+extern unordered_map<short, string> color_mapping;
+
+/*
+const map<string, string> mod_map = {
+    {"bold", bold}, 
+    {"underline", underline}, 
+    {"blink", blink}, 
+    {"reverse", reverse}, 
+    {"concealed", concealed}
 };
+
+const map<string, string> font_map = {
+    {"font_black", font_black}, 
+    {"font_red", font_red}, 
+    {"font_green", font_green}, 
+    {"font_yellow", font_yellow}, 
+    {"font_blue", font_blue}, 
+    {"font_purple", font_purple}, 
+    {"font_cyan", font_cyan}, 
+    {"font_white", font_white}
+};
+
+const map<string, string> back_map = {
+    {"back_black", back_black}, 
+    {"back_red", back_red}, 
+    {"back_green", back_green}, 
+    {"back_yellow", back_yellow}, 
+    {"back_blue", back_blue}, 
+    {"back_purple", back_purple}, 
+    {"back_cyan", back_cyan}, 
+    {"back_white", back_white}
+}; */
