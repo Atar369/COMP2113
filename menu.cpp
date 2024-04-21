@@ -1,5 +1,9 @@
 #include <iostream>
 #include <string>
+#include <sys/ioct.h>
+//#include "player.h"
+//#include "draw.h"
+//#include "keyboard.h"
 
 using namespace std;
 
