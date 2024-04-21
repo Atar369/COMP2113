@@ -1,0 +1,25 @@
+flag = -pedantic-errors -std=c++11
+main = maintest
+
+$(main): maintest.o keyboard.o format.o menu.o
+	g++ -o $@ $(flag) $^
+
+format.o: format.cpp format.h
+	g++ $(flag) -c $< -o $@
+
+keyboard.o: keyboard.cpp keyboard.h
+	g++ $(flag) -c $< -o $@
+
+menu.o: menu.cpp menu.h
+	g++ $(flag) -c $< -o $@
+
+$(main).o: $(main).cpp menu.h keyboard.h
+	g++ $(flag) -c $< -o $@
+
+clean:
+	rm -rf *.o $(main)
+
+test:
+	./$(main)
+
+.PHONY: clean, test
