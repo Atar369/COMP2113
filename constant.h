@@ -4,22 +4,19 @@
 #include <string>
 using namespace std;
 
-// Const state
-bool EXIT = false;
-
 // Game board size
 #define COLS 27
 #define ROWS 20
 
 // Game Global var
-short choice = 1;
-short option = 0;
-short Scn_num = 0;
-short map_code = 0;
+//short choice = 1;
+//short option = 0;
+//short Scn_num = 0;
+//short map_code = 0;
 // short lifes = 3;
 
 //int apples_in_level = 0;
-int bullet_shoot = false;
+//int bullet_shoot = false;
 
 
 // Window width & Height
@@ -64,8 +61,24 @@ const short c_lighton    = 16;
 #define i_lightoff  15
 #define i_lighton   16
 
+// Symbol map object
+#define s_empty         "   "
+#define s_wall          "///"
+#define s_treasure      "[$]"
+#define s_door          "{ }"
+#define s_chair         "|-|"
+#define s_npc           "/N\\"
+#define s_player        "|@|"
+#define s_enemy         "(-)"
+#define s_monster       "(?)"
+#define s_grass         "www"
+#define s_closet        "[=]"
+#define s_dragon        "^@^"
+#define s_key           "[*]"
+#define s_table         "[T]"
+#define s_bed           "==="
+#define s_lightoff      "[']"
+#define s_lighton       "[`]" 
+
 #define ROWS 20
 #define COLS 27
-
-
-
