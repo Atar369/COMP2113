@@ -1,13 +1,28 @@
 flag = -pedantic-errors -std=c++11
-obj = draw_main.o draw.o keyboard.o object.o player.o 
+main = runtest
 
-%.o: %.cpp *.h
-	g++ $(flag) -c $<
+$(main): runtest.o player.o keyboard.o draw.o format.o
+	g++ -o $@ $(flag) $^
 
-main: $(obj)
-	g++ $(flag) $^ -o $@
+format.o: format.cpp format.h
+	g++ $(flag) -c $< -o $@
+
+keyboard.o: keyboard.cpp keyboard.h
+	g++ $(flag) -c $< -o $@
+
+player.o: player.cpp player.h keyboard.h constant.h
+	g++ $(flag) -c $< -o $@
+
+draw.o: draw.cpp draw.h player.h format.h
+	g++ $(flag) -c $< -o $@
+
+runtest.o: runtest.cpp draw.h
+	g++ $(flag) -c $< -o $@
 
 clean:
-	rm -rf $(obj) main
+	rm -rf *.o $(main)
 
-.PHONY: clean
+test:
+	./runtest
+
+.PHONY: clean, test
