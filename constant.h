@@ -93,6 +93,14 @@ const short c_dragon = 66;
 const short c_deaddragonnpc = 67;
 const short c_deaddragon = 68;
 const short c_player = 69;
+const short c_oldman = 70;
+const short c_rooftop1 = 71;
+const short c_rooftop2 = 72;
+const short c_rooftop3 = 73;
+const short c_rooftop4 = 74;
+const short c_knob = 75;
+const short c_rooftop5 = 76;
+const short c_rooftop6 = 77;
 
 #define i_empty        0
 #define i_c_dtopleft   1
@@ -164,6 +172,14 @@ const short c_player = 69;
 #define i_c_deaddragonnpc 67
 #define i_c_deaddragon 68
 #define i_c_player 69
+#define i_c_oldman 70
+#define i_c_rooftop1 71
+#define i_c_rooftop2 72
+#define i_c_rooftop3 73
+#define i_c_rooftop4 74
+#define i_c_knob 75
+#define i_c_rooftop5 76
+#define i_c_rooftop6 77
 
 // Symbol map object
 #define s_empty         "   "
@@ -236,3 +252,11 @@ const short c_player = 69;
 #define s_deaddragonnpc "^░^"
 #define s_deaddragon "^▒^"
 #define s_player "/@\\"
+#define s_oldman "/▼\\"
+#define s_rooftop1 " /_"
+#define s_rooftop2 "/  "
+#define s_rooftop3 "_\\ "
+#define s_rooftop4 "  \\"
+#define s_knob "  ."
+#define s_rooftop5 " __"
+#define s_rooftop6 "__ "
