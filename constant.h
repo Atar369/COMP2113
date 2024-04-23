@@ -76,9 +76,24 @@ const short c_leaveleft = 49;
 const short c_leaveright = 50;
 const short c_dmbottomleft = 51;
 const short c_dmbottomright = 52;
+const short c_bush = 53;
+const short c_brick = 54;
+const short c_castle = 55;
+const short c_flag = 56;
+const short c_hole = 57;
+const short c_stairs1 = 58;
+const short c_stairs2 = 59;
+const short c_stairs3 = 60;
+const short c_stairs4 = 61;
+const short c_stairs5 = 62;
+const short c_stairs6 = 63;
+const short c_stairs7 = 64;
+const short c_dragonnpc = 65;
+const short c_dragon = 66;
+const short c_deaddragonnpc = 67;
+const short c_deaddragon = 68;
+const short c_player = 69;
 
-
-// Index map object
 #define i_empty        0
 #define i_c_dtopleft   1
 #define i_c_dtopright  2
@@ -132,6 +147,23 @@ const short c_dmbottomright = 52;
 #define i_c_leaveright 50
 #define i_c_dmbottomleft 51
 #define i_c_dmbottomright 52
+#define i_c_bush 53
+#define i_c_brick 54
+#define i_c_castle 55
+#define i_c_flag 56
+#define i_c_hole 57
+#define i_c_stairs1 58
+#define i_c_stairs2 59
+#define i_c_stairs3 60
+#define i_c_stairs4 61
+#define i_c_stairs5 62
+#define i_c_stairs6 63
+#define i_c_stairs7 64
+#define i_c_dragonnpc 65
+#define i_c_dragon 66
+#define i_c_deaddragonnpc 67
+#define i_c_deaddragon 68
+#define i_c_player 69
 
 // Symbol map object
 #define s_empty         "   "
@@ -181,3 +213,26 @@ const short c_dmbottomright = 52;
 #define s_tree "|=|"
 #define s_treebranch "/=\\"
 #define s_treeleft "  /"
+#define s_treeright "\\  "
+#define s_grass "wWw"
+#define s_leaveleft "=  "
+#define s_leaveright "  ="
+#define s_dmbottomleft " ╚═"
+#define s_dmbottomright "═╝ "
+#define s_bush " _ "
+#define s_brick "║║║"
+#define s_castle "_═_"
+#define s_flag " ⚑ "
+#define s_hole " o "
+#define s_stairs1 "  |"
+#define s_stairs2 "|  "
+#define s_stairs3 "__/"
+#define s_stairs4 "\\__"
+#define s_stairs5 " |_"
+#define s_stairs6 "_| "
+#define s_stairs7 "___"
+#define s_dragonnpc "^N^"
+#define s_dragon "^@^"
+#define s_deaddragonnpc "^░^"
+#define s_deaddragon "^▒^"
+#define s_player "/@\\"
