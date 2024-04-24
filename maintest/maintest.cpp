@@ -2,8 +2,10 @@
 #include <sys/ioctl.h>
 #include <string>
 #include <unistd.h>
+#include <fstream>
 #include "menu.h"
 #include "Hero.h"
+#include "progress.h"
 using namespace std;
 
 // Escape sequences for cursor positioning and movement
@@ -16,6 +18,7 @@ int main() {
         STATE_HTP,
         STATE_ACHIEVE,
         STATE_GAME,
+        STATE_CONTIN,
         STATE_EXIT,
     } game_states;
 
@@ -24,7 +27,7 @@ int main() {
     ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
     int rows = w.ws_row;
     int cols = w.ws_col;
-
+    
      // Calculate the coordinates for centering the text
     int startRow = rows / 2;
     int startCol = cols / 2; // Adjust for the length of the longest string
@@ -32,6 +35,11 @@ int main() {
     // Init current state
     game_states current_state;
     current_state = STATE_MENU;
+    
+    Progress progress;
+    Keyboard keyboard;
+    Window window;
+    Player player;
 
     ////////////////
     // Main loop
@@ -40,8 +48,13 @@ int main() {
     // Menu menu
     // Buttons
     const string button_start_game[2] = {
-        "> START GAME <",
-        "  Start Game  ",
+        "> NEW GAME <",
+        "  New Game  ",
+    };
+
+    const string button_continue[2] = {
+        "> CONTINUE <",
+        "  Continue  ",
     };
 
     const string button_HTP[2] = {
@@ -75,8 +88,8 @@ int main() {
     while (current_state != STATE_EXIT) {
         // Clear screen
         system("clear");
-        cout << save_cursor_position; // Save cursor position
-        //cout << hide_cursor;  
+        std::cout << save_cursor_position; // Save cursor position
+        std::cout << hide_cursor;  
 
   /**     int check_waiting = keyboard.waiting(keyboard.key);
 
@@ -88,13 +101,24 @@ int main() {
         }
         */
 
-        int select_start_game = 1, select_HTP = 1, select_achieve = 1, select_exit = 1;
+       // Predine the variables
+        int select_start_game = 1, select_HTP = 1, select_achieve = 1, select_exit = 1, select_continue = 1;
+        bool making_choice = true;
+        int choice_button = 0;
+
+        // Save options
+        int select_yes, select_no;
+        vector<string> save_options = {"> YES <", "  Yes  ", "> NO <", "  No  "};
+        vector<vector<short> > temp_map;
 
         // In menu state
         switch(current_state) {
             
             // Menu
             case STATE_MENU:
+
+                system("clear");
+                keyboard.key = 0;
 
                 while (keyboard.key != KEY_ENTER) {
                     // Draw the logo
@@ -110,63 +134,139 @@ int main() {
                         
                     if (keyboard.key == KEY_DOWN) {
                         menu_button++;
+                    } 
+
+                    // if the player saved 
+                    if (progress.checking_loading()) {
+                        if (menu_button >= 4) {
+                            menu_button = 4;
+                        }
+
+                        // check the button
+                        if (menu_button == 0) {
+                            select_start_game = 0;
+                            select_continue = 1;
+                            select_HTP = 1;
+                            select_achieve = 1;
+                            select_exit = 1;
+                        } 
+                        else if (menu_button == 1) {
+                            select_start_game = 1;
+                            select_continue = 0;
+                            select_HTP = 1;
+                            select_achieve = 1;
+                            select_exit = 1;
+                        }
+                        else if (menu_button == 2) {
+                            select_start_game = 1;
+                            select_continue = 1;
+                            select_HTP = 0;
+                            select_achieve = 1;
+                            select_exit = 1;
+                        }
+                        else if (menu_button == 3) {
+                            select_start_game = 1;
+                            select_continue = 1;
+                            select_HTP = 1;
+                            select_achieve = 0;
+                            select_exit = 1;
+                        }
+                        else if (menu_button == 4){
+                            select_start_game = 1;
+                            select_continue = 1;
+                            select_HTP = 1;
+                            select_achieve = 1;
+                            select_exit = 0;
+                        }
+
+                        // Position the cursor and print the text at the center
+                        std::cout << default_format << startRow - logo_h_size + 9 << ";" << startCol - (button_start_game[select_start_game].length())/2 << "H" << button_start_game[select_start_game] << endl;
+
+                        std::cout << default_format << startRow - logo_h_size + 11 << ";" << startCol - (button_continue[select_continue].length())/2 << "H" << button_continue[select_continue] << endl;
+
+                        std::cout << default_format << startRow - logo_h_size + 13 << ";" << startCol - (button_HTP[select_HTP].length())/2 << "H" << button_HTP[select_HTP] << endl;
+
+                        std::cout << default_format << startRow - logo_h_size + 15 << ";" << startCol - (button_achieve[select_achieve].length())/2 << "H" << button_achieve[select_achieve] << endl;
+
+                        std::cout << default_format << startRow - logo_h_size + 17 << ";" << startCol - (button_exit[select_exit].length())/2 << "H" << button_exit[select_exit] << endl;
+
+                        // Click handler
+                        switch(menu_button) {
+                            case 0:
+                                current_state = STATE_GAME;
+                                break;
+                            case 1:
+                                current_state = STATE_CONTIN;
+                                break;
+                            case 2:
+                                current_state = STATE_HTP;
+                                break;
+                            case 3:
+                                current_state = STATE_ACHIEVE;
+                                break;
+                            case 4:
+                                current_state = STATE_EXIT;
+                                break;    
+                        }
+                    }
+
+                    else {
                         if (menu_button >= 3) {
                             menu_button = 3;
                         }
-                    } 
+                        // check the button
+                        if (menu_button == 0) {
+                            select_start_game = 0;
+                            select_HTP = 1;
+                            select_achieve = 1;
+                            select_exit = 1;
+                        } 
+                        else if (menu_button == 1) {
+                            select_start_game = 1;
+                            select_HTP = 0;
+                            select_achieve = 1;
+                            select_exit = 1;
+                        }
+                        else if (menu_button == 2) {
+                            select_start_game = 1;
+                            select_HTP = 1;
+                            select_achieve = 0;
+                            select_exit = 1;
+                        }
+                        else if (menu_button == 3){
+                            select_start_game = 1;
+                            select_HTP = 1;
+                            select_achieve = 1;
+                            select_exit = 0;
+                        }
 
-                    // check the button
-                    if (menu_button == 0) {
-                        select_start_game = 0;
-                        select_HTP = 1;
-                        select_achieve = 1;
-                        select_exit = 1;
-                    } 
-                    else if (menu_button == 1) {
-                        select_start_game = 1;
-                        select_HTP = 0;
-                        select_achieve = 1;
-                        select_exit = 1;
+                        // Position the cursor and print the text at the center
+                        std::cout << default_format << startRow - logo_h_size + 9 << ";" << startCol - (button_start_game[select_start_game].length())/2 << "H" << button_start_game[select_start_game] << endl;
+
+                        std::cout << default_format << startRow - logo_h_size + 11 << ";" << startCol - (button_HTP[select_HTP].length())/2 << "H" << button_HTP[select_HTP] << endl;
+
+                        std::cout << default_format << startRow - logo_h_size + 13 << ";" << startCol - (button_achieve[select_achieve].length())/2 << "H" << button_achieve[select_achieve] << endl;
+
+                        std::cout << default_format << startRow - logo_h_size + 15 << ";" << startCol - (button_exit[select_exit].length())/2 << "H" << button_exit[select_exit] << endl;
+
+                        // Click handler
+                    switch(menu_button) {
+                        case 0:
+                            current_state = STATE_GAME;
+                            break;
+                        case 1:
+                            current_state = STATE_HTP;
+                            break;
+                        case 2:
+                            current_state = STATE_ACHIEVE;
+                            break;
+                        case 3:
+                            current_state = STATE_EXIT;
+                            break;    
                     }
-                    else if (menu_button == 2) {
-                        select_start_game = 1;
-                        select_HTP = 1;
-                        select_achieve = 0;
-                        select_exit = 1;
-                    }
-                    else if (menu_button == 3) {
-                        select_start_game = 1;
-                        select_HTP = 1;
-                        select_achieve = 1;
-                        select_exit = 0;
-                    }
-
-                    // Position the cursor and print the text at the center
-                    cout << default_format << startRow - logo_h_size + 9 << ";" << startCol - (button_start_game[select_start_game].length())/2 << "H" << button_start_game[select_start_game] << endl;
-
-                    cout << default_format << startRow - logo_h_size + 11 << ";" << startCol - (button_HTP[select_HTP].length())/2 << "H" << button_HTP[select_HTP] << endl;
-
-                    cout << default_format << startRow - logo_h_size + 13 << ";" << startCol - (button_achieve[select_achieve].length())/2 << "H" << button_achieve[select_achieve] << endl;
-
-                    cout << default_format << startRow - logo_h_size + 15 << ";" << startCol - (button_exit[select_exit].length())/2 << "H" << button_exit[select_exit] << endl;
                     
+                    }
                     keyboard.get_userInput();
-                }
-
-                // Click handler
-                switch(menu_button) {
-                    case 0:
-                        current_state = STATE_GAME;
-                        break;
-                    case 1:
-                        current_state = STATE_HTP;
-                        break;
-                    case 2:
-                        current_state = STATE_ACHIEVE;
-                        break;
-                    case 3:
-                        current_state = STATE_EXIT;
-                        break;    
                 }
 
                 break;
@@ -174,14 +274,14 @@ int main() {
             // Info
             case STATE_HTP:
                 // How to play
-                cout << default_format << 10 << ";" << startCol - (how_to_play[0].length())/2 << "H" << how_to_play[0] << endl; // title
-                cout << default_format << 17 << ";" << startCol - (how_to_play[1].length())/2 << "H" << how_to_play[1] << endl; // keys
-                cout << default_format << 19 << ";" << startCol - (how_to_play[2].length())/2 << "H" << how_to_play[2] << endl;
-                cout << default_format << 21 << ";" << startCol - (how_to_play[3].length())/2 << "H" << how_to_play[3] << endl;
-                cout << default_format << 23 << ";" << startCol - (how_to_play[4].length())/2 << "H" << how_to_play[4] << endl;
-                cout << default_format << 25 << ";" << startCol - (how_to_play[5].length())/2 << "H" << how_to_play[5] << endl; // words
-                cout << default_format << 27 << ";" << startCol - (how_to_play[6].length())/2 << "H" << how_to_play[6] << endl;
-                cout << default_format << 30 << ";" << startCol - (how_to_play[7].length())/2 << "H" << how_to_play[7] << endl;
+                std::cout << default_format << 10 << ";" << startCol - (how_to_play[0].length())/2 << "H" << how_to_play[0] << endl; // title
+                std::cout << default_format << 17 << ";" << startCol - (how_to_play[1].length())/2 << "H" << how_to_play[1] << endl; // keys
+                std::cout << default_format << 19 << ";" << startCol - (how_to_play[2].length())/2 << "H" << how_to_play[2] << endl;
+                std::cout << default_format << 21 << ";" << startCol - (how_to_play[3].length())/2 << "H" << how_to_play[3] << endl;
+                std::cout << default_format << 23 << ";" << startCol - (how_to_play[4].length())/2 << "H" << how_to_play[4] << endl;
+                std::cout << default_format << 25 << ";" << startCol - (how_to_play[5].length())/2 << "H" << how_to_play[5] << endl; // words
+                std::cout << default_format << 27 << ";" << startCol - (how_to_play[6].length())/2 << "H" << how_to_play[6] << endl;
+                std::cout << default_format << 30 << ";" << startCol - (how_to_play[7].length())/2 << "H" << how_to_play[7] << endl;
 
                 keyboard.get_userInput();
 
@@ -192,7 +292,7 @@ int main() {
                 break;
 
             case STATE_ACHIEVE:
-                cout << "Achievements" << endl;
+                std::cout << "Achievements" << endl;
                 // to be implemented
                 keyboard.get_userInput();
 
@@ -200,28 +300,147 @@ int main() {
                 if (keyboard.key == KEY_EXIT)
                     current_state = STATE_MENU;
                 break;
+
            // Game
             case STATE_GAME:
-                // Exit to menu
-                if (keyboard.key != KEY_EXIT)
-                    Hero_run();
+
+                // Clear previous progress
+                progress.delete_progress();
+
+                player.x = 4;
+                player.y = 4;
+                player.symbol = "|0|";
+
+                // Start game
+                Hero_run(progress.scn_num, progress.map_code, progress.event_num, player);
+
+                temp_map = map_code_mapping.at(progress.map_code);
+
+                window.build_buffer("Save progress?");
+                window.Print_buffer(temp_map, player);
+
+                while (keyboard.key != KEY_SPACE) {
+                        keyboard.get_userInput();
+                }
+
+                // save quit loop
+                while (true) {
                     
-                current_state = STATE_MENU;    
-                break; 
+                    if (choice_button == 0) {
+                        select_yes = 0;
+                        select_no = 3;
 
+                    } 
+                    else {
+                        select_yes = 1;
+                        select_no = 2;
+                    }  
+
+                    window.build_buffer(save_options[select_yes] + save_options[select_no]);
+                    window.Print_buffer(temp_map, player);
+
+                    keyboard.get_userInput();
+                    
+                    // button
+                    if (keyboard.key == KEY_LEFT) {
+                        choice_button--;
+                        if (choice_button <= 0) {
+                            choice_button = 0;
+                        }
+                    }
+                        
+                    if (keyboard.key == KEY_RIGHT) {
+                        choice_button++;
+                        if (choice_button >= 1) {
+                            choice_button = 1;
+                        }
+                    }
+
+                    if (keyboard.key == KEY_ENTER) 
+                        break;
+                }
+
+                if (choice_button == 0) 
+                    // save progress
+                    progress.save_progress(progress.scn_num, progress.map_code, progress.event_num, player);
                 
-                
-            case STATE_EXIT:
-                cout << "Exiting game" << endl;
+
+                current_state = STATE_MENU; 
+
                 break;
-            }
 
+            case STATE_CONTIN:
+                progress.load_progress(player);
+                player.symbol = "|0|";
+
+                // Continue game
+                Hero_run(progress.scn_num, progress.map_code, progress.event_num, player);
+                
+                temp_map = map_code_mapping.at(progress.map_code);
+
+                window.build_buffer("Save progress?");
+                window.Print_buffer(temp_map, player);
+
+                while (keyboard.key != KEY_SPACE) {
+                        keyboard.get_userInput();
+                }
+
+                // save quit loop
+                while (true) {
+                    
+                    if (choice_button == 0) {
+                        select_yes = 0;
+                        select_no = 3;
+
+                    } 
+                    else {
+                        select_yes = 1;
+                        select_no = 2;
+                    }  
+
+                    window.build_buffer(save_options[select_yes] + "      " + save_options[select_no]);
+                    window.Print_buffer(temp_map, player);
+
+                    keyboard.get_userInput();
+                    
+                    // button
+                    if (keyboard.key == KEY_LEFT) {
+                        choice_button--;
+                        if (choice_button <= 0) {
+                            choice_button = 0;
+                        }
+                    }
+                        
+                    if (keyboard.key == KEY_RIGHT) {
+                        choice_button++;
+                        if (choice_button >= 1) {
+                            choice_button = 1;
+                        }
+                    }
+
+                    if (keyboard.key == KEY_ENTER) 
+                        break;
+                }
+
+                if (choice_button == 0) 
+                    // save progress
+                    progress.save_progress(progress.scn_num, progress.map_code, progress.event_num, player);
+                
+
+                current_state = STATE_MENU; 
+
+                break;
+
+            case STATE_EXIT:
+                std::cout << "Goodbye!" << endl;
+                break;
+                }
+ 
         }
     
-    // Exit
-    cout << restore_cursor_position; // Restore cursor position
-    cout << clear_screen; // Clear screen
-    cout << show_cursor; // Show cursor
+    system("clear"); // Clear screen
+    std::cout << restore_cursor_position; // Restore cursor position
+    std::cout << show_cursor; // Show cursor
     return 0;
     
 }
