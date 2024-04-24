@@ -51,6 +51,6 @@ void Progress::delete_progress() {
     remove("2113_Gp15_mini_game_saving");
     this->scn_num = 0;
     this->map_code = 0;
-    this->event_num = 1;
+    this->event_num = 0;
 }
 
