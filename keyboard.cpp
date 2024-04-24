@@ -1,18 +1,22 @@
 #include "keyboard.h"
 
-bool Keyboard::key_pressed(int key) {
-    if (key != 0 && (key == KEY_UP || key == KEY_DOWN || key == KEY_LEFT || key == KEY_RIGHT || key == KEY_ENTER || key == KEY_ESC || key == KEY_SPACE || key == KEY_ACTION || key == KEY_EXIT) ) {
+Keyboard keyboard;
+
+bool Keyboard::key_pressed() {
+    this->get_userInput();
+    if (this->key != 0 && (this->key != KEY_EXIT || this->key != KEY_ENTER || this->key != KEY_ESC || this->key != KEY_SPACE || this->key != KEY_ACTION || this->key != KEY_UP || this->key != KEY_DOWN || this->key != KEY_LEFT || this->key != KEY_RIGHT) ) {
         return 0;
     }
     return 1;
 }
 
-bool Keyboard::waiting(int key) {
-    if (key == KEY_ENTER) {
-        return 0;
+/*
+void Keyboard::action_loop() {
+    get_userInput();
+    while (key != KEY_EXIT || key != KEY_ENTER || key != KEY_ESC || key != KEY_SPACE || key != KEY_ACTION) {
+        get_userInput();
     }
-    return 1;
-}
+}*/
 
 void Keyboard::get_userInput() {
     struct termios oldSettings, newSettings;
@@ -26,31 +30,31 @@ void Keyboard::get_userInput() {
 
     switch (userInput) {
         case 'W': case 'w': case KEY_UP:
-            key = KEY_UP;
+            this->key = KEY_UP;
             break;
         case 'A': case 'a': case KEY_LEFT:
-            key = KEY_LEFT;
+            this->key = KEY_LEFT;
             break;
         case 'S': case 's': case KEY_DOWN:
-            key = KEY_DOWN;
+            this->key = KEY_DOWN;
             break;
         case 'D': case 'd': case KEY_RIGHT:
-            key = KEY_RIGHT;
+            this->key = KEY_RIGHT;
             break;
         case KEY_ENTER:
-            key = KEY_ENTER;
+            this->key = KEY_ENTER;
             break;
         case KEY_ESC:
-            key = KEY_ESC;
+            this->key = KEY_ESC;
             break;
         case KEY_SPACE:
-            key = KEY_SPACE;
+            this->key = KEY_SPACE;
             break;
         case 'E': case 'e': 
-            key = KEY_ACTION;
+            this->key = KEY_ACTION;
             break;
         case 'Q': case 'q':
-            key = KEY_EXIT;
+            this->key = KEY_EXIT;
             break;
         //default:
             // Ignore invalid keys
