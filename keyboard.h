@@ -5,10 +5,11 @@
 #include <iostream>
 #include <string>
 
-#define KEY_UP 650
+
+#define KEY_UP 650 // hv bugs for arrows
 #define KEY_DOWN 660
 #define KEY_LEFT 680
-#define KEY_RIGHT 670
+#define KEY_RIGHT 670 
 #define KEY_ENTER 10 // '\n' key
 #define KEY_ESC 27  
 #define KEY_SPACE 32
@@ -20,9 +21,11 @@ class Keyboard {
     int key;
 
     public:
-    bool key_pressed(int key);
-    bool waiting(int key);
+    bool key_pressed();
+    //void action_loop();
     void get_userInput();
     //void stop();
 };
+
+extern Keyboard keyboard;
 
