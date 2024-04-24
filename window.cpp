@@ -1,10 +1,11 @@
 #include "window.h"
 
-typedef enum Choices{
-    Choice_1,
-    Choice_2
-} Choices;
+Window window;
 
+// Choice of character, girl or Hero
+const vector<string> player_button = {
+"/@\\", "\\@/"
+};
 
 // content of choice window, match with scn num
 unordered_map<string, vector<string> > choice_map_b4 = {
@@ -98,7 +99,7 @@ void Window::reset_buffer() {
     }
 }
 
-void Window::Print_buffer(vector<vector<short> > current_map) { // position wanted to display
+void Window::Print_buffer(vector<vector<short> > current_map, Player &player, string color) { // position wanted to display
     system("clear");
 
     int k = 0;
@@ -108,28 +109,87 @@ void Window::Print_buffer(vector<vector<short> > current_map) { // position want
         k++;
     }
 
-    draw_map(current_map);
+    draw_map(current_map, player);
     // print buffer window on top of current map, x, y are the top left corner of the window
     //cout << "\033[" << y_coor << ";" << x_coor << "H"; // move cursor to the top left corner of the window
 
     for (int i = 0; i < height; i++) {
         for (int j = 0; j < width; j++) {
-            cout << window_buffer[i][j];
+            cout << color << window_buffer[i][j];
         }
-        cout << endl;
+        cout << reset << endl;
     }
     
     reset_buffer();
 }
 
+void Window::intro_character_choice(Player &player) {
+    string intro = "Choose your character: ";
+
+    cout << default_format << 20 << ";" << MAP_WIDTH/2 - intro.length() << intro << endl;
+
+    // save quit loop
+    while (true) {
+        
+        int select_hero = 0;
+        int select_girl = 0;
+
+        if (choice_button == 0) {
+            select_hero = 1;
+            select_girl = 0;
+
+        } 
+        else {
+            select_hero = 0;
+            select_girl = 1;
+        }  
+
+        cout << default_format << 40 << ";" << MAP_WIDTH/2 - 10 << "H" << font_blue << player_button[select_hero] << reset << endl;
+        cout << default_format << 42 << ";" << MAP_WIDTH/2 - 10  << "H" << "Be the Boy" << endl;
+        
+        cout << default_format << 40 << ";" << MAP_WIDTH/2 + 20  << "H" << font_purple << player_button[select_girl] << reset << endl;
+        cout << default_format << 42 << ";" << MAP_WIDTH/2 + 20 << "H" << "Be the Girl" << endl;
 
 
-void Window::handle_choice(vector<vector<short> >current_map) {
+        keyboard.get_userInput();
+        
+        // button
+        if (keyboard.key == KEY_LEFT) {
+            choice_button--;
+            if (choice_button <= 0) {
+                choice_button = 0;
+            }
+        }
+            
+        if (keyboard.key == KEY_RIGHT) {
+            choice_button++;
+            if (choice_button >= 1) {
+                choice_button = 1;
+            }
+        }
+
+        if (keyboard.key == KEY_ENTER) 
+            break;
+    }
+
+    if (choice_button == 0) {
+        is_Hero = true;
+    } 
+    else {
+        is_Girl = true;
+    }
+
+}
+
+void Window::handle_choice(vector<vector<short> >current_map, int &scn_num, int &event_num, Player &player){
+    string choice1_content;
+    string choice2_content;
+
 
     vector<string> content_b4;
 
     // choice description
-    if(event_num == 1) 
+    if (event_num == 1) 
         content_b4 = choice_map_b4["event 1"];
     else if(event_num == 2) 
         content_b4 = choice_map_b4["event 2"];
@@ -137,7 +197,7 @@ void Window::handle_choice(vector<vector<short> >current_map) {
     int line = 0;
     while(line < content_b4.size()) {
         build_buffer(content_b4[line]);    
-        Print_buffer(current_map);
+        Print_buffer(current_map, player, font_white);
         line ++;
         keyboard.get_userInput();
         while (keyboard.key != KEY_SPACE) {
@@ -145,14 +205,12 @@ void Window::handle_choice(vector<vector<short> >current_map) {
         }
     }
 
-    string choice1_content;
-    string choice2_content;
-    
     int select_choice_1 = 1;
     int select_choice_2 = 1;
 
     // make choice loop
-    while (!choice_made) {
+    while (true) {
+
         string choice_contents = "";
         
         switch(event_num) {
@@ -168,7 +226,7 @@ void Window::handle_choice(vector<vector<short> >current_map) {
 
         choice_contents = choice1_content + "         " + choice2_content;
         build_buffer(choice_contents);
-        Print_buffer(current_map);
+        Print_buffer(current_map, player, font_white);
 
         keyboard.get_userInput();
         
@@ -206,7 +264,7 @@ void Window::handle_choice(vector<vector<short> >current_map) {
                 else if (choice_button == 1) {
                     scn_num = 2;
                 }
-                 // to be confirmed
+                // to be confirmed
             } 
             else if (event_num == 2) {
                 if (choice_button == 0) {
@@ -217,11 +275,10 @@ void Window::handle_choice(vector<vector<short> >current_map) {
                 }
             }
             event_num++;
-            choice_made = true;
+            break;
         }
     }
 
-    
     // print after 
     vector<string> content_after;
     
@@ -237,7 +294,7 @@ void Window::handle_choice(vector<vector<short> >current_map) {
     line = 0;
     while(line < content_after.size()) {
         build_buffer(content_after[line]);    
-        Print_buffer(current_map);
+        Print_buffer(current_map, player, font_white);
         line ++;
         keyboard.get_userInput();
         while (keyboard.key != KEY_SPACE) {
@@ -246,6 +303,60 @@ void Window::handle_choice(vector<vector<short> >current_map) {
     } 
 
     system("clear");   
+
+}
+
+
+
+ void Window::handle_save_choice(int &choice_button, int &map_code, Player &player) {
+    
+    temp_map = map_code_mapping.at(map_code);
+
+    window.build_buffer("Save progress?");
+    window.Print_buffer(temp_map, player, font_white);
+
+    while (keyboard.key != KEY_SPACE) {
+            keyboard.get_userInput();
+    }
+
+    // save quit loop
+    while (true) {
+        
+        if (choice_button == 0) {
+            select_yes = 0;
+            select_no = 3;
+
+        } 
+        else {
+            select_yes = 1;
+            select_no = 2;
+        }  
+
+        window.build_buffer(save_options[select_yes] + save_options[select_no]);
+        window.Print_buffer(temp_map, player, font_white);
+
+        keyboard.get_userInput();
+        
+        // button
+        if (keyboard.key == KEY_LEFT) {
+            choice_button--;
+            if (choice_button <= 0) {
+                choice_button = 0;
+            }
+        }
+            
+        if (keyboard.key == KEY_RIGHT) {
+            choice_button++;
+            if (choice_button >= 1) {
+                choice_button = 1;
+            }
+        }
+
+        if (keyboard.key == KEY_ENTER) 
+            break;
+    }
+
+
 }
 
 /*
