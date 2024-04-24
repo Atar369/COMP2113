@@ -29,7 +29,12 @@ int main(){
   "You: Oh no! The apple is spoiled."
   "(You took up the apple and looked at it)"
   "You: Time rewind... what if that was not a dream."
-  "You"
+  "You: TIME REWIND!!!"
+  "(The apple on your hand became a fresh, fragant apple in a flash)"
+  "You: Oh my god... this is real!"
+  "(You were so panic and you wanted to tell some other people about this.)"
+  "(You ran out of your house.)"
+  ""
 }
 
 void print() {
