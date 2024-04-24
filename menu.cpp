@@ -13,7 +13,7 @@ const vector<string> menu_logo = {
 "░▒▓████████▓▒░▒▓█▓▒░▒▓█▓▒░      ░▒▓████████▓▒░         ░▒▓█▓▒░   ░▒▓█▓▒░░▒▓█▓▒░▒▓████████▓▒░▒▓█▓▒░░▒▓█▓▒░ ░▒▓█▓▒░   ░▒▓█▓▒░░▒▓█▓▒░▒▓████████▓▒░" 
 };
 
-/*
+
 // Draw the logo
 void draw_logo(int h, int w) {
     // Clear
@@ -24,7 +24,7 @@ void draw_logo(int h, int w) {
         cout << font_blue << default_format << logo_h_size + i << ";" << 37 << "H" << line << endl;
     }
     cout << reset;
-}*/
+}
 
 
 /*
