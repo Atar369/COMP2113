@@ -1,6 +1,7 @@
 #include "player.h"
 
-//objects obj;
+// temp
+Player player;
 
 void Player::moveUp() {
     this->vtrl = -1;
@@ -45,31 +46,29 @@ void Player::player_move(int key, vector<vector<short> > &current_map) {
 
     // Reset player movement
     this->stopMovement();
+    this->symbol = "|@|";
 
     // Animation and direction shoot
     //int dir_shoot = 0;
 
-    if (!left && !right && !down && !up) {
-        this->symbol = "|0|";
-    } 
-    else {
-        if (right) { 
-            //dir_shoot = 1; 
-            this->symbol = "|0>";
-        }
-        if (left) { 
-            //dir_shoot = -1; 
-            this->symbol = "<0|"; 
-        }
-        if (up) { 
-            //dir_shoot = -2; 
-            this->symbol = "/0\\"; 
-        }
-        if (down) { 
-            //dir_shoot = 2; 
-            this->symbol = "\\0/"; 
-        }
+
+    if (right) { 
+        //dir_shoot = 1; 
+        this->symbol = "|@>";
     }
+    if (left) { 
+        //dir_shoot = -1; 
+        this->symbol = "<@|"; 
+    }
+    if (up) { 
+        //dir_shoot = -2; 
+        this->symbol = "/@\\"; 
+    }
+    if (down) { 
+        //dir_shoot = 2; 
+        this->symbol = "\\@/"; 
+    }
+
 
     // Move player
     this->hrz = int(right) - int(left);
@@ -88,43 +87,40 @@ void Player::player_move(int key, vector<vector<short> > &current_map) {
 }
 
 
+
 // Collsiion
 void Player::player_collision(vector<vector<short> > &current_map) {
-    switch(current_map[this->y][this->x]) {
-        
-        // Collision
-        case i_wall:    // wall
-        case i_lightoff:  // lightoff
-        case i_lighton:   // lighton
-        case i_monster:   // monster
-        case i_closet:    // closet
-        case i_chair:     // chair
-        case i_table:     // table
-            this->x -= this->hrz;
-            this->y -= this->vtrl;
-            break;
+    switch(current_map[this->y][this->x]) {     
 
         // Treasure collision
-        case i_treasure:
-            current_map[this->y][this->x] = 0;
-            //this->obj.treasure = 1;
+        case i_empty: case i_bed: case i_bedcentre: case i_bedleft: case i_bedright: case i_door: case i_leftdoor: case i_rightdoor: case i_stairs1: case i_stairs2: case i_stairs3: case i_stairs4: case i_stairs5: case i_stairs6: case i_stairs7: 
         break;
 
-        // key collision
+        case i_treasure:
+            current_map[this->y][this->x] = 0;
+            this->open_treasure = 1;
+        break;
+
         case i_key:
             current_map[this->y][this->x] = 0;
-            //this->obj.key = 1;
+            this->have_key = 1;
         break;
 
         case i_npc:     // npc
             this->x -= this->hrz;
             this->y -= this->vtrl;
-            //this->obj.npc = 1;
+            this->chat_npc = 1;
             break;
+
+        default:
+            this->x -= this->hrz;
+            this->y -= this->vtrl;
+        break;     
     }
 }
 
-/* testing
+/*
+ testing
 void displayMap(vector<vector<short> > current_map[ROWS][COLS]) {
     for (int i = 0; i < ROWS; i++) {
         for (int j = 0; j < COLS; j++) {
