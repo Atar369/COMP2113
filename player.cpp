@@ -1,32 +1,32 @@
 #include "player.h"
 
-object player;
+//objects obj;
 
-void moveUp() {
-    player.vtrl = -1;
+void Player::moveUp() {
+    this->vtrl = -1;
 }
 
-void moveDown() {
-    player.vtrl = 1;
+void Player::moveDown() {
+    this->vtrl = 1;
 }
 
-void moveLeft() {
-    player.hrz = -1;
+void Player::moveLeft() {
+    this->hrz = -1;
 }
 
-void moveRight() {
-    player.hrz = 1;
+void Player::moveRight() {
+    this->hrz = 1;
 }
 
-void stopMovement() {
-    player.hrz = 0;
-    player.vtrl = 0;
+void Player::stopMovement() {
+    this->hrz = 0;
+    this->vtrl = 0;
 }
 
 /*
-void updatePlayercorr(short current_map[ROWS][COLS]) {
-    for (int i = 0; i < ROWS; i++) {
-        for (int j = 0; j < COLS; j++) {
+void updatePlayercorr(vector<vector<short> > current_map) {
+    for (int i = 0; i < current_map.size(); i++) {
+        for (int j = 0; j < current_map[0].size(); j++) {
             if (current_map[i][j] == i_player) {
                 player.x = j;
                 player.y = i;
@@ -35,7 +35,8 @@ void updatePlayercorr(short current_map[ROWS][COLS]) {
     }
 }   */ 
 
-void player_move(int key, short current_map[ROWS][COLS]) {
+
+void Player::player_move(int key, vector<vector<short> > &current_map) {
     // Key check
     bool left  = ( key == KEY_LEFT ) ? 1 : 0;
     bool right = ( key == KEY_RIGHT ) ? 1 : 0;
@@ -43,80 +44,88 @@ void player_move(int key, short current_map[ROWS][COLS]) {
     bool up    = ( key == KEY_UP ) ? 1 : 0;
 
     // Reset player movement
-    stopMovement();
+    this->stopMovement();
 
     // Animation and direction shoot
     //int dir_shoot = 0;
 
     if (!left && !right && !down && !up) {
-        player.symbol = "|0|";
+        this->symbol = "|0|";
     } 
     else {
         if (right) { 
             //dir_shoot = 1; 
-            player.symbol = "|0>";
+            this->symbol = "|0>";
         }
         if (left) { 
             //dir_shoot = -1; 
-            player.symbol = "<0|"; 
+            this->symbol = "<0|"; 
         }
         if (up) { 
             //dir_shoot = -2; 
-            player.symbol = "/0\\"; 
+            this->symbol = "/0\\"; 
         }
         if (down) { 
             //dir_shoot = 2; 
-            player.symbol = "\\0/"; 
+            this->symbol = "\\0/"; 
         }
     }
 
     // Move player
-    player.hrz = int(right) - int(left);
-    player.vtrl = int(down) - int(up);
+    this->hrz = int(right) - int(left);
+    this->vtrl = int(down) - int(up);
 
     // Check
-    if (player.hrz != 0) {
-        player.vtrl = 0;
+    if (this->hrz != 0) {
+        this->vtrl = 0;
     } 
-    else if (player.vtrl != 0) {
-        player.hrz = 0;
+    else if (this->vtrl != 0) {
+        this->hrz = 0;
     }
 
-    player.x += player.hrz;
-    player.y += player.vtrl;
+    this->x += this->hrz;
+    this->y += this->vtrl;
 }
 
 
 // Collsiion
-void player_collision(short current_map[][COLS]) {
-    switch(current_map[player.y][player.x]) {
+void Player::player_collision(vector<vector<short> > &current_map) {
+    switch(current_map[this->y][this->x]) {
         
         // Collision
         case i_wall:    // wall
-        case i_npc:     // box
         case i_lightoff:  // lightoff
         case i_lighton:   // lighton
         case i_monster:   // monster
         case i_closet:    // closet
         case i_chair:     // chair
-            player.x -= player.hrz;
-            player.y -= player.vtrl;
+        case i_table:     // table
+            this->x -= this->hrz;
+            this->y -= this->vtrl;
             break;
 
         // Treasure collision
         case i_treasure:
-            current_map[player.y][player.x] = 0;
+            current_map[this->y][this->x] = 0;
+            //this->obj.treasure = 1;
         break;
 
         // key collision
         case i_key:
-            current_map[player.y][player.x] = 0;
+            current_map[this->y][this->x] = 0;
+            //this->obj.key = 1;
         break;
+
+        case i_npc:     // npc
+            this->x -= this->hrz;
+            this->y -= this->vtrl;
+            //this->obj.npc = 1;
+            break;
     }
 }
 
 /* testing
-void displayMap(short current_map[ROWS][COLS]) {
+void displayMap(vector<vector<short> > current_map[ROWS][COLS]) {
     for (int i = 0; i < ROWS; i++) {
         for (int j = 0; j < COLS; j++) {
             if (i == player.y && j == player.x) {
