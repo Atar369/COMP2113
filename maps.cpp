@@ -3,13 +3,13 @@
 unordered_map <int, vector<vector<short> > > map_code_mapping = {
     {0, Hero_house},
     {1, Girl_house},
-    {2, villager_house},
-    {3, village_top_left},
-    {4, village_top_right},
-    {5, village_bottom_left},
-    {6, village_bottom_right},
-    {7, woods},
-    {8, puzzle},
-    {9, castle},
+    {2, Oldman_house},
+    {3, Village},
+    {4, Outside_village},
+    {5, Forest},
+    {6, Monster},
+    {7, Castle},
+    {8, Back_village},
+    {9, All_dead},
 };
 
