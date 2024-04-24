@@ -29,6 +29,8 @@ int get_logo_w_size() {
 
 // Draw the logo
 void draw_logo(int h, int w) {
+    // Clear
+    system("clear");
     // Draw
     for (int i = 0; i < logo_h_size; i++) {
         string line = menu_logo[i];
