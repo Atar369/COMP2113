@@ -8,7 +8,7 @@ Window window;
 
 // Choice of character, girl or Hero
 const vector<string> player_button = {
-"/@\\", "\\@/", "/%\\", "\\%/"
+"/@\\", "\\@/", "/%\\", "\\%/", "Be the Boy", "Be the Girl"
 };
 
 // content of choice window, match with scn num
@@ -128,17 +128,14 @@ void Window::Print_buffer(vector<vector<short> > current_map, Player &player, st
 void Window::intro_character_choice(Player &player) {
     string intro = "Choose your character: ";
 
-    // Get the dimensions of the terminal window
-    struct winsize w;
-    ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
-    int rows = w.ws_row;
-    int cols = w.ws_col;
+    build_buffer(intro);
 
-    // centering
-    int xoffset = cols / 2;
-    int yoffset = rows / 2;
-
-    cout << default_format << yoffset - 5 << ";" << xoffset - intro.length() << intro << endl;
+    for (int i = 0; i < this->window_buffer.size(); i++) {
+        for (int j = 0; j < this->window_buffer[0].size(); j++) {
+            cout << this->window_buffer[i][j];
+        }
+        cout << endl;
+    }
 
     // save quit loop
     while (true) {
@@ -156,12 +153,20 @@ void Window::intro_character_choice(Player &player) {
             select_girl = 3;
         }  
 
-        cout << default_format << yoffset + 10 << ";" << xoffset - 10 << "H" << font_blue << player_button[select_hero] << reset << endl;
-        cout << default_format << yoffset + 12 << ";" << xoffset - 12  << "H" << "Be the Boy" << endl;
-        
-        cout << default_format << yoffset + 10 << ";" << xoffset + 10  << "H" << font_purple << player_button[select_girl] << reset << endl;
-        cout << default_format << yoffset + 12 << ";" << xoffset + 8 << "H" << "Be the Girl" << endl;
+        reset_buffer();
+        build_buffer(player_button[select_hero] + "                         " + player_button[select_girl]);
 
+        system("clear");
+
+        for (int i = 0; i < this->window_buffer.size(); i++) {
+            for (int j = 0; j < this->window_buffer[0].size(); j++) {
+                cout << font_yellow << this->window_buffer[i][j];
+            }
+            cout << endl;
+        }        
+
+        cout << default_format << 8 << ";" << 35 << "H" << font_blue << "Be the Boy" << endl;
+        cout << default_format << 8 << ";" << 63 << "H" << font_purple << "Be the girl" << reset << endl;
 
         keyboard.get_userInput();
         
