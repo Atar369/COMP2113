@@ -1,10 +1,14 @@
 #include "window.h"
+#include "draw.h"
+#include "player.h"
+#include "keyboard.h"
+#include "progress.h"
 
 Window window;
 
 // Choice of character, girl or Hero
 const vector<string> player_button = {
-"/@\\", "\\@/"
+"/@\\", "\\@/", "/%\\", "\\%/"
 };
 
 // content of choice window, match with scn num
@@ -87,8 +91,6 @@ void Window::build_buffer(const string & content) {
                 window_buffer[i][j] = " ";
         }
     }
-
-    return;
 }
 
 void Window::reset_buffer() {
@@ -126,29 +128,39 @@ void Window::Print_buffer(vector<vector<short> > current_map, Player &player, st
 void Window::intro_character_choice(Player &player) {
     string intro = "Choose your character: ";
 
-    cout << default_format << 20 << ";" << MAP_WIDTH/2 - intro.length() << intro << endl;
+    // Get the dimensions of the terminal window
+    struct winsize w;
+    ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
+    int rows = w.ws_row;
+    int cols = w.ws_col;
+
+    // centering
+    int xoffset = cols / 2;
+    int yoffset = rows / 2;
+
+    cout << default_format << yoffset - 5 << ";" << xoffset - intro.length() << intro << endl;
 
     // save quit loop
     while (true) {
         
         int select_hero = 0;
-        int select_girl = 0;
+        int select_girl = 2;
 
         if (choice_button == 0) {
             select_hero = 1;
-            select_girl = 0;
+            select_girl = 2;
 
         } 
         else {
             select_hero = 0;
-            select_girl = 1;
+            select_girl = 3;
         }  
 
-        cout << default_format << 40 << ";" << MAP_WIDTH/2 - 10 << "H" << font_blue << player_button[select_hero] << reset << endl;
-        cout << default_format << 42 << ";" << MAP_WIDTH/2 - 10  << "H" << "Be the Boy" << endl;
+        cout << default_format << yoffset + 10 << ";" << xoffset - 10 << "H" << font_blue << player_button[select_hero] << reset << endl;
+        cout << default_format << yoffset + 12 << ";" << xoffset - 12  << "H" << "Be the Boy" << endl;
         
-        cout << default_format << 40 << ";" << MAP_WIDTH/2 + 20  << "H" << font_purple << player_button[select_girl] << reset << endl;
-        cout << default_format << 42 << ";" << MAP_WIDTH/2 + 20 << "H" << "Be the Girl" << endl;
+        cout << default_format << yoffset + 10 << ";" << xoffset + 10  << "H" << font_purple << player_button[select_girl] << reset << endl;
+        cout << default_format << yoffset + 12 << ";" << xoffset + 8 << "H" << "Be the Girl" << endl;
 
 
         keyboard.get_userInput();
@@ -184,7 +196,6 @@ void Window::intro_character_choice(Player &player) {
 void Window::handle_choice(vector<vector<short> >current_map, int &scn_num, int &event_num, Player &player){
     string choice1_content;
     string choice2_content;
-
 
     vector<string> content_b4;
 
@@ -368,22 +379,23 @@ int main() {
     player.symbol = "|@|";
 
     Window window;
-
+    
     vector<vector<short> > current_map;
 
     // Assign the values of Girl_house to current_map
     current_map = map_code_mapping.at(0);
 
+    progress.event_num = 1;
     while (true) {
         
         // Clear screen
         system("clear");
         
-        if (window.event_num == 1) {
-            window.handle_choice(current_map);
+        if (progress.event_num == 1) {
+            window.handle_choice(current_map, progress.scn_num, progress.event_num, player);
         }
 
-        draw_map(current_map);
+        draw_map(current_map, player);
         
         int key_pressed = keyboard.key_pressed();
 
@@ -395,24 +407,24 @@ int main() {
             break;
         }
         if (keyboard.key == KEY_UP) {
-            moveUp();
+            player.moveUp();
         }
         if (keyboard.key == KEY_DOWN) {
-            moveDown();
+            player.moveDown();
         }
         if (keyboard.key == KEY_LEFT) {
-            moveLeft();
+            player.moveLeft();
         }
         if (keyboard.key == KEY_RIGHT) {
-            moveRight();
+            player.moveRight();
         }
 
         // Move the player
-        player_move(keyboard.key, current_map);
-        player_collision(current_map);
+        player.player_move(keyboard.key, current_map);
+        player.player_collision(current_map);
         
-        draw_map(current_map);
+        draw_map(current_map, player);
         }
 
     return 0;
-}*/
+} */
