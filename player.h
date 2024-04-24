@@ -6,20 +6,31 @@
 #include <cstring>
 #include "keyboard.h"
 #include "constant.h"
-#include "object.h"
 
 
 using namespace std;
 
 class Player {
+
     public:
     int hrz, vtrl;
     int x, y;
     int direction;
     string symbol;
     string color;
+    
+    
+    // Player's inventory & states
+    bool have_key;
+    bool open_treasure;
+    bool turn_light_switch;
+    bool have_sword;
+    bool investigate;
+    bool chat_npc;
+
 
     public:
+
     void moveUp();
 
     void moveDown();
@@ -34,6 +45,8 @@ class Player {
 
     void player_collision(vector<vector<short> > &current_map);
 };
+
+extern Player player; // temp
 
 /*
 struct objects {
