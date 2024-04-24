@@ -1,12 +1,4 @@
-#include <iostream>
-#include <sys/ioctl.h>
-#include <string>
-#include <unistd.h>
-#include <fstream>
-#include "menu.h"
-#include "Hero.h"
-#include "progress.h"
-using namespace std;
+#include "maintest.h"
 
 // Escape sequences for cursor positioning and movement
 // \033[<L>;<C>H -> move cursor to line L, column C
@@ -74,10 +66,10 @@ int main() {
 
     const string how_to_play[8] = {
         "How to Play",
-        "W - Move Up                    E - Action      ",
-        "A - Move Left                  Q - Exit to menu",
-        "S - Move Down                  SPACE - Hit     ",
-        "D - Move Right                                 ",
+        "W - Move Up                    E - Action                ",
+        "A - Move Left                  Q - Exit to menu          ",
+        "S - Move Down                  SPACE - Next page         ",
+        "D - Move Right                 ENTER - Confirm           ",
         "Unlock different endings with different choices",
         "Enjoy the movie...                             ",
         "Good luck"
@@ -103,13 +95,7 @@ int main() {
 
        // Predine the variables
         int select_start_game = 1, select_HTP = 1, select_achieve = 1, select_exit = 1, select_continue = 1;
-        bool making_choice = true;
         int choice_button = 0;
-
-        // Save options
-        int select_yes, select_no;
-        vector<string> save_options = {"> YES <", "  Yes  ", "> NO <", "  No  "};
-        vector<vector<short> > temp_map;
 
         // In menu state
         switch(current_state) {
@@ -306,121 +292,59 @@ int main() {
 
                 // Clear previous progress
                 progress.delete_progress();
+                
+                window.intro_character_choice(player);
 
-                player.x = 4;
-                player.y = 4;
-                player.symbol = "|0|";
-
-                // Start game
-                Hero_run(progress.scn_num, progress.map_code, progress.event_num, player);
-
-                temp_map = map_code_mapping.at(progress.map_code);
-
-                window.build_buffer("Save progress?");
-                window.Print_buffer(temp_map, player);
-
-                while (keyboard.key != KEY_SPACE) {
-                        keyboard.get_userInput();
-                }
-
-                // save quit loop
-                while (true) {
+                if (window.is_Hero) {
+                    player.x = 4;
+                    player.y = 4;
+                    player.symbol = "|@|";
+                    player.color = font_blue;
+                    progress.map_code = 0;
+                    progress.event_num = 1;
                     
-                    if (choice_button == 0) {
-                        select_yes = 0;
-                        select_no = 3;
-
-                    } 
-                    else {
-                        select_yes = 1;
-                        select_no = 2;
-                    }  
-
-                    window.build_buffer(save_options[select_yes] + save_options[select_no]);
-                    window.Print_buffer(temp_map, player);
-
-                    keyboard.get_userInput();
-                    
-                    // button
-                    if (keyboard.key == KEY_LEFT) {
-                        choice_button--;
-                        if (choice_button <= 0) {
-                            choice_button = 0;
-                        }
-                    }
-                        
-                    if (keyboard.key == KEY_RIGHT) {
-                        choice_button++;
-                        if (choice_button >= 1) {
-                            choice_button = 1;
-                        }
-                    }
-
-                    if (keyboard.key == KEY_ENTER) 
-                        break;
+                    // Start game
+                    Hero_run(progress.scn_num, progress.map_code, progress.event_num, player);
                 }
+                else if (window.is_Girl) {
+                    player.x = 4;
+                    player.y = 4;
+                    player.symbol = "|%|";
+                    player.color = font_purple;
+                    progress.map_code = 0;
+                    progress.event_num = 2;
+                    // Start game
+                    //Hero_run(progress.scn_num, progress.map_code, progress.event_num, player);
+                }    
+
+                window.handle_save_choice(choice_button, progress.map_code, player);
 
                 if (choice_button == 0) 
                     // save progress
                     progress.save_progress(progress.scn_num, progress.map_code, progress.event_num, player);
-                
 
                 current_state = STATE_MENU; 
 
                 break;
 
             case STATE_CONTIN:
+            
                 progress.load_progress(player);
-                player.symbol = "|0|";
 
-                // Continue game
-                Hero_run(progress.scn_num, progress.map_code, progress.event_num, player);
+                if (player.color == font_blue) {
+                    window.is_Hero = true;
+                    player.symbol = "|@|";
+                    // Continue game
+                    Hero_run(progress.scn_num, progress.map_code, progress.event_num, player);
+                }
+                else if(player.color == font_purple) {
+                    window.is_Girl = true;
+                    player.symbol = "|%|";
+                    // Continue game
+                    //Hero_run(progress.scn_num, progress.map_code, progress.event_num, player);
+                }
                 
-                temp_map = map_code_mapping.at(progress.map_code);
-
-                window.build_buffer("Save progress?");
-                window.Print_buffer(temp_map, player);
-
-                while (keyboard.key != KEY_SPACE) {
-                        keyboard.get_userInput();
-                }
-
-                // save quit loop
-                while (true) {
-                    
-                    if (choice_button == 0) {
-                        select_yes = 0;
-                        select_no = 3;
-
-                    } 
-                    else {
-                        select_yes = 1;
-                        select_no = 2;
-                    }  
-
-                    window.build_buffer(save_options[select_yes] + "      " + save_options[select_no]);
-                    window.Print_buffer(temp_map, player);
-
-                    keyboard.get_userInput();
-                    
-                    // button
-                    if (keyboard.key == KEY_LEFT) {
-                        choice_button--;
-                        if (choice_button <= 0) {
-                            choice_button = 0;
-                        }
-                    }
-                        
-                    if (keyboard.key == KEY_RIGHT) {
-                        choice_button++;
-                        if (choice_button >= 1) {
-                            choice_button = 1;
-                        }
-                    }
-
-                    if (keyboard.key == KEY_ENTER) 
-                        break;
-                }
+                window.handle_save_choice(choice_button, progress.map_code, player);
 
                 if (choice_button == 0) 
                     // save progress
