@@ -68,48 +68,78 @@ void Hero_run(int &scn_num, int &map_code, int &event_num, Player &player) {
         int offsetx = 0;
         // Clear screen
         system("clear");
-
+        
         switch(map_state) {
 
             case hero_house: // hero house
                 map_code = 0;
 
+                // event 1
                 if (event_num == 1)
                     window.handle_choice(current_map, scn_num, event_num, player);
                 
-                if (current_map[player.y][player.x] == i_c_door)  {
+                // door transition
+                if (current_map[player.y][player.x] == i_door || current_map[player.y][player.x] == i_leftdoor || current_map[player.y][player.x] == i_rightdoor)   {
                     map_state = village;
-                    offsety = 6;
+                    offsety = - player.y;
                 }
-                // door transition    
+                   
             break;
             
             case girl_house: // girl's house
                 map_code = 1;
-                if (current_map[player.y][player.x] == i_c_door)  {
+                if (current_map[player.y][player.x] == i_door || current_map[player.y][player.x] == i_leftdoor || current_map[player.y][player.x] == i_rightdoor)  {
                     map_state = village;
-                    offsety = 10;
+                    offsety = - player.y;
                 }
             break;
 
             case oldman_house: 
                 map_code = 2;
-                if (current_map[player.y][player.x] == i_c_door)  {
-                    map_state = village;
-                    //player.y = 15;
+                if (current_map[player.y][player.x] == i_door || current_map[player.y][player.x] == i_leftdoor || current_map[player.y][player.x] == i_rightdoor)  {
+                    map_state = forest;
                 }
+
             break;
 
             case village:
                 map_code = 3;
-                if (player.x >= MAP_HEIGHT) {
+
+                if (player.y <= 0 && player.x <= 24 && player.x >= 22) {
+                    map_state = hero_house;
+                    offsety = 32 - 1;
+                }
+
+                if (player.y <= 0 && player.x <= 14 && player.x >= 12) {
+                    map_state = girl_house;
+                    offsety = 32 - 1;
+                }    
+/*
+                if (player.x >= 32) {
                     map_state = forest;
                     //player.x = 1;
                 }
-                if (player.y >= MAP_WIDTH) {
+
+                if (player.y >= 324) {
                     //player.y = 1;
                     map_state = monster;
                 }
+*/
+                if (player.chat_npc) {
+                    
+                    keyboard.key = KEY_SPACE;
+
+                    while (keyboard.key == KEY_SPACE) {
+                        chat.loadChat("npc", map_code, scn_num, player);
+                        window.Print_buffer(current_map, player, font_white);
+                        keyboard.get_userInput();
+                    }
+                    
+                    system("clear");
+                    player.chat_npc = 0;
+
+                }
+
             break;
 
             case outside_village:
@@ -141,12 +171,10 @@ void Hero_run(int &scn_num, int &map_code, int &event_num, Player &player) {
 
         draw_map(current_map, player);
 
-        player.x -= offsetx;
-        player.y -= offsety;
+        player.x += offsetx;
+        player.y += offsety;
 
-        int key_pressed = keyboard.key_pressed();
-
-        while (key_pressed) {
+        while (keyboard.key_pressed()) {
             keyboard.get_userInput();
         }
         
@@ -169,7 +197,9 @@ void Hero_run(int &scn_num, int &map_code, int &event_num, Player &player) {
         // Move the player
         player.player_move(keyboard.key, current_map);
         player.player_collision(current_map);
+
     }
+
 }
 
 /* test
