@@ -64,12 +64,13 @@ int main() {
         "  Exit  ",
     };
 
-    const string how_to_play[8] = {
+    const string how_to_play[9] = {
         "How to Play",
-        "W - Move Up                    E - Action                ",
-        "A - Move Left                  Q - Exit to menu          ",
-        "S - Move Down                  SPACE - Next page         ",
-        "D - Move Right                 ENTER - Confirm           ",
+        "W - Move Up                    E - Action       ",
+        "A - Move Left                  Q - Exit to menu ",
+        "S - Move Down                  SPACE - Next page",
+        "D - Move Right                 ENTER - Confirm  ",
+        "Walk away to cancel chat with NPCs             ",
         "Unlock different endings with different choices",
         "Enjoy the movie...                             ",
         "Good luck"
@@ -259,15 +260,11 @@ int main() {
 
             // Info
             case STATE_HTP:
+    
                 // How to play
-                std::cout << default_format << 10 << ";" << startCol - (how_to_play[0].length())/2 << "H" << how_to_play[0] << endl; // title
-                std::cout << default_format << 17 << ";" << startCol - (how_to_play[1].length())/2 << "H" << how_to_play[1] << endl; // keys
-                std::cout << default_format << 19 << ";" << startCol - (how_to_play[2].length())/2 << "H" << how_to_play[2] << endl;
-                std::cout << default_format << 21 << ";" << startCol - (how_to_play[3].length())/2 << "H" << how_to_play[3] << endl;
-                std::cout << default_format << 23 << ";" << startCol - (how_to_play[4].length())/2 << "H" << how_to_play[4] << endl;
-                std::cout << default_format << 25 << ";" << startCol - (how_to_play[5].length())/2 << "H" << how_to_play[5] << endl; // words
-                std::cout << default_format << 27 << ";" << startCol - (how_to_play[6].length())/2 << "H" << how_to_play[6] << endl;
-                std::cout << default_format << 30 << ";" << startCol - (how_to_play[7].length())/2 << "H" << how_to_play[7] << endl;
+                for (int i = 0; i < 9; i++) {
+                    std::cout << default_format << 20 + i * 3 << ";" << startCol - (how_to_play[i].length())/2 << "H" << how_to_play[i] << endl;
+                }
 
                 keyboard.get_userInput();
 
@@ -296,15 +293,15 @@ int main() {
                 window.intro_character_choice(player);
 
                 if (window.is_Hero) {
-                    player.x = 4;
-                    player.y = 4;
+                    player.x = 9;
+                    player.y = 9;
                     player.symbol = "|@|";
                     player.color = font_blue;
                     progress.map_code = 0;
                     progress.event_num = 1;
                     
                     // Start game
-                    Hero_run(progress.scn_num, progress.map_code, progress.event_num, player);
+                    Hero_run(progress.scn_num, progress.map_code, progress.event_num, progress.ending_num, player);
                 }
                 else if (window.is_Girl) {
                     player.x = 4;
@@ -321,7 +318,7 @@ int main() {
 
                 if (choice_button == 0) 
                     // save progress
-                    progress.save_progress(progress.scn_num, progress.map_code, progress.event_num, player);
+                    progress.save_progress(player);
 
                 current_state = STATE_MENU; 
 
@@ -335,7 +332,7 @@ int main() {
                     window.is_Hero = true;
                     player.symbol = "|@|";
                     // Continue game
-                    Hero_run(progress.scn_num, progress.map_code, progress.event_num, player);
+                    Hero_run(progress.scn_num, progress.map_code, progress.event_num, progress.ending_num, player);
                 }
                 else if(player.color == font_purple) {
                     window.is_Girl = true;
@@ -348,7 +345,7 @@ int main() {
 
                 if (choice_button == 0) 
                     // save progress
-                    progress.save_progress(progress.scn_num, progress.map_code, progress.event_num, player);
+                    progress.save_progress(player);
                 
 
                 current_state = STATE_MENU; 
