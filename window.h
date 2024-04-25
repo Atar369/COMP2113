@@ -20,7 +20,7 @@ class Window {
     int choice_button = 0;
     //int x_coor = 0, y_coor = ROWS * 2 / 3;
     int width = COLS*3;
-    int height = ROWS*2/3;
+    int height = ROWS/2;
     vector<vector<string> > window_buffer;
 
     // Save options
