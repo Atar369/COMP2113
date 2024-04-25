@@ -10,48 +10,42 @@ int Chat::getRandomNumber(int a, int b) {
     return rand() % b + a; // Generate a random number between a and b, to be confirmed how many lines they will say
 }
 
-unordered_map<string, vector<string> > chat_map = {
-    {"Narrator", {
+unordered_map<string, vector<string> > Hero_chat_map = {
+    {"intro", {
         "Once upon a time, in a faraway land...",
         "The kingdom was in great peril...",
         "A hero was destined to rise and save the day...",
         }
     },
-    {"Hero", {
-        "Zzz... Huh? What's that voice?",
-        "I was chosen to be the Hero? This must be a dream...",
+    {"enter castle", {
+        "Hero enters the castle.",
+        "He saw that the girl that he was looking for just stands next to the evil Dragon.",
+        "He said loudly, 'I'm here to save you! Dragon, let her alone!'",
+        "The Dragon laughed and said, 'You stupid human, dare to challenge me?'",
+        "The Dragon was about to attack the Hero, but the Girl stopped him.",
+        "She said, 'He is my friend, Dragon.'",
+        "'We have talked about this, right? You will not hurt people anymore.'",
+        "The Dragon flipped his wings and turned away his head, surprisingly really not attacking the Hero.",
+        "The Girl said, 'Thank you for coming. But I'm fine now.'",
+        "'The Dragon and monsters are not evil, they just fight back for life.'",
+        "'At the beginning, monsters lived here, and built the houses.'",
+        "'But humans came and took over the place, and the monsters were forced to leave and built this castle.'",
         }
-    }, 
-    {"Girl", {
-        "Help! Help! Is anyone there?",
-        "The dragon took me... I'm scared...",
-        }
-    }, 
-    /*
-    {"Villager", {
-        "Ah, the chosen Hero! We've been waiting for you.",
-        "Your mission is to defeat the evil dragon and save our world.",
-        "But first, a girl has been captured by the dragon.",
-        "Please, brave Hero, go and rescue her!",
-        }
-    },*/
-
-    {"Dragon", {
-        "You dare challenge me, mortal?",
-        "Prepare to meet your doom!",
-        "None can defeat the might of a dragon!",
-        }
-    },
-    {"Endings", {
-        "Ending: Idiot",
-        "Ending: Genius",
-        "Ending: Normal",
-        "Ending: Bad",
-        "Ending: Good",
-        "Ending: Best",
-        }
-    },
+    },  
+    {"ending name", {}}, // ending names
 };
+
+unordered_map<string, vector<string> > Girl_chat_map = {
+    {"intro", {
+        "Once upon a time, in a faraway land...",
+        "The kingdom was in great peril...",
+        "A hero was destined to rise and save the day...",
+        }
+    },
+    {"enter castle", {
+        "Hero enters the castle.",}
+    },
+};        
 
 string Chat::getRandomVillagerChat(string color, int scn_num) {
 
@@ -80,7 +74,7 @@ string Chat::getRandomVillagerChat(string color, int scn_num) {
             case 2:
                 switch (randomNumber) {
                     case 1:
-                        return "The dragon is getting stronger. You must hurry!";
+                        return "";
                     case 2:
                         return "We need to find a way to weaken the dragon's defenses.";
                     case 3:
@@ -152,6 +146,12 @@ string Chat::getRandomVillagerChat(string color, int scn_num) {
 
 void Chat::loadChat(string charactor, int map_code, int scn_num, Player &player) {
     string contents;
+    if (player.color == font_blue) {
+        this->is_Hero = true;
+    }
+    else if (player.color == font_purple) {
+        this->is_Girl = true;
+    } 
 
     if (charactor == "npc") {
         contents = this->getRandomVillagerChat(player.color, scn_num);
@@ -161,15 +161,29 @@ void Chat::loadChat(string charactor, int map_code, int scn_num, Player &player)
 
     else {
         int line = 0;
-        while (line < chat_map[charactor].size()) {
-            window.build_buffer(chat_map[charactor][0]);
-            window.Print_buffer(map_code_mapping[map_code], player, font_white);
-            line ++;
-            keyboard.get_userInput();
-            while (keyboard.key != KEY_SPACE) {
-            keyboard.get_userInput();
+        
+        if (this->is_Hero) {
+            while (line < Hero_chat_map[charactor].size()) {
+                window.build_buffer(Hero_chat_map[charactor][0]);
+                window.Print_buffer(map_code_mapping[map_code], player, font_white);
+                line ++;
+                keyboard.get_userInput();
+                while (keyboard.key != KEY_SPACE) {
+                keyboard.get_userInput();
+                }
             }
         }
+        else if (this->is_Girl) {
+            while (line < Girl_chat_map[charactor].size()) {
+                window.build_buffer(Girl_chat_map[charactor][0]);
+                window.Print_buffer(map_code_mapping[map_code], player, font_white);
+                line ++;
+                keyboard.get_userInput();
+                while (keyboard.key != KEY_SPACE) {
+                keyboard.get_userInput();
+                }
+            }
+        }    
     }
     
 }
