@@ -101,23 +101,23 @@ void Hero_run(int &scn_num, int &map_code, int &event_num, Player &player) {
                     map_state = outside_village;
                     offsety = 32 - 1 ;
                 }
-
+ 
             break;
 
             case village:
                 map_code = 3; 
 
-                if (player.y <= 0 && player.x <= 24 && player.x >= 22) {
+                if (player.y < 1 && player.x <= 24 && player.x >= 22) {
                     map_state = hero_house;
                     offsety = 32 - 1;
                 }
 
-                if (player.y <= 0 && player.x <= 14 && player.x >= 12) {
+                if (player.y < 1 && player.x <= 14 && player.x >= 12) {
                     map_state = girl_house;
                     offsety = 32 - 1;
                 }
 
-                if (player.y >= 32) {
+                if (player.y > 31) {
                     map_state = outside_village;
                     offsety = - player.y;
                 }    
@@ -151,17 +151,17 @@ void Hero_run(int &scn_num, int &map_code, int &event_num, Player &player) {
 
             case outside_village:
                 map_code = 4;
-                if (player.y >= 32) {
+                if (player.y > 31) {
                     map_state = oldman_house;
                     offsety = - player.y;
                 } 
 
-                if (player.y <= 0) {
+                if (player.y < 1) {
                     map_state = village;
                     offsety = 32 - 1;
                 }
 
-                if (player.x >= 32) {
+                if (player.x > 35) {
                     map_state = forest;
                     offsetx = - player.x;
                 }
@@ -170,17 +170,17 @@ void Hero_run(int &scn_num, int &map_code, int &event_num, Player &player) {
 
             case forest:
                 map_code = 5;
-                if (player.y >= 32) {
+                if (player.y > 31) {
                     map_state = monster;
                     offsety = - player.y;
                 }
 
-                if (player.x <= 0) {
+                if (player.x < 1) {
                     map_state = outside_village;
-                    offsetx = 32 - 1;
+                    offsetx = 36 - 1;
                 }
 
-                if (player.x >= 32) {
+                if (player.x > 35) {
                     map_state = castle;
                     offsetx = - player.x;
                 }
@@ -189,12 +189,12 @@ void Hero_run(int &scn_num, int &map_code, int &event_num, Player &player) {
 
             case monster:
                 map_code = 6;
-                if (player.y <= 0) {
+                if (player.y < 1) {
                     map_state = forest;
                     offsety = 32 - 1;
                 }
 
-                if (player.x >= 28 && player.y <= 11) {
+                if (player.x >= 28 && player.y < 12) {
                     map_state = castle;
                     offsetx = 1;
                 }
@@ -203,7 +203,7 @@ void Hero_run(int &scn_num, int &map_code, int &event_num, Player &player) {
             
             case castle:
                 map_code = 7; 
-                if (player.y >= 32) {
+                if (player.y > 31) {
                     map_state = back_village;
                     offsety = -16;
                 }
@@ -212,16 +212,16 @@ void Hero_run(int &scn_num, int &map_code, int &event_num, Player &player) {
 
             case back_village:
                 map_code = 8;
-                if (player.x <= 0) {
+                if (player.x < 1) {
                     map_state = oldman_house;
-                    offsetx = 32 - 1;
+                    offsetx = 36 - 1;
                 }
 
             break;
 
             case all_dead:
                 map_code = 9;
-                if (player.y >= 32) {
+                if (player.y > 31) {
                     map_state = back_village;
                     offsety = -16;
                 }
