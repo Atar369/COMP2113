@@ -116,7 +116,7 @@ void set_map_param(short current_map[][COLS], int clx, int cly) {
 #define s_chair23 "\\ \\"
 #define s_lamp9 " _|"
 #define s_lamp10 "|_ "
-#define s_monster "^#^
+#define s_monster "^#^"
 
 unordered_map<int, string> symbol_mapping = {
     {0, s_empty},
@@ -214,7 +214,6 @@ unordered_map<int, string> symbol_mapping = {
     {92, s_chair23},
     {93, s_lamp9},
     {94, s_lamp10},
-    {95, s_monster}
 };
 
 // Draw instance
@@ -236,9 +235,10 @@ void draw_map(vector<vector<short> > & current_map, Player &player) {
     int cols = w.ws_col;
 
     // centering
-    int xoffset = (cols - current_map[0].size()) / 2;
-    int yoffset = (rows - current_map.size()) / 2;
+    int xoffset = (cols - current_map[0].size()) / 2 - 1;
+    int yoffset = (rows - current_map.size()) / 2 - 1;
 
+    // print map at centre
     cout << default_format << yoffset << ";" << xoffset << "H" << endl;
 */
     for (int i = 0; i < current_map.size(); i++) {
