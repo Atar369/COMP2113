@@ -1,7 +1,58 @@
 #include "Hero.h"
 
-// testing
-void Hero_run(int &scn_num, int &map_code, int &event_num, Player &player) {
+unordered_map<int, vector<string> > Hero_endings = {
+    {1, {
+        "He chosed to be a Hero.",
+        "But he didn't know how to fight.",
+        "He went everywhere but still doesn't know how to fight.",
+        "No matter how hard he tried, he was never able to defeat any monster.",
+        "He went back to the village.",
+        "Surprisingly, he saw another 'Hero'.",
+        "'He' was the one, he knew it.",
+        "With 'his' powerful sword, shining under the sunlight.",
+        "Suddenly, he realized that he was just himself.",
+        "A normal person, ...",
+        "...who dreamed to be a Hero."
+        }
+    },
+    {2, { // not yet done
+        "He decided to hide from the monster.",
+        "He found a hiding spot and stayed there for hours.",
+        "The monster eventually found him and swallowed him whole.",
+        "He was never seen again.",
+        }
+    },
+    {3, { // not yet done
+        "He decided to befriend the monster.",
+        "He offered the monster some food and they became friends.",
+        "The monster protected him from other dangers.",
+        "He lived happily ever after.",
+        }
+    },
+    {4, {
+        "He decided to talk with to monster.",
+        "The monster surprised him by speaking back.",
+        "The monster said that they were not enemies.",
+        "They talked for hours and became friends.",
+        "He asked the monster if it saw a girl walking around.",
+        "The monster said no, but it would help him find her.",
+        "He refused politely and went on his way.",
+        "After searching for days, he still couldn't find her and went back to the village.",
+        "The villagers told him that the girl has already been saved by another Hero.",
+        "He was being forgotten."
+        "He was just a normal person...",
+        }
+    },
+    {5, {
+        "He decided to fight the monster.",
+        "He tried his best, but his attacks meant nothing to the monster.",
+        "The monster opened its mouth and swallowed him whole.",
+        "He was never seen again.",     
+        }
+    },
+};
+
+void Hero_run(int &scn_num, int &map_code, int &event_num, int &ending_num, Player &player) {
     typedef enum {
     hero_house,
     girl_house,
@@ -63,7 +114,7 @@ void Hero_run(int &scn_num, int &map_code, int &event_num, Player &player) {
     
     current_map = map_code_mapping.at(map_code);
 
-    while (true) {
+    while (!player.reach_ending) {
         int offsety = 0;
         int offsetx = 0;
         // Clear screen
@@ -81,7 +132,7 @@ void Hero_run(int &scn_num, int &map_code, int &event_num, Player &player) {
                 // door transition
                 if (current_map[player.y][player.x] == i_door || current_map[player.y][player.x] == i_leftdoor || current_map[player.y][player.x] == i_rightdoor)   {
                     map_state = village;
-                    offsety = - player.y;
+                    offsety = - 31;
                 } 
                    
             break;
@@ -90,36 +141,36 @@ void Hero_run(int &scn_num, int &map_code, int &event_num, Player &player) {
                 map_code = 1;
                 if (current_map[player.y][player.x] == i_door || current_map[player.y][player.x] == i_leftdoor || current_map[player.y][player.x] == i_rightdoor)  {
                     map_state = village; 
-                    offsety = - player.y;
+                    offsety = - 31;
                 }
 
             break;
 
             case oldman_house: 
                 map_code = 2;
-                if (current_map[player.y][player.x] == i_door || current_map[player.y][player.x] == i_leftdoor || current_map[player.y][player.x] == i_rightdoor)  {
+                if (player.y <= 0) {
                     map_state = outside_village;
-                    offsety = 32 - 1 ;
+                    offsety = 30;
                 }
- 
+
             break;
 
             case village:
                 map_code = 3; 
 
-                if (player.y < 1 && player.x <= 24 && player.x >= 22) {
+                if (player.y <= 0 && player.x <= 24 && player.x >= 22) {
                     map_state = hero_house;
-                    offsety = 32 - 1;
+                    offsety = 31;
                 }
 
-                if (player.y < 1 && player.x <= 14 && player.x >= 12) {
+                if (player.y <= 0 && player.x <= 14 && player.x >= 12) {
                     map_state = girl_house;
-                    offsety = 32 - 1;
+                    offsety = 31;
                 }
 
-                if (player.y > 31) {
+                if (player.y >= 31) {
                     map_state = outside_village;
-                    offsety = - player.y;
+                    offsety = - 31;
                 }    
 /*
                 if (player.x >= 32) {
@@ -151,84 +202,92 @@ void Hero_run(int &scn_num, int &map_code, int &event_num, Player &player) {
 
             case outside_village:
                 map_code = 4;
-                if (player.y > 31) {
+                if (player.y >= 31) {
                     map_state = oldman_house;
-                    offsety = - player.y;
+                    offsety = - 31;
                 } 
 
-                if (player.y < 1) {
+                if (player.y <= 0) {
                     map_state = village;
-                    offsety = 32 - 1;
+                    offsety = 31;
                 }
 
-                if (player.x > 35) {
+                if (player.x >= 35) {
                     map_state = forest;
-                    offsetx = - player.x;
+                    offsetx = - 35;
                 }
 
             break;
 
             case forest:
                 map_code = 5;
-                if (player.y > 31) {
+                if (player.y >= 31) {
                     map_state = monster;
-                    offsety = - player.y;
+                    offsety = -30;
                 }
 
-                if (player.x < 1) {
+                if (player.x <= 0) {
                     map_state = outside_village;
-                    offsetx = 36 - 1;
+                    offsetx = 35;
                 }
 
-                if (player.x > 35) {
+                if (player.x >= 35) {
                     map_state = castle;
-                    offsetx = - player.x;
+                    offsetx = - 36;
                 }
 
             break;
 
             case monster:
                 map_code = 6;
-                if (player.y < 1) {
+                if (player.y <= 0) {
                     map_state = forest;
-                    offsety = 32 - 1;
+                    offsety = 31;
                 }
 
-                if (player.x >= 28 && player.y < 12) {
+                if ((current_map[player.y][player.x] == i_door || current_map[player.y][player.x] == i_leftdoor || current_map[player.y][player.x] == i_rightdoor) && player.y == 10) {
+                    //if (scn_num == )
                     map_state = castle;
-                    offsetx = 1;
+                    offsetx = -15;
+                    offsety = 18;
+                    //y = 28
+                    //x = 18
                 }
 
             break;
             
             case castle:
                 map_code = 7; 
-                if (player.y > 31) {
+                if (player.y >= 31) {
                     map_state = back_village;
-                    offsety = -16;
+                    offsety = -17;
+                }
+                if (player.x <0) {
+                    player.x = 0;
                 }
 
             break;
 
             case back_village:
                 map_code = 8;
-                if (player.x < 1) {
+                if (player.x <= 0) {
                     map_state = oldman_house;
-                    offsetx = 36 - 1;
+                    offsetx = 31;
                 }
 
             break;
 
             case all_dead:
                 map_code = 9;
-                if (player.y > 31) {
+                if (player.y >= 31) {
                     map_state = back_village;
                     offsety = -16;
                 }
 
             break; 
-        }
+            } 
         
+
         current_map = map_code_mapping.at(map_code); 
 
         draw_map(current_map, player);
@@ -262,8 +321,20 @@ void Hero_run(int &scn_num, int &map_code, int &event_num, Player &player) {
 
     }
 
-}
-
+    if (player.reach_ending) {
+        vector<string> contents = Hero_endings.at(ending_num);
+        int line = 0;
+        while (line < contents.size()) {
+            window.build_buffer(contents[line]);
+            window.Print_buffer(current_map, player, font_white);
+            line ++;
+            keyboard.get_userInput();
+            while (keyboard.key != KEY_SPACE) {
+                keyboard.get_userInput();
+            }
+        }    
+    }
+}    
 /* test
 int main() {
     Hero_run();
