@@ -12,11 +12,11 @@ const vector<string> player_button = {
 };
 
 // content of choice window, match with scn num
-unordered_map<int, vector<string> > Hero_choice_map_b4 = {
+unordered_map<int, vector<string> > Hero_choice_map_b4 = { // event num mapping
     {1,   {
         "The sun is shining, and the birds are chirping.",
         "It's a beautiful day, isn't it?",
-        "Hero wakes up from the dream. Or... Is it really a dream?",
+        "He wakes up from the dream. Or... Is it really a dream?",
         "The mistery voice still remains in his mind...",  
         "He decided to...",
         }
@@ -45,7 +45,7 @@ unordered_map<int, vector<string> > Hero_choice_map_b4 = {
 
 };
 
-unordered_map<int, vector<string> > Hero_choice_map_after = {
+unordered_map<int, vector<string> > Hero_choice_map_after = { // scn num mapping
     {1, {
         "He has chosen to be himself.",     
         },
@@ -84,19 +84,19 @@ unordered_map<int, vector<string> > Hero_choice_map_after = {
 };        
     
 // choice_1, match with scn num
-unordered_map <string, vector<string> > button_choice1 = {
-    {"event 1", { "> BE HIMSELF <", "  Be himself  ", } },    
-    {"event 2", { "> TAKE THE SWORD <", "  Take the sword  ", } },
-    {"event 3", { "> GET CLOSER <", "  Get Closer  ", } },      
-    {"event 4", { "> FIGHT THE MONSTER <", "  Fight the monster  ", } }, 
+unordered_map <int, vector<string> > button_choice1 = {
+    {1, { "> BE HIMSELF <", "  Be himself  ", } },    
+    {2, { "> TAKE THE SWORD <", "  Take the sword  ", } },
+    {3, { "> GET CLOSER <", "  Get Closer  ", } },      
+    {4, { "> FIGHT THE MONSTER <", "  Fight the monster  ", } }, 
 };
 
 // choice_2, match with scn num
-unordered_map <string, vector<string> > button_choice2 = {
-    {"event 1", { "> BE HERO <", "  Be Hero  ", } },    
-    {"event 2", { "> LEAVE THE SWORD <", "  Leave the sword  ", } }, 
-    {"event 3", { "> RUN AWAY <", "  Run away  ", } },
-    {"event 4", { "> TALK TO THE MONSTER <", "  Talk to the monster  ", } },
+unordered_map <int, vector<string> > button_choice2 = {
+    {1, { "> BE HERO <", "  Be Hero  ", } },    
+    {2, { "> LEAVE THE SWORD <", "  Leave the sword  ", } }, 
+    {3, { "> RUN AWAY <", "  Run away  ", } },
+    {4, { "> TALK TO THE MONSTER <", "  Talk to the monster  ", } },
 };    
 
 void Window::build_buffer(const string & content) {
@@ -161,6 +161,20 @@ void Window::intro_character_choice(Player &player) {
     string intro = "Choose your character: ";
 
     build_buffer(intro);
+
+/*
+    // Get the dimensions of the terminal window
+    struct winsize w;
+    ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
+    int rows = w.ws_row;
+    int cols = w.ws_col;
+
+    // centering
+    int xoffset = (cols - window_buffer[0].size()) / 2 - 1;
+    int yoffset = (rows - window_buffer.size()) / 2 - 1;
+
+    cout << default_format << yoffset<< ";" << xoffset << "H" << endl;
+*/
 
     for (int i = 0; i < this->window_buffer.size(); i++) {
         for (int j = 0; j < this->window_buffer[0].size(); j++) {
@@ -264,18 +278,13 @@ void Window::handle_choice(vector<vector<short> >current_map, int &scn_num, int 
 
         string choice_contents = "";
         
-        switch(event_num) {
-            case 1:
-                    choice1_content = button_choice1["event 1"][select_choice_1];
-                    choice2_content = button_choice2["event 1"][select_choice_2];        
-                break;
-            case 2:
-                    choice1_content = button_choice1["event 2"][select_choice_1];
-                    choice2_content = button_choice2["event 2"][select_choice_2];  
-                break;
-        }
+
+        choice1_content = button_choice1[event_num][select_choice_1];
+        choice2_content = button_choice2[event_num][select_choice_2];        
+ 
 
         choice_contents = choice1_content + "         " + choice2_content;
+
         build_buffer(choice_contents);
         Print_buffer(current_map, player, font_white);
 
@@ -308,26 +317,53 @@ void Window::handle_choice(vector<vector<short> >current_map, int &scn_num, int 
 
         // modify event num, scn num after choice made
         if (keyboard.key == KEY_ENTER) {
-            if (event_num == 1) {
-                if (choice_button == 0) {
-                    scn_num = 1;
-                    event_num = 2;
-                } 
-                else if (choice_button == 1) {
-                    scn_num = 2;
-                    event_num = 3;
-                }
-            } 
-            else if (event_num == 2) {
-                if (choice_button == 0) {
-                    scn_num = 3;
-                } 
-                else if (choice_button == 1) {
-                    scn_num = 4;
-                }
-            }
+            switch (event_num) {
+                case 1: 
+                    if (choice_button == 0) {
+                        scn_num = 1;
+                        event_num = 2;
+                    } 
+                    else if (choice_button == 1) {
+                        scn_num = 2;
+                        event_num = 3;
+                    }
+                break;
 
-            event_num++;
+                case 2: 
+                    if (choice_button == 0) {
+                        scn_num = 3;
+                        //event_num = 4;
+                    } 
+                    else if (choice_button == 1) {
+                        scn_num = 4;
+                        //event_num = 5;
+                    }
+                break;  
+
+                case 3:  
+                    if (choice_button == 0) {
+                        scn_num = 5;
+                        event_num = 4;
+                    } 
+                    else if (choice_button == 1) {
+                        scn_num = 6;
+                        event_num = 0; // reset effect num as no more choices can be made
+                    }
+                break;
+
+                case 4:
+                    if (choice_button == 0) {
+                        scn_num = 7;
+                        event_num = 0;
+                        player.reach_ending = true;
+                    } 
+                    else if (choice_button == 1) {
+                        scn_num = 8;
+                        event_num = 0;
+                        //player.reach_ending = true;
+                    }
+                break;        
+            }
             break;
         }
     }
