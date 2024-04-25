@@ -11,11 +11,10 @@ class Progress {
     int scn_num;
     int map_code;
     int event_num;
-    int x, y;
-    string player_color;
+    int ending_num;
 
     public:
-        void save_progress(int scn_num, int map_code, int event_num, Player player);
+        void save_progress(Player player);
         bool checking_loading();
         void load_progress(Player &player);
         void delete_progress();
