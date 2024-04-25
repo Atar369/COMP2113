@@ -14,7 +14,7 @@
 #define KEY_ESC 27  
 #define KEY_SPACE 32
 #define KEY_ACTION 69
-#define KEY_EXIT 81
+#define KEY_EXIT 81 // ascii numbers
 
 class Keyboard {
     public:
