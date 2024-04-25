@@ -103,6 +103,7 @@ unordered_map<short, string> color_mapping = {
     {c_chair22 ,  font_cyan},
     {c_chair23 ,  font_cyan},
     {c_lamp9 ,  font_yellow},
-    {c_lamp10 ,  font_yellow}
+    {c_lamp10 ,  font_yellow},
+    {c_monster , font_cyan}
 };
 
