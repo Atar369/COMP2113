@@ -12,8 +12,8 @@ const vector<string> player_button = {
 };
 
 // content of choice window, match with scn num
-unordered_map<string, vector<string> > choice_map_b4 = {
-    {"event 1",   {
+unordered_map<int, vector<string> > Hero_choice_map_b4 = {
+    {1,   {
         "The sun is shining, and the birds are chirping.",
         "It's a beautiful day, isn't it?",
         "Hero wakes up from the dream. Or... Is it really a dream?",
@@ -21,18 +21,31 @@ unordered_map<string, vector<string> > choice_map_b4 = {
         "He decided to...",
         }
     },
-    {"event 2",   {
+    {2,   {
         "Hero enters the store", 
         "He saw tons of people around there.",
         "Suddenly, a weird object in the corner grapped his attention.",
         "It was a sword, shining in the dark.",
         "After noticing the sword, he decied to...",
         }
-    }
+    },
+    {3, { // wrong direction, saw monster first, being himself
+        "Hero got lost in the forest.",
+        "He saw a monster in the distance.",
+        "It was a huge monster, with sharp teeth and red eyes.",
+        "He decided to...",
+        }
+    },
+    {4, { 
+        "He decided to get closer to the monster.",
+        "He could felt the hard breath. One step closer, he could be swallowed.",
+        "He could clearly see warning signs, but he still decided to...",
+        }
+    },
 
 };
 
-unordered_map<string, vector<string> > choice_map_after = {
+unordered_map<int, vector<string> > Hero_choice_map_after = {
     {"Scn 1", {
         "He has chosen to be himself.",     
         },
@@ -52,19 +65,34 @@ unordered_map<string, vector<string> > choice_map_after = {
         "He decided to leave it there and continue his journey.",
         }
     },
+    {"Scn 5", {
+        "He ignored the warning signs and got closer to the monster.",
+        }
+    },
+    {"Scn 6", {
+        "He escaped.",     
+        }
+    },
+    {"Scn 6", {
+        "He decided to fight the monster.",     
+        } 
+    }      
 };        
     
-
 // choice_1, match with scn num
 unordered_map <string, vector<string> > button_choice1 = {
     {"event 1", { "> BE HIMSELF <", "  Be himself  ", } },    
-    {"event 2", { "> TAKE THE SWORD <", "  Take the sword  ", } },        
+    {"event 2", { "> TAKE THE SWORD <", "  Take the sword  ", } },
+    {"event 3", { "> GET CLOSER <", "  Get Closer  ", } },      
+    {"event 4", { "> FIGHT THE MONSTER <", "  Fight the monster  ", } }, 
 };
 
 // choice_2, match with scn num
 unordered_map <string, vector<string> > button_choice2 = {
     {"event 1", { "> BE HERO <", "  Be Hero  ", } },    
     {"event 2", { "> LEAVE THE SWORD <", "  Leave the sword  ", } }, 
+    {"event 3", { "> RUN AWAY <", "  Run away  ", } },
+    {"event 4", { "> TALK TO THE MONSTER <", "  Talk to the monster  ", } },
 };    
 
 void Window::build_buffer(const string & content) {
@@ -205,10 +233,8 @@ void Window::handle_choice(vector<vector<short> >current_map, int &scn_num, int 
     vector<string> content_b4;
 
     // choice description
-    if (event_num == 1) 
-        content_b4 = choice_map_b4["event 1"];
-    else if(event_num == 2) 
-        content_b4 = choice_map_b4["event 2"];
+    content_b4 = Hero_choice_map_b4[event_num];
+           
 
     int line = 0;
     while(line < content_b4.size()) {
@@ -276,11 +302,12 @@ void Window::handle_choice(vector<vector<short> >current_map, int &scn_num, int 
             if (event_num == 1) {
                 if (choice_button == 0) {
                     scn_num = 1;
+                    event_num = 2;
                 } 
                 else if (choice_button == 1) {
                     scn_num = 2;
+                    event_num = 3;
                 }
-                // to be confirmed
             } 
             else if (event_num == 2) {
                 if (choice_button == 0) {
@@ -290,6 +317,7 @@ void Window::handle_choice(vector<vector<short> >current_map, int &scn_num, int 
                     scn_num = 4;
                 }
             }
+
             event_num++;
             break;
         }
@@ -299,13 +327,37 @@ void Window::handle_choice(vector<vector<short> >current_map, int &scn_num, int 
     vector<string> content_after;
     
     if(scn_num == 1) 
-        content_after = choice_map_after["Scn 1"];
+        content_after = Hero_choice_map_after["Scn 1"];
     else if(scn_num == 2) 
-        content_after = choice_map_after["Scn 2"];
+        content_after = Hero_choice_map_after["Scn 2"];
     else if(scn_num == 3) 
-        content_after = choice_map_after["Scn 3"];
+        content_after = Hero_choice_map_after["Scn 3"];
     else if(scn_num == 4) 
-        content_after = choice_map_after["Scn 4"];
+        content_after = Hero_choice_map_after["Scn 4"];
+    else if(scn_num == 5)
+        content_after = Hero_choice_map_after["Scn 5"];
+    else if(scn_num == 6) {
+        content_after = Hero_choice_map_after["Scn 6"]; 
+        player.reach_ending = true;
+        progress.ending_num = 5;   
+    }
+
+    if (player.reach_ending) {
+        line = 0;
+        while(line < content_after.size()) {
+            build_buffer(content_after[line]);    
+            Print_buffer(current_map, player, font_white);
+            line ++;
+            keyboard.get_userInput();
+            while (keyboard.key != KEY_SPACE) {
+                keyboard.get_userInput();
+            }
+        }
+        player.reach_ending = false; 
+        progress.save_progress(player);
+        //progress.delete_progress();
+        return;
+    }
 
     line = 0;
     while(line < content_after.size()) {
