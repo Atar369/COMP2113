@@ -9,7 +9,7 @@
 
 using namespace std;
 // Define standard 
-#define default_format "\033["
+#define default_format "\033[" // ansi escape code
 
 // define format codes
 #define reset "\033[0m"
