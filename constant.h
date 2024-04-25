@@ -118,196 +118,101 @@ const short c_chair22 = 91;
 const short c_chair23 = 92;
 const short c_lamp9 = 93;
 const short c_lamp10 = 94;
+const short c_monster = 95;
 
-#define i_empty        0
-#define i_wall         1
-#define i_hero         2
-#define i_girl         3
-#define i_bed          4
-#define i_bedleft      5
-#define i_bedright     6
-#define i_bedcentre    7
-#define i_bedmiddle    8
-#define i_leaveleft    9
-#define i_leaveright   10
-#define i_table        11
-#define i_chair        12
-#define i_door         13
-#define i_leftdoor     14
-#define i_rightdoor    15
-#define i_lightoff     16
-#define i_lighton      17
-#define i_treasure     18
-#define i_key          19
-#define i_leftcupboard 20
+#define i_empty         0
+#define i_wall          1
+#define i_hero          2
+#define i_girl          3
+#define i_bed           4
+#define i_bedleft       5
+#define i_bedright      6
+#define i_bedcentre     7
+#define i_bedmiddle     8
+#define i_leaveleft     9
+#define i_leaveright    10
+#define i_table         11
+#define i_chair         12
+#define i_door          13
+#define i_leftdoor      14
+#define i_rightdoor     15
+#define i_lightoff      16
+#define i_lighton       17
+#define i_treasure      18
+#define i_key           19
+#define i_leftcupboard  20
 #define i_rightcupboard 21
-#define i_npc          22
-#define i_tree         23
-#define i_treebranch   24
-#define i_treeleft     25
-#define i_treeright    26
-#define i_grass        27
-#define i_bush         28
-#define i_brick        29
-#define i_castle       30
-#define i_flag         31
-#define i_hole         32
-#define i_stairs1      33
-#define i_stairs2      34
-#define i_stairs3      35
-#define i_stairs4      36
-#define i_stairs5      37
-#define i_stairs6      38
-#define i_stairs7      39
-#define i_dragonnpc    40
-#define i_dragon       41
+#define i_npc           22
+#define i_tree          23
+#define i_treebranch    24
+#define i_treeleft      25
+#define i_treeright     26
+#define i_grass         27
+#define i_bush          28
+#define i_brick         29
+#define i_castle        30
+#define i_flag          31
+#define i_hole          32
+#define i_stairs1       33
+#define i_stairs2       34
+#define i_stairs3       35
+#define i_stairs4       36
+#define i_stairs5       37
+#define i_stairs6       38
+#define i_stairs7       39
+#define i_dragonnpc     40
+#define i_dragon        41
 #define i_deaddragonnpc 42
-#define i_deaddragon   43
-#define i_oldman       44
-#define i_rooftop1     45
-#define i_rooftop2     46
-#define i_rooftop3     47
-#define i_rooftop4     48
-#define i_rooftop5     49
-#define i_rooftop6     50
-#define i_knob         51
-#define i_leftwardrobe 52
+#define i_deaddragon    43
+#define i_oldman        44
+#define i_rooftop1      45
+#define i_rooftop2      46
+#define i_rooftop3      47
+#define i_rooftop4      48
+#define i_rooftop5      49
+#define i_rooftop6      50
+#define i_knob          51
+#define i_leftwardrobe  52
 #define i_rightwardrobe 53
-#define i_librarian    54
-#define i_penny        55
-#define i_haley        56
-#define i_cooper       57
-#define i_robert       58
-#define i_castlewall   59
-#define i_stairs8      60
-#define i_stairs9      61
-#define i_chair1 62
-#define i_chair2 63
-#define i_chair3 64
-#define i_chair4 65
-#define i_chair5 66
-#define i_chair6 67
-#define i_chair7 68
-#define i_chair8 69
-#define i_chair9 70
-#define i_chair10 71
-#define i_chair11 72
-#define i_chair12 73
-#define i_chair13 74
-#define i_chair14 75
-#define i_chair15 76
-#define i_chair16 77
-#define i_chair17 78
-#define i_chair18 79
-#define i_chair19 80
-#define i_lamp1 81
-#define i_lamp2 82
-#define i_lamp3 83
-#define i_lamp4 84
-#define i_lamp5 85
-#define i_lamp6 86
-#define i_lamp7 87
-#define i_lamp8 88
-#define i_chair20 89
-#define i_chair21 90
-#define i_chair22 91
-#define i_chair23 92
-#define i_lamp9 93
-#define i_lamp10 94
-
-// Symbol map object
-#define s_empty        "   "
-#define s_wall "///"
-#define s_hero "/@\\"
-#define s_girl "/%\\"
-#define s_bed "==="
-#define s_bedleft "== "
-#define s_bedright " =="
-#define s_bedcentre " = "
-#define s_bedmiddle "= ="
-#define s_leaveleft "=  "
-#define s_leaveright "  ="
-#define s_table "[T]"
-#define s_chair "|-|"
-#define s_door "---"
-#define s_leftdoor "{--"
-#define s_rightdoor "--}"
-#define s_lightoff "[']"
-#define s_lighton "[`]"
-#define s_treasure "{$}"
-#define s_key "[*]"
-#define s_leftcupboard "| ="
-#define s_rightcupboard "= |"
-#define s_npc "/N\\"
-#define s_tree "|=|"
-#define s_treebranch "/=\\"
-#define s_treeleft "  /"
-#define s_treeright "\\  "
-#define s_grass "wWw"
-#define s_bush " _ "
-#define s_brick "|||"
-#define s_castle "_=_"
-#define s_flag " |-"
-#define s_hole " o "
-#define s_stairs1 "  |"
-#define s_stairs2 "|  "
-#define s_stairs3 "__/"
-#define s_stairs4 "\\__"
-#define s_stairs5 " |_"
-#define s_stairs6 "_| "
-#define s_stairs7 "___"
-#define s_dragonnpc "^N^"
-#define s_dragon "^@^"
-#define s_deaddragonnpc "xNx"
-#define s_deaddragon "x@x"
-#define s_oldman "/V\\"
-#define s_rooftop1 " /_"
-#define s_rooftop2 "/  "
-#define s_rooftop3 "_\\ "
-#define s_rooftop4 "  \\"
-#define s_rooftop5 " __"
-#define s_rooftop6 "__ "
-#define s_knob "  ."
-#define s_leftwardrobe "|=="
-#define s_rightwardrobe "==|"
-#define s_librarian "/L\\"
-#define s_penny "/P\\"
-#define s_haley "/H\\"
-#define s_cooper "/C\\"
-#define s_robert "/R\\"
-#define s_castlewall " | "
-#define s_stairs8 "/__"
-#define s_stairs9 "__\\"
-#define s_chair1 "| |"
-#define s_chair2 "/_/"
-#define s_chair3 "\\_\\"
-#define s_chair4 "|__"
-#define s_chair5 "__|"
-#define s_chair6 " .."
-#define s_chair7 ".. "
-#define s_chair8 " ' "
-#define s_chair9 "/ /"
-#define s_chair10 "_//"
-#define s_chair11 "\\\\_"
-#define s_chair12 "|:."
-#define s_chair13 ".:|"
-#define s_chair14 "o) "
-#define s_chair15 " (o"
-#define s_chair16 " |_"
-#define s_chair17 "_| "
-#define s_chair18 "|__"
-#define s_chair19 "__|"
-#define s_lamp1 "  _"
-#define s_lamp2 "_  "
-#define s_lamp3 "/'-"
-#define s_lamp4 "-'\\"
-#define s_lamp5 "  ."
-#define s_lamp6 ".  "
-#define s_lamp7 " '|"
-#define s_lamp8 "|' "
-#define s_chair20 "..."
-#define s_chair21 "  '"
-#define s_chair22 "|_|"
-#define s_chair23 "\\ \\"
-#define s_lamp9 " _|"
-#define s_lamp10 "|_ "
+#define i_librarian     54
+#define i_penny         55
+#define i_haley         56
+#define i_cooper        57
+#define i_robert        58
+#define i_castlewall    59
+#define i_stairs8       60
+#define i_stairs9       61
+#define i_chair1        62
+#define i_chair2        63
+#define i_chair3        64
+#define i_chair4        65
+#define i_chair5        66
+#define i_chair6        67
+#define i_chair7        68
+#define i_chair8        69
+#define i_chair9        70
+#define i_chair10       71
+#define i_chair11       72
+#define i_chair12       73    
+#define i_chair13       74
+#define i_chair14       75
+#define i_chair15       76
+#define i_chair16       77
+#define i_chair17       78
+#define i_chair18       79
+#define i_chair19       80
+#define i_lamp1         81
+#define i_lamp2         82
+#define i_lamp3         83
+#define i_lamp4         84
+#define i_lamp5         85
+#define i_lamp6         86
+#define i_lamp7         87
+#define i_lamp8         88
+#define i_chair20       89    
+#define i_chair21       90
+#define i_chair22       91
+#define i_chair23       92
+#define i_lamp9         93
+#define i_lamp10        94
+#define i_monster       95
