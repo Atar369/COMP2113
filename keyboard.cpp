@@ -26,7 +26,8 @@ void Keyboard::get_userInput() {
     tcsetattr(STDIN_FILENO, TCSANOW, &newSettings);
     newSettings.c_cc[VTIME] = 0;
     newSettings.c_cc[VMIN] = 1;
-    char userInput = getchar();
+
+    char userInput = getchar(); // get one character from the user
 
     switch (userInput) {
         case 'W': case 'w': case KEY_UP:
