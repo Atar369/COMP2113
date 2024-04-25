@@ -13,4 +13,4 @@
 using namespace std;
 
 
-void Hero_run(int &scn_num, int &map_code, int &event_num, Player &player);
+void Hero_run(int &scn_num, int &map_code, int &event_num, int &ending_num, Player &player);
