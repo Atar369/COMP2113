@@ -13,11 +13,13 @@ using namespace std;
 class Player {
 
     public:
-    int hrz, vtrl;
+    int hrz, vtrl; // horizontal, vertical, -1, 0, 1
     int x, y;
     int direction;
     string symbol;
     string color;
+    bool reach_ending = false;
+    bool saw_monster = false;
     
     
     // Player's inventory & states
