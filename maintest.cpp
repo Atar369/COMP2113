@@ -33,10 +33,6 @@ int main() {
     Window window;
     Player player;
 
-    ////////////////
-    // Main loop
-    ///////////////
-
     // Menu menu
     // Buttons
     const string button_start_game[2] = {
