@@ -3,21 +3,22 @@
 Progress progress;
 
 // store the state of the game to the file
-void Progress::save_progress(int scn_num, int map_code, int event_num, Player player) { 
-    ofstream fout("2113_Gp15_mini_game_saving", ofstream::trunc);
-    fout << scn_num << endl;
-    fout << map_code << endl;
-    fout << event_num << endl;
+void Progress::save_progress(Player player) { 
+    ofstream fout("2113_Gp15_mini_game_saving.txt", ofstream::trunc);
+    fout << this->scn_num << endl;
+    fout << this->map_code << endl;
+    fout << this->event_num << endl;
     fout << player.x << endl;
     fout << player.y << endl;
     fout << player.color << endl;
+    fout << this->ending_num << endl;
     //fout <<  << endl;
     fout.close();
 }
 
 bool Progress::checking_loading() {
 
-    ifstream fin("2113_Gp15_mini_game_saving");
+    ifstream fin("2113_Gp15_mini_game_saving.txt");
     if (!fin) {
         return 0;
     }
@@ -30,27 +31,25 @@ bool Progress::checking_loading() {
 // load the state of the game from the file
 void Progress::load_progress(Player &player) {
 
-    ifstream fin("2113_Gp15_mini_game_saving");
+    ifstream fin("2113_Gp15_mini_game_saving.txt");
 
     fin >> this->scn_num;
     fin >> this->map_code;
     fin >> this->event_num;
-    fin >> this->x;
-    fin >> this->y;
-    fin >> this->player_color;
-
-    player.x = this->x;
-    player.y = this->y;
-    player.color = this->player_color;
+    fin >> player.x;
+    fin >> player.y;
+    fin >> player.color;
+    fin >> this->ending_num;
 
     fin.close();
 
 }
 
 void Progress::delete_progress() {
-    remove("2113_Gp15_mini_game_saving");
+    remove("2113_Gp15_mini_game_saving.txt");
     this->scn_num = 0;
     this->map_code = 0;
     this->event_num = 0;
+    this->ending_num = 0;
 }
 
