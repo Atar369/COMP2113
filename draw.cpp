@@ -214,6 +214,7 @@ unordered_map<int, string> symbol_mapping = {
     {92, s_chair23},
     {93, s_lamp9},
     {94, s_lamp10},
+    {95, s_monster}
 };
 
 // Draw instance
