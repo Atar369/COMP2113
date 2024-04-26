@@ -3,6 +3,7 @@
 #include <fstream>
 #include "player.h"
 #include "maps.h"
+#include "format.h"
 using namespace std;
 
 class Progress {
@@ -17,7 +18,9 @@ class Progress {
         void save_progress(Player player);
         bool checking_loading();
         void load_progress(Player &player);
+        void reset_progress();
         void delete_progress();
+        
 };
 
 extern Progress progress;
