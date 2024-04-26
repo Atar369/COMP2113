@@ -1,8 +1,4 @@
 #include "window.h"
-#include "draw.h"
-#include "player.h"
-#include "keyboard.h"
-#include "progress.h"
 
 Window window;
 
@@ -11,8 +7,9 @@ const vector<string> player_button = {
 "/@\\", "\\@/", "/%\\", "\\%/", "Be the Boy", "Be the Girl"
 };
 
-// content of choice window, match with scn num
+// content of choice window, match with event num
 unordered_map<int, vector<string> > Hero_choice_map_b4 = { // event num mapping
+
     {1,   {
         "The sun is shining, and the birds are chirping.",
         "It's a beautiful day, isn't it?",
@@ -46,6 +43,7 @@ unordered_map<int, vector<string> > Hero_choice_map_b4 = { // event num mapping
 };
 
 unordered_map<int, vector<string> > Hero_choice_map_after = { // scn num mapping
+
     {1, {
         "He has chosen to be himself.",     
         },
@@ -85,6 +83,7 @@ unordered_map<int, vector<string> > Hero_choice_map_after = { // scn num mapping
     
 // choice_1, match with scn num
 unordered_map <int, vector<string> > button_choice1 = {
+
     {1, { "> BE HIMSELF <", "  Be himself  ", } },    
     {2, { "> TAKE THE SWORD <", "  Take the sword  ", } },
     {3, { "> GET CLOSER <", "  Get Closer  ", } },      
@@ -93,6 +92,7 @@ unordered_map <int, vector<string> > button_choice1 = {
 
 // choice_2, match with scn num
 unordered_map <int, vector<string> > button_choice2 = {
+
     {1, { "> BE HERO <", "  Be Hero  ", } },    
     {2, { "> LEAVE THE SWORD <", "  Leave the sword  ", } }, 
     {3, { "> RUN AWAY <", "  Run away  ", } },
@@ -100,6 +100,7 @@ unordered_map <int, vector<string> > button_choice2 = {
 };    
 
 void Window::build_buffer(const string & content) {
+
     // Resize the window_buffer vector to the required dimensions
     window_buffer.resize(height, vector<string>(width));
 
@@ -135,7 +136,6 @@ void Window::reset_buffer() {
 
 void Window::Print_buffer(vector<vector<short> > current_map, Player &player, string color) { // position wanted to display
     system("clear");
-
     int k = 0;
 
     while (k < height) {
@@ -153,7 +153,7 @@ void Window::Print_buffer(vector<vector<short> > current_map, Player &player, st
         }
         cout << reset << endl;
     }
-    
+
     reset_buffer();
 }
 
@@ -176,9 +176,9 @@ void Window::intro_character_choice(Player &player) {
     cout << default_format << yoffset<< ";" << xoffset << "H" << endl;
 */
 
-    for (int i = 0; i < this->window_buffer.size(); i++) {
-        for (int j = 0; j < this->window_buffer[0].size(); j++) {
-            cout << this->window_buffer[i][j];
+    for (int i = 0; i < window_buffer.size(); i++) {
+        for (int j = 0; j < window_buffer[0].size(); j++) {
+            cout << window_buffer[i][j];
         }
         cout << endl;
     }
@@ -204,9 +204,9 @@ void Window::intro_character_choice(Player &player) {
 
         system("clear");
 
-        for (int i = 0; i < this->window_buffer.size(); i++) {
-            for (int j = 0; j < this->window_buffer[0].size(); j++) {
-                cout << font_yellow << this->window_buffer[i][j];
+        for (int i = 0; i < window_buffer.size(); i++) {
+            for (int j = 0; j < window_buffer[0].size(); j++) {
+                cout << font_yellow << window_buffer[i][j];
             }
             cout << endl;
         }        
@@ -242,20 +242,20 @@ void Window::intro_character_choice(Player &player) {
         is_Girl = true;
     }
 
+    reset_buffer();
 }
 
-void Window::handle_choice(vector<vector<short> >current_map, int &scn_num, int &event_num, Player &player){
+void Window::handle_choice(vector<vector<short> >current_map, int &scn_num, int &event_num, int &ending_num, Player &player){
     string choice1_content;
     string choice2_content;
 
     vector<string> content_b4;
 
     if (player.color == font_blue) {
-        this-> is_Hero = true;
+        is_Hero = true;
         content_b4 = Hero_choice_map_b4[event_num];     
     }
-    else if (player.color == font_purple) {
-        this->is_Girl = true;
+    else {
         //content_b4 = Girl_choice_map_b4[event_num];     
     } 
 
@@ -321,11 +321,11 @@ void Window::handle_choice(vector<vector<short> >current_map, int &scn_num, int 
                 case 1: 
                     if (choice_button == 0) {
                         scn_num = 1;
-                        event_num = 2;
+                        event_num = 3;
                     } 
                     else if (choice_button == 1) {
                         scn_num = 2;
-                        event_num = 3;
+                        event_num = 2;
                     }
                 break;
 
@@ -355,12 +355,12 @@ void Window::handle_choice(vector<vector<short> >current_map, int &scn_num, int 
                     if (choice_button == 0) {
                         scn_num = 7;
                         event_num = 0;
+                        ending_num = 5;
                         player.reach_ending = true;
                     } 
                     else if (choice_button == 1) {
                         scn_num = 8;
                         event_num = 0;
-                        //player.reach_ending = true;
                     }
                 break;        
             }
@@ -376,23 +376,6 @@ void Window::handle_choice(vector<vector<short> >current_map, int &scn_num, int 
     }
     else if (is_Girl) {
         //content_after = Girl_choice_map_after[scn_num];
-    }
-
-    if (player.reach_ending) {
-        line = 0;
-        while(line < content_after.size()) {
-            build_buffer(content_after[line]);    
-            Print_buffer(current_map, player, font_white);
-            line ++;
-            keyboard.get_userInput();
-            while (keyboard.key != KEY_SPACE) {
-                keyboard.get_userInput();
-            }
-        }
-        player.reach_ending = false; 
-        progress.save_progress(player);
-        //progress.delete_progress();
-        return;
     }
 
     line = 0;
@@ -413,11 +396,13 @@ void Window::handle_choice(vector<vector<short> >current_map, int &scn_num, int 
 
 
  void Window::handle_save_choice(int &choice_button, int &map_code, Player &player) {
+
+    vector<vector<short> > temp_map (32, vector<short>(36, 0));
     
     temp_map = map_code_mapping.at(map_code);
 
-    window.build_buffer("Save progress?");
-    window.Print_buffer(temp_map, player, font_white);
+    build_buffer("Save progress?");
+    Print_buffer(temp_map, player, font_white);
 
     while (keyboard.key != KEY_SPACE) {
             keyboard.get_userInput();
@@ -436,8 +421,8 @@ void Window::handle_choice(vector<vector<short> >current_map, int &scn_num, int 
             select_no = 2;
         }  
 
-        window.build_buffer(save_options[select_yes] + save_options[select_no]);
-        window.Print_buffer(temp_map, player, font_white);
+        build_buffer(save_options[select_yes] + save_options[select_no]);
+        Print_buffer(temp_map, player, font_white);
 
         keyboard.get_userInput();
         
@@ -460,8 +445,25 @@ void Window::handle_choice(vector<vector<short> >current_map, int &scn_num, int 
             break;
     }
 
-
 }
+
+void Window::Print_endings(vector<string> contents, string color) {
+    system("clear");
+    vector<vector<short> > endings (31, vector<short>(36, 0));
+
+    for (int i = 0; i < contents.size(); i++) {
+        build_buffer(contents[i]);
+        Print_buffer(endings, player, color);
+        keyboard.get_userInput();
+        while (keyboard.key != KEY_SPACE) {
+            keyboard.get_userInput();
+        }
+    }
+
+    sleep(1);
+    system("clear");
+}
+  
 
 /*
 // testing
