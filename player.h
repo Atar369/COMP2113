@@ -11,24 +11,28 @@
 using namespace std;
 
 class Player {
-
+    
     public:
     int hrz, vtrl; // horizontal, vertical, -1, 0, 1
     int x, y;
     int direction;
     string symbol;
     string color;
+    bool chat_npc;
     bool reach_ending = false;
-    bool saw_monster = false;
+    bool touch_monster = false;
+    bool touch_oldman = false;
+    bool touch_robert = false;
+    bool touch_dragon = false;
+    bool touch_dragonnpc = false;
     
     
     // Player's inventory & states
     bool have_key;
     bool open_treasure;
     bool turn_light_switch;
-    bool have_sword;
     bool investigate;
-    bool chat_npc;
+    
 
 
     public:
