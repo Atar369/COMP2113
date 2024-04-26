@@ -1,6 +1,7 @@
 #include "Hero.h"
 
 unordered_map<int, vector<string> > Hero_endings = {
+        {0, {"testing ending"}},
     {1, {
         "He chosed to be a Hero.",
         "But he didn't know how to fight.",
@@ -13,6 +14,7 @@ unordered_map<int, vector<string> > Hero_endings = {
         "Suddenly, he realized that he was just himself.",
         "A normal person, ...",
         "...who dreamed to be a Hero."
+        "Ending 1: Dreamer"
         }
     },
     {2, { // not yet done
@@ -41,18 +43,20 @@ unordered_map<int, vector<string> > Hero_endings = {
         "The villagers told him that the girl has already been saved by another Hero.",
         "He was being forgotten."
         "He was just a normal person...",
+        "Ending 4: Forgotten"
         }
     },
     {5, {
         "He decided to fight the monster.",
         "He tried his best, but his attacks meant nothing to the monster.",
         "The monster opened its mouth and swallowed him whole.",
-        "He was never seen again.",     
+        "He was never seen again.",
+        "Ending 5: Why you try?"     
         }
     },
 };
 
-void Hero_run(int &scn_num, int &map_code, int &event_num, int &ending_num, Player &player) {
+void Hero_run(Progress &progress, Player &player) {
     typedef enum {
     hero_house,
     girl_house,
@@ -70,7 +74,9 @@ void Hero_run(int &scn_num, int &map_code, int &event_num, int &ending_num, Play
         
     map_transition map_state;    
 
-    switch(map_code) {
+    keyboard.key = 0;
+
+    switch(progress.map_code) {
         case 0:
             map_state = hero_house;
         break;
@@ -112,9 +118,9 @@ void Hero_run(int &scn_num, int &map_code, int &event_num, int &ending_num, Play
         break;
     }
     
-    current_map = map_code_mapping.at(map_code);
+    current_map = map_code_mapping.at(progress.map_code);
 
-    while (!player.reach_ending) {
+    while (true) {
         int offsety = 0;
         int offsetx = 0;
         // Clear screen
@@ -123,11 +129,11 @@ void Hero_run(int &scn_num, int &map_code, int &event_num, int &ending_num, Play
         switch(map_state) {
 
             case hero_house: // hero house
-                map_code = 0;
+                progress.map_code = 0;
 
                 // event 1
-                if (event_num == 1) 
-                    window.handle_choice(current_map, scn_num, event_num, player);
+                if (progress.event_num == 1) 
+                    window.handle_choice(current_map, progress.scn_num, progress.event_num, progress.ending_num, player);
                 
                 // door transition
                 if (current_map[player.y][player.x] == i_door || current_map[player.y][player.x] == i_leftdoor || current_map[player.y][player.x] == i_rightdoor)   {
@@ -138,7 +144,7 @@ void Hero_run(int &scn_num, int &map_code, int &event_num, int &ending_num, Play
             break;
             
             case girl_house: // girl's house
-                map_code = 1;
+                progress.map_code = 1;
                 if (current_map[player.y][player.x] == i_door || current_map[player.y][player.x] == i_leftdoor || current_map[player.y][player.x] == i_rightdoor)  {
                     map_state = village; 
                     offsety = - 31;
@@ -147,7 +153,7 @@ void Hero_run(int &scn_num, int &map_code, int &event_num, int &ending_num, Play
             break;
 
             case oldman_house: 
-                map_code = 2;
+                progress.map_code = 2;
                 if (player.y <= 0) {
                     map_state = outside_village;
                     offsety = 30;
@@ -156,7 +162,7 @@ void Hero_run(int &scn_num, int &map_code, int &event_num, int &ending_num, Play
             break;
 
             case village:
-                map_code = 3; 
+                progress.map_code = 3; 
 
                 if (player.y <= 0 && player.x <= 24 && player.x >= 22) {
                     map_state = hero_house;
@@ -188,7 +194,7 @@ void Hero_run(int &scn_num, int &map_code, int &event_num, int &ending_num, Play
                     keyboard.key = KEY_SPACE;
 
                     while (keyboard.key == KEY_SPACE) {
-                        chat.loadChat("npc", map_code, scn_num, player);
+                        chat.loadChat("npc", progress.map_code, progress.scn_num, player);
                         window.Print_buffer(current_map, player, font_white);
                         keyboard.get_userInput();
                     }
@@ -201,7 +207,7 @@ void Hero_run(int &scn_num, int &map_code, int &event_num, int &ending_num, Play
             break;
 
             case outside_village:
-                map_code = 4;
+                progress.map_code = 4;
                 if (player.y >= 31) {
                     map_state = oldman_house;
                     offsety = - 31;
@@ -220,7 +226,7 @@ void Hero_run(int &scn_num, int &map_code, int &event_num, int &ending_num, Play
             break;
 
             case forest:
-                map_code = 5;
+                progress.map_code = 5;
                 if (player.y >= 31) {
                     map_state = monster;
                     offsety = -30;
@@ -239,37 +245,38 @@ void Hero_run(int &scn_num, int &map_code, int &event_num, int &ending_num, Play
             break;
 
             case monster:
-                map_code = 6;
+                progress.map_code = 6;
                 if (player.y <= 0) {
                     map_state = forest;
                     offsety = 31;
                 }
 
-                if ((current_map[player.y][player.x] == i_door || current_map[player.y][player.x] == i_leftdoor || current_map[player.y][player.x] == i_rightdoor) && player.y == 10) {
-                    //if (scn_num == )
-                    map_state = castle;
-                    offsetx = -15;
-                    offsety = 18;
-                    //y = 28
-                    //x = 18
+                if (progress.event_num == 3 && player.y >= 5) {
+                    window.handle_choice(current_map, progress.scn_num, progress.event_num, progress.ending_num, player);
                 }
+
+                if (progress.event_num == 4 && player.touch_monster) {
+                    window.handle_choice(current_map, progress.scn_num, progress.event_num, progress.ending_num, player);
+                }
+
 
             break;
             
             case castle:
-                map_code = 7; 
+                progress.map_code = 7; 
                 if (player.y >= 31) {
                     map_state = back_village;
                     offsety = -17;
                 }
-                if (player.x <0) {
-                    player.x = 0;
+                if (player.x < 0) {
+                    map_state = forest;
+                    offsetx = 36;
                 }
 
             break;
 
             case back_village:
-                map_code = 8;
+                progress.map_code = 8;
                 if (player.x <= 0) {
                     map_state = oldman_house;
                     offsetx = 31;
@@ -278,7 +285,7 @@ void Hero_run(int &scn_num, int &map_code, int &event_num, int &ending_num, Play
             break;
 
             case all_dead:
-                map_code = 9;
+                progress.map_code = 9;
                 if (player.y >= 31) {
                     map_state = back_village;
                     offsety = -16;
@@ -287,8 +294,12 @@ void Hero_run(int &scn_num, int &map_code, int &event_num, int &ending_num, Play
             break; 
             } 
         
+        if (player.reach_ending) {
+            window.Print_endings(Hero_endings.at(progress.ending_num), font_red);
+            return;
+        }
 
-        current_map = map_code_mapping.at(map_code); 
+        current_map = map_code_mapping.at(progress.map_code); 
 
         draw_map(current_map, player);
 
@@ -300,7 +311,7 @@ void Hero_run(int &scn_num, int &map_code, int &event_num, int &ending_num, Play
         }
         
         if (keyboard.key == KEY_EXIT) {
-            break;
+            return;
         }
         if (keyboard.key == KEY_UP) {
             player.moveUp();
@@ -321,19 +332,7 @@ void Hero_run(int &scn_num, int &map_code, int &event_num, int &ending_num, Play
 
     }
 
-    if (player.reach_ending) {
-        vector<string> contents = Hero_endings.at(ending_num);
-        int line = 0;
-        while (line < contents.size()) {
-            window.build_buffer(contents[line]);
-            window.Print_buffer(current_map, player, font_white);
-            line ++;
-            keyboard.get_userInput();
-            while (keyboard.key != KEY_SPACE) {
-                keyboard.get_userInput();
-            }
-        }    
-    }
+    
 }    
 /* test
 int main() {
