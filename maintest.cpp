@@ -33,6 +33,10 @@ int main() {
     Window window;
     Player player;
 
+    ////////////////
+    // Main loop
+    ///////////////
+
     // Menu menu
     // Buttons
     const string button_start_game[2] = {
@@ -60,15 +64,16 @@ int main() {
         "  Exit  ",
     };
 
-    const string how_to_play[9] = {
+    const string how_to_play[10] = {
         "How to Play",
         "W - Move Up                    E - Action       ",
         "A - Move Left                  Q - Exit to menu ",
         "S - Move Down                  SPACE - Next page",
         "D - Move Right                 ENTER - Confirm  ",
-        "Walk away to cancel chat with NPCs             ",
-        "Unlock different endings with different choices",
-        "Enjoy the movie...                             ",
+        "Walk away to cancel chat with NPCs                ",
+        "Exit to menu and save your progress by pressing Q ",            
+        "Unlock different endings with different choices   ",
+        "Enjoy the movie...                                ",
         "Good luck"
     };
     
@@ -80,7 +85,7 @@ int main() {
         std::cout << save_cursor_position; // Save cursor position
         std::cout << hide_cursor;  
 
-  /**     int check_waiting = keyboard.waiting(keyboard.key);
+  /*     int check_waiting = keyboard.waiting(keyboard.key);
 
         int check_pressed_key = keyboard.key_pressed(keyboard.key);
         
@@ -295,9 +300,9 @@ int main() {
                     player.color = font_blue;
                     progress.map_code = 0;
                     progress.event_num = 1;
-                    
+                    progress.ending_num = 0;
                     // Start game
-                    Hero_run(progress.scn_num, progress.map_code, progress.event_num, progress.ending_num, player);
+                    Hero_run(progress, player);
                 }
                 else if (window.is_Girl) {
                     player.x = 4;
@@ -306,17 +311,39 @@ int main() {
                     player.color = font_purple;
                     progress.map_code = 0;
                     progress.event_num = 2;
+                    progress.ending_num = 0;
                     // Start game
                     //Hero_run(progress.scn_num, progress.map_code, progress.event_num, player);
                 }    
 
-                window.handle_save_choice(choice_button, progress.map_code, player);
 
-                if (choice_button == 0) 
+                if (!player.reach_ending) {
+                    window.handle_save_choice(choice_button, progress.map_code, player);
+                }
+                else {
+                    // reset progress after reaching the ending
+                    progress.reset_progress();
+                    if (player.color == font_blue) {
+                        player.x = 9;
+                        player.y = 9;
+                        progress.event_num = 1;
+                    }
+                    else if (player.color == font_purple) {
+                        player.x = 0;
+                        player.y = 0;
+                        progress.event_num = 1;
+                    }    
+                    progress.save_progress(player);
+                    player.reach_ending = 0;
+                    current_state = STATE_MENU; 
+                }
+
+                if (choice_button == 0)
                     // save progress
                     progress.save_progress(player);
-
-                current_state = STATE_MENU; 
+                
+                // reset progress
+                current_state = STATE_MENU;  
 
                 break;
 
@@ -328,7 +355,7 @@ int main() {
                     window.is_Hero = true;
                     player.symbol = "|@|";
                     // Continue game
-                    Hero_run(progress.scn_num, progress.map_code, progress.event_num, progress.ending_num, player);
+                    Hero_run(progress, player);
                 }
                 else if(player.color == font_purple) {
                     window.is_Girl = true;
@@ -336,16 +363,35 @@ int main() {
                     // Continue game
                     //Hero_run(progress.scn_num, progress.map_code, progress.event_num, player);
                 }
-                
-                window.handle_save_choice(choice_button, progress.map_code, player);
 
-                if (choice_button == 0) 
+                if (!player.reach_ending) {
+                    window.handle_save_choice(choice_button, progress.map_code, player);
+                }
+                else {
+                    // reset progress after reaching the ending
+                    progress.reset_progress();
+                    if (player.color == font_blue) {
+                        player.x = 9;
+                        player.y = 9;
+                        progress.event_num = 1;
+                    }
+                    else if (player.color == font_purple) {
+                        player.x = 0;
+                        player.y = 0;
+                        progress.event_num = 1;
+                    }    
+                    progress.save_progress(player);
+                    player.reach_ending = 0;
+                    current_state = STATE_MENU; 
+                }
+
+                if (choice_button == 0)
                     // save progress
                     progress.save_progress(player);
                 
-
-                current_state = STATE_MENU; 
-
+                // reset progress
+                current_state = STATE_MENU;     
+                
                 break;
 
             case STATE_EXIT:
