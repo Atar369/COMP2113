@@ -11,32 +11,38 @@ const vector<string> player_button = {
 unordered_map<int, vector<string> > Hero_choice_map_b4 = { // event num mapping
 
     {1,   {
-        "The sun is shining, and the birds are chirping.",
+        "The sun is shinning bright, and the birds are chirping in the woods.",
         "It's a beautiful day, isn't it?",
-        "He wakes up from the dream. Or... Is it really a dream?",
-        "The mistery voice still remains in his mind...",  
-        "He decided to...",
+        "You wake up from a dream. Or... Is it really a dream?",
+        "The mistery voice remains in your mind...",  
+        "You decided to...",
         }
     },
     {2,   {
-        "Hero enters the store", 
-        "He saw tons of people around there.",
-        "Suddenly, a weird object in the corner grapped his attention.",
-        "It was a sword, shining in the dark.",
-        "After noticing the sword, he decied to...",
+        "Robert noticed you and said, 'I've been waiting for you.'",
+        "'The new journey begins...'",
+        "'The new hero is being chosen...'",
+        "He silently handed you a sword.",
+        "'This sword is the key to your destiny.'",
+        "'Once you take it, there is no turning back.'",
+        "'Are you ready?'",
+        "The sword is shining, as if it has a life of its own.",
+        "As what the blacksmith said, once you take it, you can't turn back.",
+        "You decided to...",
         }
     },
     {3, { // wrong direction, saw monster first, being himself
-        "Hero got lost in the forest.",
-        "He saw a monster in the distance.",
+        "You got lost in the forest.",
+        "You saw a monster from a distance.",
         "It was a huge monster, with sharp teeth and red eyes.",
-        "He decided to...",
+        "You decided to...",
         }
     },
     {4, { 
-        "He decided to get closer to the monster.",
-        "He could felt the hard breath. One step closer, he could be swallowed.",
-        "He could clearly see warning signs, but he still decided to...",
+        "You decided to get closer to the monster.",
+        "You could feel your own breath getting heavier as you approach.",
+        "One step closer, and you could be swallowed.",
+        "You could clearly see warning signs, but you still decided to...",
         }
     },
 
@@ -45,53 +51,66 @@ unordered_map<int, vector<string> > Hero_choice_map_b4 = { // event num mapping
 unordered_map<int, vector<string> > Hero_choice_map_after = { // scn num mapping
 
     {1, {
-        "He has chosen to be himself.",     
+        "You have chosen to be yourself.",     
         },
     },    
     {2, {
-        "He has chosen to be a Hero.",     
+        "You have chosen to be a Hero.",     
         }
     },
     {3, {
-        "He picked it up and felt the power surging through his body.",
-        "He knew that he was the chosen one.",
-        "He decided to kill all the monsters and free the villagers from the control of the Dragon.",
+        "You picked up the sword and felt the power surging through your body.",
+        "You knew that you were the chosen one.",
+        "You decided to kill all the monsters and free the villagers from the threat of the Dragon.",
+        "You are the savior of the people.",
+        "You are the legend that will be told for generations to come.",
+        "You are the Hero.",
         }
     },
     {4, {
-        "He is not sure if it is other's belongings or not.",
-        "He decided to leave it there and continue his journey.",
+        "You scare to take the responsibility of being a Hero.",
+        "You afraid of risking your life for others.",
+        "You left the sword there.",
+        "Robert was disappointed, but he understood.",
+        "You decided to go back to your normal life.",
         }
     },
     {5, {
-        "He ignored the warning signs and got closer to the monster.",
+        "You ignored the warning signs and got closer to the monster.",
         }
     },
     {6, {
-        "He escaped.",     
+        "You escaped.",     
         }
     },
     {7, {
-        "He decided to fight the monster.",     
+        "You decided to fight the monster.",     
         } 
     },
     {8, {
-        "He decided to talk to the monster.",     
+        "You decided to talk to the monster.",
+        "The monster surprised you by speaking back.",
+        "The monster said that they will never attack humans unless provoked.",
+        "You two talked for hours and became friends.",
+        "You asked the monster if it saw a girl walking around.",
+        "The monster said no, but he would be willing to help you looking for her.",
+        "You agreed.",
+        "...",     
         }   
     }       
-};        
+};      
     
 // choice_1, match with scn num
-unordered_map <int, vector<string> > button_choice1 = {
+unordered_map <int, vector<string> > Hero_button_choice1 = {
 
-    {1, { "> BE HIMSELF <", "  Be himself  ", } },    
+    {1, { "> BE YOURSELF <", "  Be yourself  ", } },    
     {2, { "> TAKE THE SWORD <", "  Take the sword  ", } },
     {3, { "> GET CLOSER <", "  Get Closer  ", } },      
     {4, { "> FIGHT THE MONSTER <", "  Fight the monster  ", } }, 
 };
 
 // choice_2, match with scn num
-unordered_map <int, vector<string> > button_choice2 = {
+unordered_map <int, vector<string> > Hero_button_choice2 = {
 
     {1, { "> BE HERO <", "  Be Hero  ", } },    
     {2, { "> LEAVE THE SWORD <", "  Leave the sword  ", } }, 
@@ -245,17 +264,20 @@ void Window::intro_character_choice(Player &player) {
     reset_buffer();
 }
 
-void Window::handle_choice(vector<vector<short> >current_map, int &scn_num, int &event_num, int &ending_num, Player &player){
+void Window::handle_choice(Progress &progress, Player &player){
     string choice1_content;
     string choice2_content;
+
+    vector<vector<short> >current_map = map_code_mapping.at(progress.map_code);
 
     vector<string> content_b4;
 
     if (player.color == font_blue) {
         is_Hero = true;
-        content_b4 = Hero_choice_map_b4[event_num];     
+        content_b4 = Hero_choice_map_b4[progress.event_num];     
     }
     else {
+        is_Girl = true;
         //content_b4 = Girl_choice_map_b4[event_num];     
     } 
 
@@ -279,8 +301,8 @@ void Window::handle_choice(vector<vector<short> >current_map, int &scn_num, int 
         string choice_contents = "";
         
 
-        choice1_content = button_choice1[event_num][select_choice_1];
-        choice2_content = button_choice2[event_num][select_choice_2];        
+        choice1_content = Hero_button_choice1[progress.event_num][select_choice_1];
+        choice2_content = Hero_button_choice2[progress.event_num][select_choice_2];        
  
 
         choice_contents = choice1_content + "         " + choice2_content;
@@ -317,50 +339,52 @@ void Window::handle_choice(vector<vector<short> >current_map, int &scn_num, int 
 
         // modify event num, scn num after choice made
         if (keyboard.key == KEY_ENTER) {
-            switch (event_num) {
+            switch (progress.event_num) {
                 case 1: 
                     if (choice_button == 0) {
-                        scn_num = 1;
-                        event_num = 3;
+                        progress.scn_num = 1;
+                        progress.event_num = 3;
                     } 
                     else if (choice_button == 1) {
-                        scn_num = 2;
-                        event_num = 2;
+                        progress.scn_num = 2;
+                        progress.event_num = 2;
                     }
                 break;
 
                 case 2: 
                     if (choice_button == 0) {
-                        scn_num = 3;
-                        //event_num = 4;
+                        progress.scn_num = 3;
+                        progress.event_num = 0;
                     } 
                     else if (choice_button == 1) {
-                        scn_num = 4;
-                        //event_num = 5;
+                        progress.scn_num = 4;
+                        progress.event_num = 0;
                     }
                 break;  
 
                 case 3:  
                     if (choice_button == 0) {
-                        scn_num = 5;
-                        event_num = 4;
+                        progress.scn_num = 5;
+                        progress.event_num = 4;
                     } 
                     else if (choice_button == 1) {
-                        scn_num = 6;
-                        event_num = 0; // reset effect num as no more choices can be made
+                        progress.scn_num = 6;
+                        progress.event_num = 0; // reset effect num as no more choices can be made
                     }
                 break;
 
                 case 4:
                     if (choice_button == 0) {
-                        scn_num = 7;
-                        event_num = 0;
-                        ending_num = 5;
+                        progress.scn_num = 7;
+                        progress.event_num = 0;
+                        progress.ending_num = 5;
                         player.reach_ending = true;
                     } 
                     else if (choice_button == 1) {
-                        scn_num = 8;
-                        event_num = 0;
+                        progress.scn_num = 8;
+                        progress.event_num = 0;
+                        progress.ending_num = 4;
+                        player.reach_ending = true;
                     }
                 break;        
             }
@@ -372,7 +396,7 @@ void Window::handle_choice(vector<vector<short> >current_map, int &scn_num, int 
     vector<string> content_after;
     
     if (is_Hero) {
-        content_after = Hero_choice_map_after[scn_num];
+        content_after = Hero_choice_map_after[progress.scn_num];
     }
     else if (is_Girl) {
         //content_after = Girl_choice_map_after[scn_num];
@@ -463,7 +487,22 @@ void Window::Print_endings(vector<string> contents, string color) {
     sleep(1);
     system("clear");
 }
-  
+
+void Window::check_offsety (Player &player, int target_row, int &offsety) {
+    for (int i = -31; i < 32; i++) {
+        if (i + player.y == target_row) {
+            offsety = i;
+        }
+    }    
+} 
+
+void Window::check_offsetx (Player &player, int target_col, int &offsetx) {
+    for (int i = -35; i < 36; i++) {
+        if (i + player.x == target_col) {
+            offsetx = i;
+        }
+    }    
+}
 
 /*
 // testing
