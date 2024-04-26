@@ -10,7 +10,8 @@
 #include "maps.h"
 #include "window.h"
 #include "chat.h"
+#include "progress.h"
 using namespace std;
 
 
-void Hero_run(int &scn_num, int &map_code, int &event_num, int &ending_num, Player &player);
+void Hero_run(Progress &progress, Player &player);
