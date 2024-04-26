@@ -93,8 +93,8 @@ void Player::player_collision(vector<vector<short> > &current_map) {
     switch(current_map[this->y][this->x]) {     
 
         // Treasure collision
-        case i_empty: case i_door: case i_leftdoor: case i_rightdoor: case i_stairs2: case i_stairs3: case i_stairs4: case i_stairs5: case i_stairs6: case i_stairs7: 
-        break;
+        case i_empty: case i_door: case i_leftdoor: case i_rightdoor: case i_stairs3: case i_stairs4: case i_stairs5: case i_stairs6: case i_stairs7:
+            break;
 
         case i_treasure:
             current_map[this->y][this->x] = 0;
@@ -115,8 +115,32 @@ void Player::player_collision(vector<vector<short> > &current_map) {
         case i_monster:
             this->x -= this->hrz;
             this->y -= this->vtrl;
-            this->saw_monster = 1;
+            this->touch_monster = 1;
         break;
+
+        case i_oldman:
+            this->x -= this->hrz;
+            this->y -= this->vtrl;
+            this->touch_oldman = 1;
+        break;
+
+        case i_robert:
+            this->x -= this->hrz;
+            this->y -= this->vtrl;
+            this->touch_robert = 1;
+        break;        
+
+        case i_dragon:
+            this->x -= this->hrz;
+            this->y -= this->vtrl;
+            this->touch_dragon = 1;
+        break;
+
+        case i_dragonnpc:
+            this->x -= this->hrz;
+            this->y -= this->vtrl;
+            this->touch_dragonnpc = 1;
+        break;        
 
         default:
             this->x -= this->hrz;
