@@ -14,8 +14,9 @@ class Chat {
 
 public:
     int getRandomNumber(int a, int b);
+    string oldmanchat();
     string getRandomVillagerChat(string color, int scn_num);
-    void loadChat(string charator, int map_code, int scn_num, Player &player);
+    void loadChat(string charator, int map_code, int scn_num, Player &player, string color);
 
 };
 
