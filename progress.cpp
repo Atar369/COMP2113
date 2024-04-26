@@ -45,11 +45,16 @@ void Progress::load_progress(Player &player) {
 
 }
 
-void Progress::delete_progress() {
-    remove("2113_Gp15_mini_game_saving.txt");
+
+void Progress::reset_progress() {
     this->scn_num = 0;
     this->map_code = 0;
     this->event_num = 0;
     this->ending_num = 0;
+}
+
+void Progress::delete_progress() {
+    remove("2113_Gp15_mini_game_saving.txt");
+    this->reset_progress();
 }
 
