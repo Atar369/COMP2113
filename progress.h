@@ -13,6 +13,16 @@ class Progress {
     int map_code;
     int event_num;
     int ending_num;
+    bool can_enterMonster;
+    bool can_enterCastle;
+    bool first_time_entering_castle;
+    bool first_time_entering_store;
+    bool talked_to_oldman;
+    bool talked_to_robert;
+    bool saw_monster;
+    bool monster_killed;
+    bool dragonnpc_killed;
+    bool dragon_killed;
 
     public:
         void save_progress(Player player);
