@@ -128,7 +128,7 @@ unordered_map<int, vector<string> > Girl_choice_map_b4 = { // event num mapping
         "...",
         "*** Woke up ***",
         "You: What was that? Was that a dream?",
-        '"Super power... Time rewinding..."',
+        "Super power... Time rewinding...'",
         "*** You tried to memorize the dream ***",
         "You: Such a weird dream...",
         "You: Whatever.",
