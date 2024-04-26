@@ -306,7 +306,30 @@ for (int i = 0; i < ROWS; i++) {
         
     }
 
-
+void change_map(vector<vector<short> > & current_map, int target, int new_obj) {
+    for (int i = 0; i < current_map.size(); i++) {
+        for (int j = 0; j < current_map[0].size(); j++) {
+            if (current_map[i][j] == target) {
+                current_map[i][j] = new_obj;
+            }
+        }
+    }
+}
+/*
+void change_after_touch (vector<vector<short> > & current_map, Player &player) {
+    if (player.touch_dragon) {
+        int row = player.y + player.vtrl;
+        int col = player.x + player.hrz;
+        current_map[row][col] = i_deaddragon;
+        player.touch_dragon = false;
+    }
+    if (player.touch_dragonnpc) {
+        int row = player.y + player.vtrl;
+        int col = player.x + player.hrz;
+        current_map[row][col] = i_deaddragonnpc;
+        player.touch_dragonnpc = false;
+    }    
+}  */  
  /*       
 // Check next map
 bool next_map(short current_map[ROWS][COLS], short &map_code) {
