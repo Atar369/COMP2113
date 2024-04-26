@@ -1,109 +1,95 @@
-#include "format.h"
+// ANSI escape code for text formatting
+// Format: \033[XXXm
+#pragma once
+
+#include <iostream>
+#include <string>
+#include <unordered_map>
+#include "constant.h"
+
+using namespace std;
+// Define standard 
+#define default_format "\033[" // ansi escape code
+
+// define format codes
+#define reset "\033[0m"
+#define bold "\033[1m"
+#define dim "\033[2m"
+#define italic "\033[3m"
+#define underline "\033[4m"
+#define blink "\033[5m"
+#define reverse "\033[7m"
+#define concealed "\033[8m"
+
+// Define font colours
+#define font_black "\033[30m"
+#define font_red "\033[31m"
+#define font_green "\033[32m"
+#define font_yellow "\033[33m"
+#define font_blue "\033[34m"
+#define font_purple "\033[35m"
+#define font_cyan "\033[36m"
+#define font_white "\033[37m"
+
+// Define background colours
+#define back_black "\033[40m"
+#define back_red "\033[41m"
+#define back_green "\033[42m"
+#define back_yellow "\033[43m"
+#define back_blue "\033[44m"
+#define back_purple "\033[45m"
+#define back_cyan "\033[46m"
+#define back_white "\033[47m"
+
+// Define printing settings
+#define move_up_by_n "\033[nA"
+#define move_down_by_n "\033[nB"
+#define move_right_by_n "\033[nC"
+#define move_left_by_n "\033[nD"
+#define clear_screen "\033[2J"
+#define remove_whole_line "\033[K"
+#define save_cursor_position "\033[s"
+#define restore_cursor_position "\033[u"
+#define hide_cursor "\033[?25l"
+#define show_cursor "\033[?25h"
+
 
 // Define color pairs 
-unordered_map<short, string> effect_mapping = {
-    {c_grass      ,   italic},
-    {c_dragon     ,   bold},
-    {c_key        ,   blink},
-    {c_lightoff   ,   dim}
-}; 
+extern unordered_map<short, string> effect_mapping;
 
 // Define effect pairs
-unordered_map<short, string> color_mapping = {
-    {c_wall ,  font_white},
-    {c_hero , font_blue},
-    {c_girl , font_purple},
-    {c_bed ,  font_green},
-    {c_bedleft ,  font_green},
-    {c_bedright ,  font_green},
-    {c_bedcentre ,  font_green},
-    {c_bedmiddle ,  font_green},
-    {c_leaveleft ,  font_green},
-    {c_leaveright ,  font_green},
-    {c_table ,  font_cyan},
-    {c_chair ,  font_blue},
-    {c_door ,  font_yellow},
-    {c_leftdoor ,  font_yellow},
-    {c_rightdoor ,  font_yellow},
-    {c_lightoff ,  font_yellow},
-    {c_lighton ,  font_yellow},
-    {c_treasure ,  font_yellow},
-    {c_key ,  font_yellow},
-    {c_leftcupboard ,  font_cyan},
-    {c_rightcupboard ,  font_cyan},
-    {c_npc ,  font_yellow},
-    {c_tree ,  font_green},
-    {c_treebranch ,  font_purple},
-    {c_treeleft ,  font_green},
-    {c_treeright ,  font_green},
-    {c_grass ,  font_green},
-    {c_bush ,  font_purple},
-    {c_brick ,  font_yellow},
-    {c_castle ,  font_white},
-    {c_flag ,  font_red},
-    {c_hole ,  font_cyan},
-    {c_stairs1 ,  font_white},
-    {c_stairs2 ,  font_white},
-    {c_stairs3 ,  font_white},
-    {c_stairs4 ,  font_white},
-    {c_stairs5 ,  font_white},
-    {c_stairs6 ,  font_white},
-    {c_stairs7 ,  font_white},
-    {c_dragonnpc ,  font_purple},
-    {c_dragon ,  font_red},
-    {c_deaddragonnpc ,  font_red},
-    {c_deaddragon ,  font_purple},
-    {c_oldman ,  font_cyan},
-    {c_rooftop1 ,  font_white},
-    {c_rooftop2 ,  font_white},
-    {c_rooftop3 ,  font_white},
-    {c_rooftop4 ,  font_white},
-    {c_rooftop5 ,  font_white},
-    {c_rooftop6 ,  font_white},
-    {c_knob ,  font_yellow},
-    {c_leftwardrobe ,  font_cyan},
-    {c_rightwardrobe ,  font_cyan},
-    {c_librarian ,  font_yellow},
-    {c_penny ,  font_yellow},
-    {c_haley ,  font_yellow},
-    {c_cooper ,  font_yellow},
-    {c_robert ,  font_yellow},
-    {c_castlewall ,  font_white},
-    {c_stairs8 ,  font_white},
-    {c_stairs9 ,  font_white},
-    {c_chair1 ,  font_cyan},
-    {c_chair2 ,  font_cyan},
-    {c_chair3 ,  font_cyan},
-    {c_chair4 ,  font_cyan},
-    {c_chair5 ,  font_cyan},
-    {c_chair6 ,  font_cyan},
-    {c_chair7 ,  font_cyan},
-    {c_chair8 ,  font_cyan},
-    {c_chair9 ,  font_cyan},
-    {c_chair10 ,  font_cyan},
-    {c_chair11 ,  font_cyan},
-    {c_chair12 ,  font_cyan},
-    {c_chair13 ,  font_cyan},
-    {c_chair14 ,  font_cyan},
-    {c_chair15 ,  font_cyan},
-    {c_chair16 ,  font_cyan},
-    {c_chair17 ,  font_cyan},
-    {c_chair18 ,  font_cyan},
-    {c_chair19 ,  font_cyan},
-    {c_lamp1 ,  font_yellow},
-    {c_lamp2 ,  font_yellow},
-    {c_lamp3 ,  font_yellow},
-    {c_lamp4 ,  font_yellow},
-    {c_lamp5 ,  font_yellow},
-    {c_lamp6 ,  font_yellow},
-    {c_lamp7 ,  font_yellow},
-    {c_lamp8 ,  font_yellow},
-    {c_chair20 ,  font_cyan},
-    {c_chair21 ,  font_cyan},
-    {c_chair22 ,  font_cyan},
-    {c_chair23 ,  font_cyan},
-    {c_lamp9 ,  font_yellow},
-    {c_lamp10 ,  font_yellow},
-    {c_monster , font_cyan}
+extern unordered_map<short, string> color_mapping;
+
+// Define ending color pairs of Hero
+extern unordered_map<int, string> Hero_ending_color_mapping;
+
+/*
+const map<string, string> mod_map = {
+    {"bold", bold}, 
+    {"underline", underline}, 
+    {"blink", blink}, 
+    {"reverse", reverse}, 
+    {"concealed", concealed}
 };
 
+const map<string, string> font_map = {
+    {"font_black", font_black}, 
+    {"font_red", font_red}, 
+    {"font_green", font_green}, 
+    {"font_yellow", font_yellow}, 
+    {"font_blue", font_blue}, 
+    {"font_purple", font_purple}, 
+    {"font_cyan", font_cyan}, 
+    {"font_white", font_white}
+};
+
+const map<string, string> back_map = {
+    {"back_black", back_black}, 
+    {"back_red", back_red}, 
+    {"back_green", back_green}, 
+    {"back_yellow", back_yellow}, 
+    {"back_blue", back_blue}, 
+    {"back_purple", back_purple}, 
+    {"back_cyan", back_cyan}, 
+    {"back_white", back_white}
+}; */
