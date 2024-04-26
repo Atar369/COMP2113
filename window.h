@@ -10,6 +10,7 @@
 #include "draw.h"
 #include "maps.h"
 #include "player.h"
+#include "progress.h"
 
 using namespace std;
 
@@ -34,9 +35,11 @@ class Window {
         void reset_buffer();
         void Print_buffer(vector<vector<short> > current_map, Player &player, string color);
         void intro_character_choice(Player &player);
-        void handle_choice(vector<vector<short> > current_map, int &scn_num, int &event_num, int &ending_num, Player &player);
+        void handle_choice(Progress &progress, Player &player);
         void handle_save_choice(int &choice_button, int &map_code, Player &player);
         void Print_endings(vector<string> contents, string color);
+        void check_offsety(Player &player, int target_row, int &offsety);
+        void check_offsetx(Player &player, int target_col, int &offsetx);
 
 };
 
