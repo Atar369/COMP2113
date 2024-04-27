@@ -306,12 +306,12 @@ int main() {
                     Hero_run(progress, player);
                 }
                 else if (window.is_Girl) {
-                    player.x = 4;
-                    player.y = 4;
+                    player.x = 9;
+                    player.y = 9;
                     player.symbol = "|%|";
                     player.color = font_purple;
-                    progress.map_code = 1;
-                    progress.event_num = 1;
+                    progress.map_code = 2;
+                    progress.event_num = 0;
                     progress.ending_num = 0;
                     // Start game
                     //Hero_run(progress.scn_num, progress.map_code, progress.event_num, player);
@@ -330,9 +330,9 @@ int main() {
                         progress.event_num = 1;
                     }
                     else if (player.color == font_purple) {
-                        player.x = 0;
-                        player.y = 0;
-                        progress.event_num = 1;
+                        player.x = 9;
+                        player.y = 9;
+                        progress.event_num = 0;
                     }    
                     progress.save_progress(player);
                     current_state = STATE_MENU; 
@@ -366,7 +366,7 @@ int main() {
                     window.is_Girl = true;
                     player.symbol = "|%|";
                     // Continue game
-                    //Hero_run(progress.scn_num, progress.map_code, progress.event_num, player);
+                    Girl_run(progress, player);
                 }
 
                 if (!player.reach_ending) {
@@ -381,9 +381,9 @@ int main() {
                         progress.event_num = 1;
                     }
                     else if (player.color == font_purple) {
-                        player.x = 0;
-                        player.y = 0;
-                        progress.event_num = 1;
+                        player.x = 9;
+                        player.y = 9;
+                        progress.event_num = 0;
                     }    
                     progress.save_progress(player);
                     current_state = STATE_MENU; 
