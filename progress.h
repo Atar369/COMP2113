@@ -34,6 +34,7 @@ class Progress {
     bool get_treasure3;
     bool all_treasure;
     int key_take_count;
+    bool hero_know_fact;
     bool hero_killed_all;
 
     // for girl
