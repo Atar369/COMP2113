@@ -27,7 +27,9 @@ void Progress::save_progress(Player player) {
     fout << this->get_treasure3 << endl;
     fout << this->all_treasure << endl;
     fout << this->key_take_count << endl;
+    fout << this->hero_know_fact << endl;
     fout << this->hero_killed_all << endl;
+    
 
     fout << this->girl_saved_monster << endl;
     fout << this->girl_rewind << endl;
@@ -79,6 +81,7 @@ void Progress::load_progress(Player &player) {
     fin >> this->get_treasure3;
     fin >> this->all_treasure;
     fin >> this->key_take_count;
+    fin >> this->hero_know_fact;
     fin >> this->hero_killed_all;
 
     fin >> this->girl_saved_monster;
@@ -125,6 +128,7 @@ void Progress::reset_progress() {
 void Progress::delete_progress() {
     remove("2113_Gp15_mini_game_saving.txt");
     this->reset_progress();
+    this->hero_know_fact = 0;
     this->hero_killed_all = 0;
     this->girl_saved_monster = 0;
     this->girl_rewind = 0;
