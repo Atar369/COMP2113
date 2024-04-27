@@ -389,10 +389,71 @@ unordered_map<string, vector<string> > Girl_chat_map = {
         "A hero was destined to rise and save the day...",
         }
     },
-    {"enter castle", {
-        "Hero enters the castle.",}
+    {"intro house", {
+        "???: You are the chosen one.",
+        "???: I will give a part of my power to you.",
+        "???: Ummmmm......let me see.",
+        "???: Ok! Time rewinding. This will be your super power.",
+        "???: Remember, kid, use your power to do the right thing.",
+        "...",
+        "*** Woke up ***",
+        "You: What was that? Was that a dream?",
+        "Super power... Time rewinding...'",
+        "*** You tried to memorize the dream ***",
+        "You: Such a weird dream...",
+        "You: Whatever.",
+        "*** stomach growling ***",
+        "You: I need some food.",
+        "You: Oh no! The apple is spoiled.",
+        "...",
+        "You: Time rewind... what if that was not a dream.",
+        "You: TIME REWIND!!!",
+        "The apple on your hand became a fresh, fragant apple in a flash.",
+        "You: Oh my goodness! It actually worked! The apple... it's fresh again! This power... it's real",
+        "But wait, what if someone finds out? What if they want me to use it for their own purposes?",
+        "I can't let anyone know about this time rewinding power. I need to come up with a cover story.",
+        "...",
+        "Healing power... yes, that could work.",
+        "You quickly finished your breakfast and headed out of your room, ready to face the day.",
+        }
     },
-};        
+    {"enter village", {
+        "You step out of your house, the sun shining brightly above you.",
+        "You hear villagers chatting and children laughing in the distance.",
+        "Let's see what are they talking about.",
+        }
+    },
+    {"enter forest", {
+        "You step into the forest, the trees towering above you.",
+        "Driven by curiosity, you really want to find out if the rumours are real.",
+        "However, there are multiple paths in the forest, and you don't know which ones lead to the castle.",
+        }
+    },
+    {"enter castle", { //incomplete
+        "You step into the forest, the trees towering above you.",
+        "Driven by curiosity, you really want to find out if the rumours are real.",
+        "However, there are multiple paths in the forest, and you don't know which ones lead to the castle.",
+        }
+    },
+    {"talk to dragon", { //incomplete
+        "You step into the forest, the trees towering above you.",
+        "Driven by curiosity, you really want to find out if the rumours are real.",
+        "However, there are multiple paths in the forest, and you don't know which ones lead to the castle.",
+        }
+    },
+    {"back village", { //incomplete
+        "You step into the forest, the trees towering above you.",
+        "Driven by curiosity, you really want to find out if the rumours are real.",
+        "However, there are multiple paths in the forest, and you don't know which ones lead to the castle.",
+        }
+    },
+    {"no one believe", { //incomplete
+        "You step into the forest, the trees towering above you.",
+        "Driven by curiosity, you really want to find out if the rumours are real.",
+        "However, there are multiple paths in the forest, and you don't know which ones lead to the castle.",
+        }
+    },
+};                
 
 string Chat::oldmanchat() {
     int randomNumber = getRandomNumber(1, 6); // Generate a random number between 1 and 4
