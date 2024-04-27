@@ -7,5 +7,6 @@
 #include <fstream>
 #include "menu.h"
 #include "Hero.h"
+#include "Girl.h"
 #include "progress.h"
 using namespace std;
