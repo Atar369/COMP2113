@@ -57,6 +57,24 @@ void Keyboard::get_userInput() {
         case 'Q': case 'q':
             this->key = KEY_EXIT;
             break;
+        case 'P': case 'p':
+            this->key = KEY_P;
+            break;
+        case 'G': case 'g':
+            this->key = KEY_G;
+            break;
+        case 'F': case 'f':
+            this->key = KEY_F;
+            break;
+        case 'K': case 'k':
+            this->key = KEY_K;
+            break;
+        case 'C': case 'c':
+            this->key = KEY_C;
+            break;
+        case 'J': case 'j':
+            this->key = KEY_J;    
+            break;                    
         //default:
             // Ignore invalid keys
             //break;
