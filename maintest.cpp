@@ -290,7 +290,8 @@ int main() {
 
                 // Clear previous progress
                 progress.delete_progress();
-                
+                player.reach_ending = 0;
+
                 window.intro_character_choice(player);
 
                 if (window.is_Hero) {
@@ -309,8 +310,8 @@ int main() {
                     player.y = 4;
                     player.symbol = "|%|";
                     player.color = font_purple;
-                    progress.map_code = 0;
-                    progress.event_num = 2;
+                    progress.map_code = 1;
+                    progress.event_num = 1;
                     progress.ending_num = 0;
                     // Start game
                     //Hero_run(progress.scn_num, progress.map_code, progress.event_num, player);
@@ -334,7 +335,6 @@ int main() {
                         progress.event_num = 1;
                     }    
                     progress.save_progress(player);
-                    player.reach_ending = 0;
                     current_state = STATE_MENU; 
                 }
 
@@ -348,9 +348,14 @@ int main() {
                 break;
 
             case STATE_CONTIN:
-            
+                
                 progress.load_progress(player);
-
+                
+                if (player.reach_ending) {
+                    window.intro_character_choice(player);
+                    player.reach_ending = 0;
+                }
+                
                 if (player.color == font_blue) {
                     window.is_Hero = true;
                     player.symbol = "|@|";
@@ -381,7 +386,6 @@ int main() {
                         progress.event_num = 1;
                     }    
                     progress.save_progress(player);
-                    player.reach_ending = 0;
                     current_state = STATE_MENU; 
                 }
 
