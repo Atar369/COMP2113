@@ -8,6 +8,7 @@ const vector<string> player_button = {
 };
 
 // content of choice window, match with event num
+//Hero
 unordered_map<int, vector<string> > Hero_choice_map_b4 = { // event num mapping
 
     {1,   {
@@ -119,49 +120,10 @@ unordered_map <int, vector<string> > Hero_button_choice2 = {
     {4, { "> TALK TO THE MONSTER <", "  Talk to the monster  ", } },
 };    
 
-// event num mapping
-unordered_map <int, vector<string> > Girl_choice_map_b4 = { 
-    {1,   { 
-        "???: You are the chosen one.",
-        "???: I will give a part of my power to you.",
-        "???: Ummmmm......let me see.",
-        "???: Ok! Time rewinding. This will be your super power.",
-        "???: Remember, kid, use your power to do the right thing.",
-        "...",
-        "*** Woke up ***",
-        "You: What was that? Was that a dream?",
-        "'Super power... Time rewinding...'",
-        "*** You tried to memorize the dream ***",
-        "You: Such a weird dream...",
-        "You: Whatever.",
-        "*** stomach growling ***",
-        "You: I need some food.",
-        "You: Oh no! The apple is spoiled.",
-        "...",
-        "You: Time rewind... what if that was not a dream.",
-        "You: TIME REWIND!!!",
-        "The apple on your hand became a fresh, fragant apple in a flash.",
-        "You: Oh my goodness! It actually worked! The apple... it's fresh again! This power... it's real",
-        "But wait, what if someone finds out? What if they want me to use it for their own purposes?",
-        "I can't let anyone know about this time rewinding power. I need to come up with a cover story.",
-        "...",
-        "Healing power... yes, that could work.",
-        "You quickly finished your breakfast and headed out of your room, ready to face the day."
-        }
-    },
-    {2,   {
-        "You step out of your house, the sun shining brightly above you.",
-        "You hear villagers chatting and children laughing in the distance.",
-        "Let's see what are they talking about."
-        }
-    },
-    {3,   {
-        "You step into the forest, the trees towering above you.",
-        "Driven by curiosity, you really want to find out if the rumours are real.",
-        "However, there are multiple paths in the forest, and you don't know which ones lead to the castle."
-        }
-    },
-    {4,   {
+//Girl
+unordered_map<int, vector<string> > Girl_choice_map_b4 = { // event num mapping
+
+    {1,   {
         "You got lost in the forest.",
         "There is a monster in the distance.",
         "It was a huge monster with sharp teeth and red eyes.",
@@ -170,10 +132,10 @@ unordered_map <int, vector<string> > Girl_choice_map_b4 = {
         "The monster's body was covered in wounds—deep gashes and oozing cuts.",
         "You: Oh no... it's hurt... terribly hurt.",
         "As you neared, the monster recoiled, its red eyes narrowing with suspicion and defiance.",
-        "Will you..."
+        "Will you...",
         }
     },
-    {5, { 
+    {2, { 
         "You step into the castle, the heavy doors creaking open...",
         "It is strangely quiet...",
         "*** Sniff, sniff ",
@@ -195,10 +157,45 @@ unordered_map <int, vector<string> > Girl_choice_map_b4 = {
         "???: In this case, I must warn you that you will have to sacrifice yourself to proceed with the power.",
         "???: That means you will forever vanish from this world.",
         "???: The world will be forever altered, and those you care for will lose the memories of your existence.",
-        "???: Are you willing to pay that price?"
+        "???: Are you willing to pay that price?",
         }
     },
 };
+
+unordered_map<int, vector<string> > Girl_choice_map_after = { // scn num mapping
+
+    {2, {
+        "You decided to leave the monster.",     
+        },
+    },    
+    {3, {
+        "You decided to save the monster.",
+
+        }
+    },    
+    {9, {
+        "With a heavy heart, you turn away from the wounded dragon, knowing that your journey will continue without her by your side.",
+        "The castle, once a place of hope and love, now holds a bittersweet memory as you walk away.",
+        "You: I will never forget you, my love.",
+        },
+    },    
+    {10, {
+        "Of course I will do everything to bring back you, my love.",
+        "TIME REWIND!!!",     
+        }
+    },  
+}; 
+
+unordered_map <int, vector<string> > Girl_button_choice1 = {
+    {1, { "> LEAVE THE MONSTER <", "  Leave the monster  ", } },    
+    {1, { "> DO NOTHING <", "  Do nothing  ", } }, 
+};
+
+unordered_map <int, vector<string> > Girl_button_choice2 = {
+    {1, { "> SAVE THE MONSTER <", "  Save the monster  ", } },    
+    {1, { "> USE TIME REWIND <", "  Use time rewind  ", } },   
+};
+
 
 void Window::build_buffer(const string & content) {
 
@@ -385,9 +382,16 @@ void Window::handle_choice(Progress &progress, Player &player){
         string choice_contents = "";
         
 
-        choice1_content = Hero_button_choice1[progress.event_num][select_choice_1];
-        choice2_content = Hero_button_choice2[progress.event_num][select_choice_2];        
- 
+        if (player.color == font_blue) {
+            this-> is_Hero = true;
+            choice1_content = Hero_button_choice1[progress.event_num][select_choice_1];
+            choice2_content = Hero_button_choice2[progress.event_num][select_choice_2];  
+        }
+        else {
+            choice1_content = Girl_button_choice1[progress.event_num][select_choice_1];
+            choice2_content = Girl_button_choice2[progress.event_num][select_choice_2];        
+        }
+        
 
         choice_contents = choice1_content + "         " + choice2_content;
 
@@ -423,56 +427,87 @@ void Window::handle_choice(Progress &progress, Player &player){
 
         // modify event num, scn num after choice made
         if (keyboard.key == KEY_ENTER) {
-            switch (progress.event_num) {
-                case 1: 
-                    if (choice_button == 0) {
-                        progress.scn_num = 1;
-                        progress.event_num = 3;
-                    } 
-                    else if (choice_button == 1) {
-                        progress.scn_num = 2;
-                        progress.event_num = 2;
-                    }
+            if (is_Hero) {
+                switch (progress.event_num) {
+                    case 1: 
+                        if (choice_button == 0) {
+                            progress.scn_num = 1;
+                            progress.event_num = 3;
+                        } 
+                        else if (choice_button == 1) {
+                            progress.scn_num = 2;
+                            progress.event_num = 2;
+                        }
+                    break;
+    
+                    case 2: 
+                        if (choice_button == 0) {
+                            progress.scn_num = 3;
+                            progress.event_num = 0;
+                        } 
+                        else if (choice_button == 1) {
+                            progress.scn_num = 4;
+                            progress.event_num = 0;
+                        }
+                    break;  
+    
+                    case 3:  
+                        if (choice_button == 0) {
+                            progress.scn_num = 5;
+                            progress.event_num = 4;
+                        } 
+                        else if (choice_button == 1) {
+                            progress.scn_num = 6;
+                            progress.event_num = 0; // reset effect num as no more choices can be made
+                        }
+                    break;
+    
+                    case 4:
+                        if (choice_button == 0) {
+                            progress.scn_num = 7;
+                            progress.event_num = 0;
+                            progress.ending_num = 5;
+                            player.reach_ending = true;
+                        } 
+                        else if (choice_button == 1) {
+                            progress.scn_num = 8;
+                            progress.event_num = 0;
+                            progress.ending_num = 4;
+                            player.reach_ending = true;
+                        }
+                    break;        
+                }
                 break;
-
-                case 2: 
-                    if (choice_button == 0) {
-                        progress.scn_num = 3;
-                        progress.event_num = 0;
-                    } 
-                    else if (choice_button == 1) {
-                        progress.scn_num = 4;
-                        progress.event_num = 0;
-                    }
-                break;  
-
-                case 3:  
-                    if (choice_button == 0) {
-                        progress.scn_num = 5;
-                        progress.event_num = 4;
-                    } 
-                    else if (choice_button == 1) {
-                        progress.scn_num = 6;
-                        progress.event_num = 0; // reset effect num as no more choices can be made
-                    }
-                break;
-
-                case 4:
-                    if (choice_button == 0) {
-                        progress.scn_num = 7;
-                        progress.event_num = 0;
-                        progress.ending_num = 5;
-                        player.reach_ending = true;
-                    } 
-                    else if (choice_button == 1) {
-                        progress.scn_num = 8;
-                        progress.event_num = 0;
-                        progress.ending_num = 4;
-                        player.reach_ending = true;
-                    }
-                break;        
             }
-            break;
+                
+            else {
+                    switch (progress.event_num) {
+                        case 1:
+                            if (choice_button == 0) {
+                                progress.scn_num = 2;
+                                progress.event_num = 0;
+                                progress.ending_num = 1;
+                                player.reach_ending = true;
+                            } 
+                            else if (choice_button == 1) {
+                                progress.scn_num = 3;
+                                progress.event_num = 0;
+                            }
+                        case 2: 
+                            if (choice_button == 0) {
+                                progress.scn_num = 9;
+                                progress.event_num = 0;
+                            } 
+                            else if (choice_button == 1) {
+                                progress.scn_num = 10;
+                                progress.event_num = 0;
+                                progress.ending_num = 4;
+                                player.reach_ending = true;
+                            }
+                        break;         
+                    }
+                break;
+            }
         }
     }
 
@@ -483,7 +518,7 @@ void Window::handle_choice(Progress &progress, Player &player){
         content_after = Hero_choice_map_after[progress.scn_num];
     }
     else if (is_Girl) {
-        //content_after = Girl_choice_map_after[scn_num];
+        content_after = Girl_choice_map_after[progress.scn_num];
     }
 
     line = 0;
