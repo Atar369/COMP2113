@@ -10,10 +10,6 @@ void Progress::save_progress(Player player) {
     fout << this->event_num << endl;
     fout << this->can_enterMonster << endl;
     fout << this->can_enterCastle << endl;
-    fout << this-> finish_intro << endl;
-    fout << this->first_time_entering_village << endl;
-    fout << this->first_time_entering_forest << endl;
-    fout << this->first_time_entering_back_village << endl;
     fout << this->first_time_entering_castle << endl;
     fout << this->first_time_entering_store << endl;
     fout << this->talked_to_oldman << endl;
@@ -34,7 +30,10 @@ void Progress::save_progress(Player player) {
     fout << this->hero_know_fact << endl;
     fout << this->hero_killed_all << endl;
     
-
+    fout << this-> finish_intro << endl;
+    fout << this->first_time_entering_village << endl;
+    fout << this->first_time_entering_forest << endl;
+    fout << this->first_time_entering_back_village << endl;
     fout << this->girl_saved_monster << endl;
     fout << this->girl_rewind << endl;
 
