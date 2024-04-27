@@ -13,53 +13,285 @@ int Chat::getRandomNumber(int a, int b) {
 unordered_map<string, vector<string> > Hero_chat_map = {
     {"intro", {
         "Once upon a time, in a faraway land...",
-        "The kingdom was in great peril...",
-        "A hero was destined to rise and save the day...",
+        "The kingdom was full of peace and happiness...",
+        "But one day, a great evil descended upon the land...",
+        "The dragon, a fearsome beast, attacked the village...",
+        "With his fiery breath and sharp claws, he destroyed everything in his path...",
+        "His minions, the monsters, terrorized the villagers...",
+        "The people were helpless, unable to defend themselves...",
+        "They choose a place far away to rebuild their home...",
+        "In this little village, a hero was born...",
+        "He was destined to rise and save the day...",
+        "That hero is you...",
+        "You are the chosen one, the one who will defeat the dragon and bring peace back...",
+        "Your journey begins now...",
+        }
+    },
+    {"librarian", {
+        "......",
+        "(the librarian is reading a book)",
+        "......",
+        "(turn another page of the book)",
+        "......?",
+        "Oh, I'm sorry. I didn't see you there.",
+        "Welcome to the library.",
+        "Please feel free to look around.",
+        "If you have any questions, I'll be happy to help.",
+        }
+    },
+    {"penny", {
+        "Welcome to the store.",
+        "I'm Penny, the store owner.",
+        "If you need anything, just let me know.",
+        "I have a wide selection of items for sale.",
+        "I'm sure you'll find something you like.",
+        "Feel free to look around.",
+        }
+    },
+    {"cooper", {
+        "......",
+        "...",
+        "......",
+        "...",
+        "...how long have you been staring at me?",
+        "......",
+        "...i have nothing to say to you...",
+        "......",
+        }
+    },
+    {"cooper the guider", {
+        "......",
+        "...",
+        "......",
+        "...",
+        "...you are the hero, aren't you?",
+        "...",
+        "I can see it in your eyes...",
+        "...",
+        "You have the determination...",
+        "just like the last hero...",
+        "......",
+        "You are not yet capable of the fighting skills.",
+        "Every act, every move, every steps... got its own meaning.",
+        "I shall teach you the art of combat.",
+        "Follow my lead.",
+        }
+    },
+    {"fight class1", {
+        "(Press the correct key to follow Cooper's instructions.)",
+        "'Fighting requires not only physical strength but also mental agility.'",
+        "He took a step back and assumed a defensive stance, motioning for you to do the same.",
+        "'Let's start with the basics.'",
+        "'Stand with your feet shoulder-width apart, knees slightly bent.", 
+        "This will give you a stable foundation.'",
+        "(Press P to stay balanced)"
+        }
+    },
+    {"fight class2", {
+        "You followed Cooper's instructions, mirroring their stance.",
+        "'Good. Now, raise your arms and keep your fists clenched. This will help you protect yourself.'",
+        "You adjusted their posture and clenched their fists, ready to learn.",
+        "'Remember, fighting isn't just about attacking. It's also about defending.'",
+        "'Keep your guard up at all times, protecting your face and body from incoming strikes.'",
+        "'Now, let's move on to footwork. Agility is key in battle.'",
+        "'Practice moving swiftly and smoothly, maintaining your balance at all times.'",
+        "He demonstrated various footwork techniques",
+        "(Press G to mimic)"
+        }
+    },
+    {"fight class3", {
+        "You observed and tried to mimic the movements.",
+        "'Well done, young hero. You're starting to get the hang of it.'", 
+        "'Now, let's talk about attacking. In combat, you must strike with precision and timing.'",
+        "'Remember, it's not just about throwing punches randomly.'",
+        "'Analyze your opponent's movements, anticipate them, and strike when the opportunity arises.'",
+        "Cooper explained different striking techniques to showcase the proper form.",
+        "(Press F to follow)"
+        }
+    },
+    {"fight class4", {
+        "You try to perform the techniques as Cooper instructed.",
+        "You listened intently, absorbing every word and movement.",
+        "'Excellent. You're a quick learner, young hero.'",
+        "'Now, let's put your skills to the test. I'll be your sparring partner.'",
+        "He assumed a fighting stance, motioning for you to do the same.",
+        "'Remember everything I taught you. Focus on your footwork, guard, and striking.'",
+        "'Don't hold back. Show me what you've got.'",
+        "You took a deep breath, ready to face Cooper in combat.",
+        "(Press K to be ready)"
+        }
+    },
+    {"fight class5", {
+        "You first focused on your footwork.", 
+        "You move swiftly and smoothly to evade his strikes and find openings for your own attacks.",
+        "Cooper moved with grace and precision, testing your skills and reflexes.",
+        "He threw a series of punches and kicks, challenging you to react and counter.",
+        "(Press C to dodge)"
+        }
+    },
+    {"fight class6", {
+        "You dodged his strikes and landed a few hits of your own.",
+        "(Press J to strike back)",
+        }
+    },
+    {"fight class7", {
+        "The sound of your fists meeting filled the air, echoing through the training area.",
+        "After a few minutes of intense combat, Cooper stepped back and smiled.",
+        "'Impressive, young hero. You have great potential.'",
+        "'Keep honing your skills, and you'll become a formidable warrior.'",
+        "'Remember, practice makes perfect. Train hard, and you'll be ready to face any challenge.'",
+        "'Here, take this.'",
+        "Cooper gave you a small pouch.",
+        "Inside, you found a white magic stone and a note.",
+        "'This stone will enhance your abilities. Use it wisely.'",
+        "You thanked Cooper, feeling more confident in your abilities.",
+        "You left the training area, determined to continue your journey and become a true hero.",
+        }
+    },
+    {"after fight class", {
+        "I have taught you everything I know.",
+        "You can do this, Hero.",
+        "You are the greatest hero I have ever seen.",
+        "Your potential is limitless.",
+        "Go and save the world.",
+        }
+    },
+    {"robert", {
+        "......",
+        "...can i add this?...",
+        "...no...",
+        "...",
+        "...or this...",
+        "...huh...",
+        "(He is busy working on a weapon.)",
+        }
+    },
+    {"saw key", {
+        "...",
+        "...?",
+        "You found a key hidden in the forest.",
+        "It looks old and rusty, but it might come in handy.",
+        "You noticed there are more.",
+        }
+    },
+    {"saw treasure", {
+        "You spend a while searching the forest.",
+        "You finally collected all the keys.",
+        "At the moment, they broke into pieces.",
+        "Pointing to the direction of the treasure.",
+        }
+    },
+    {"open treasure", {
+        "Following the light, you found a treasure chest hidden in the forest.",
+        "You opened it. Inside, you found a black magic stone.",
+        "It radiated a mysterious energy, pulsing with power.",
+        "But you felt a strange presence emanating from it.",
+        "You picked it up and put it in your pocket.",
         }
     },
     {"old man hero", {
-        "In the middle of woods, you saw weird house.",
-        "You never noticed it before.",
-        "An old man was sitting in front of the house.",
-        "He said, 'I've been waiting for you, Hero.'",
-        "'The dragon has taken the castle and threatens the villages.'",
-        "'His power is too great for us to defeat.'",
-        "'Under his control, the monsters have become more aggressive.'",
-        "'We have been waiting for a hero to save us.'",
-        "'But now you still not ready to face the dragon.'",
-        "'You still not determined enough.'",
-        "'Go and find the blacksmith Robert, he will help you.'",
-        "'May the light guide you, Hero.'",
+        "(In the middle of woods, you saw weird house)",
+        "(You never noticed it before)",
+        "(An old man was sitting in front of the house)",
+        "(He was looking at you)",
+        "I've been waiting for you, Hero.",
+        "The dragon has taken the castle and threatens the villages.",
+        "His power is too great for us to defeat.",
+        "Under his control, the monsters have become more aggressive.",
+        "We have been waiting for a hero to save us.",
+        "But now you still not ready to face the dragon.",
+        "You still not determined enough.",
+        "Go and find the blacksmith Robert, he will help you.",
+        "May the light guide you, Hero.",
         }
     },
     {"old man talked", {
-        "'I have told you everything you need to know.'",
-        "'The rest is up to you.'",
-        "'Be brave, Hero.'",
-        "'May the light guide you.'",
+        "I have told you everything you need to know.",
+        "The rest is up to you.",
+        "Be brave, Hero.",
+        "May the light guide you.",
         }
     },
     {"old man robert took", {
-        "'I see you have met Robert the blacksmith, are't you?'",
-        "'The sword he made is the only weapon that can defeat the dragon.'",
-        "'But the sword is not complete yet.'",
-        "'You need to find the three treasures to unlock its full power.'",
-        "'The first treasure is kept by a villager in the village.'",
-        "'He was the teacher of last hero, but the last hero...'",
+        "I see you have met Robert the blacksmith, are't you?",
+        "The sword he made is the only weapon that can defeat the dragon.",
+        "But the sword is not complete yet.",
+        "You need to find the three magic stones to unlock its full power.",
+        "The first one is kept by a villager hidden in the village.",
+        "He was the teacher of last hero, but the last hero...",
         "...",
-        "'Anyway, he will help you to become stronger.'",
-        "'The second treasure is hidden in the forest.'",
-        "'The third treasure is in the cave, guarded by a monster.'",
-        "'Find them and bring them to Robert.'",
+        "Anyway, he can help you to become stronger.",
+        "Go and find him.",
+        "The second one is hidden in the forest.",
+        "The third one is very close to the castle.",
+        "The monster swallowed it, and the aggresive magic inside is weakening his body.",
+        "It's your chance to defeat him and take the stone.",
+        "Find them and bring them to me.",
+        "I will complete the sword for you.",
+        "May the light guide you.",
         }
     },
     {"old man robert leave", {
-        "'You did't take the sword are't you?'",
-        "'Then why are you here?'",
-        "'You are not the one I'm looking for.'",
-        "'Go back and enjoy your life.'",
+        "You did't take the sword are't you?",
+        "You are not the one I'm looking for.",
+        "Go back and enjoy your life.",
+        "...hero...",
         }
-    },    
+    }, 
+    {"old man all treasure", {
+        "You have collected all the magic stones.",
+        "Good job, Hero.",
+        "Now, I will complete the sword for you. Give me the stones.",
+        "......",
+        "...",
+        "......ha",
+        "...ha......HAHA...",
+        }
+
+    },
+    {"boss no rewind", {
+        "HAHAHAHAHAHAHAHAHAHAHAHAHAHA",
+        "You idiot...",
+        "No..all of you are idiots...",
+        "I am been searching for so long...",
+        "The power of the magic stones...",
+        "They hide them so well...",
+        "Oh right my lovely player, I am terribly sorry for the interruption of the movie.",
+        "I will let you continue after I end this.",
+        "I was so harrassed by those humans and monsters...",
+        "No matter how many times I kill them, reset the movie, brainwash them...",
+        "Eventually they will overcome the control and take revenge on me...",
+        "Although it is useless, it still makes me feel uncomfortable...",
+        "But...but......BUT...",
+        "In one of the timelines, I found that all monsters and humans sacrificed themselves...",
+        "to build up these magic stones. Hero, Girl and Dragon, with these stones...",
+        "ALMOST, almost defeated me...",
+        "Glad that I found them before they did...",
+        "But the stones are lost in the timeline...",
+        "I have been searching for so long...",
+        "Finally, I found them...",
+        "BUT!! I can't take them! I can feel their existence... But I just can't reach it...",
+        "Only the hero can take them...",
+        "Player, thank you for your help...",
+        "Just hand them to me, I will let you enjoy your movie.",
+        "No, even more. I can add more fun to it.",
+        "I can intensify the conflict, make them suffer more...",
+        "I can make them kill each other...",
+        "Blood, tears, despair, hatred, anger, fear, pain, ...",
+        "... sorrow, regret, guilt, betrayal, revenge, death...",
+        "... disease, disaster, war, famine, poverty, corruption, ...",
+        "You can enjoy all of these scenes in this theater.",
+        "That's the real art of the life... The TRUE entertainment of life!!!!",
+        "HAHAHAHAAAA",
+        "  Give it to GM                   No  ",
+        "> GIVE IT TO GM <                 No  ",
+        "Thank you for your cooperation.",
+        "Let's restart the movie.",
+        "All things will become normal...",
+        "You will forget everything...",
+        "Just be a good player and enjoy the movie.",
+        }
+    },
     {"enter castle", {
         "You enter the castle.",
         "You saw that the girl that you were looking for standing next to the evil Dragon.",
@@ -86,7 +318,7 @@ unordered_map<string, vector<string> > Hero_chat_map = {
         "You enter the store",
         "The store is filled with villagers, talking and laughing.", 
         "The crowd accumulates, almost blocking your sight.",
-        "You found the person that you were looking for.",
+        "You found the person that the old man was talking about.",
         "He is a blacksmith, with a big beard and a strong build.",
         }
     },  
@@ -109,28 +341,42 @@ unordered_map<string, vector<string> > Hero_chat_map = {
         "only a burning desire to rid the world of these evil creatures.",
         }    
     },
-    {"hero kill", {
+    {"monster notice", {
         "Drawing nearer, the wounded monster sensed your presence.",
         "He raised his head, eyes glowing with a mix of pain and fury. ",
         "With a thunderous roar, he bared his jagged teeth, attempting to strike fear into your soul.",
         "But you got no fear.",
+        "(touch the monster)"
+        }
+    },
+    {"hero kill", {
         "A fierce battle ensued.",
         "The monster opens his mouth, trying to swallow you whole.",
         "You switch your position quickly. He missed.",
+        "After that, you strike back.",
         "You are deeply focusing, your sword dancing with deadly precision.",
         "...",
         "The last attack goes for his neck.",
         "The clash of steel against scales reverberating through the air.",
         "The monster's eyes widened in shock as he realized his fate.",
         "'...You...humans...as always...'",
-        "'...you...will never...understand...'",
-        "'...our pain...'",
+        "'...stole...our home...took everything...'",
+        "'...I...will...never...forgive...'",
+        "'...'",
         "His words have no effect on you.",
         "You thrust your sword into his heart.",
         "His body fell to the ground.",
+        "You found a white stone fell out from his body.",
+        "You picked it up and took a look at it.",
+        "It emits a mysterious power, with some hidden pattern of lines sparkling.",
+        "You can feel the pure energy inside it, friendly and warm.",
+        "You put it into your pocket.",
+        "......",
+        "You look at the monster's body.",
         "His eyes still staring at you.",
         "With anger, and with sadness.",
-        "...",
+        "......",
+        "His body slowly dissolves into the air...",
         "You continue your journey.",
         }
     },    
@@ -268,6 +514,7 @@ string Chat::getRandomVillagerChat(string color, int scn_num) {
 
 void Chat::loadChat(string charactor, int map_code, int scn_num, Player &player, string color) {
     string contents;
+    vector<vector<short> > temp (31, vector<short> (36, 0));
     if (player.color == font_blue) {
         this->is_Hero = true;
     }
@@ -280,7 +527,33 @@ void Chat::loadChat(string charactor, int map_code, int scn_num, Player &player,
         window.build_buffer(contents);
         //window.Print_buffer(map_code_mapping[map_code], player, font_white);
     }
+    else if (charactor == "intro") {
+        int line = 0;
 
+        if (this->is_Hero) {
+            while (line < Hero_chat_map[charactor].size()) {
+                temp[9][27] = i_mystery;
+                window.build_buffer(Hero_chat_map[charactor][line]);
+                window.Print_buffer(temp, player, color);
+                keyboard.get_userInput();
+                while (keyboard.key != KEY_SPACE) {
+                keyboard.get_userInput();
+                }
+                line ++;
+            }
+        }
+        else if (this->is_Girl) {
+            while (line < Girl_chat_map[charactor].size()) {
+                window.build_buffer(Girl_chat_map[charactor][line]);
+                window.Print_buffer(temp, player, color);
+                keyboard.get_userInput();
+                while (keyboard.key != KEY_SPACE) {
+                keyboard.get_userInput();
+                }
+                line ++;
+            }
+        }
+    }
     else {
         int line = 0;
         
@@ -306,8 +579,8 @@ void Chat::loadChat(string charactor, int map_code, int scn_num, Player &player,
                 line ++;
             }
         } 
-
-        system("clear");   
     }
+        system("clear");   
+    
     
 }
