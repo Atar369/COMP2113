@@ -38,6 +38,10 @@ class Progress {
     bool hero_killed_all;
 
     // for girl
+    bool finish_intro;
+    bool first_time_entering_village;
+    bool first_time_entering_forest;
+    bool first_time_entering_back_village;
     bool girl_saved_monster;
     bool girl_rewind;
 
