@@ -21,3 +21,5 @@ public:
 };
 
 extern Chat chat;
+
+extern unordered_map<string, vector<string> > Hero_chat_map;
