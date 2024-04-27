@@ -68,9 +68,6 @@ void Progress::load_progress(Player &player) {
     fin >> this->can_enterMonster;
     fin >> this->can_enterCastle;
     fin >> this->finish_intro;
-    fin >> this->first_time_entering_village;
-    fin >> this->first_time_entering_forest;
-    fin >> this->first_time_entering_back_village;
     fin >> this->first_time_entering_castle;
     fin >> this->first_time_entering_store;
     fin >> this->talked_to_oldman;
@@ -91,6 +88,9 @@ void Progress::load_progress(Player &player) {
     fin >> this->hero_know_fact;
     fin >> this->hero_killed_all;
 
+    fin >> this->first_time_entering_village;
+    fin >> this->first_time_entering_forest;
+    fin >> this->first_time_entering_back_village;
     fin >> this->girl_saved_monster;
     fin >> this->girl_rewind;
 
@@ -113,10 +113,6 @@ void Progress::reset_progress() {
     // for hero
     this->can_enterMonster = 1;
     this->can_enterCastle = 1;
-    this->finish_intro = 0;
-    this->first_time_entering_village = 1;
-    this->first_time_entering_forest = 1;
-    this->first_time_entering_back_village = 1;
     this->first_time_entering_castle = 1;
     this->first_time_entering_store = 1;
     this->talked_to_oldman = 0;
@@ -134,6 +130,11 @@ void Progress::reset_progress() {
     this->get_treasure3 = 0;
     this->all_treasure = 0;
     this->key_take_count = 0;
+
+    this->finish_intro = 0;
+    this->first_time_entering_village = 1;
+    this->first_time_entering_forest = 1;
+    this->first_time_entering_back_village = 1;
 }
 
 void Progress::delete_progress() {
