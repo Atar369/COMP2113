@@ -117,6 +117,8 @@ void set_map_param(short current_map[][COLS], int clx, int cly) {
 #define s_lamp9 " _|"
 #define s_lamp10 "|_ "
 #define s_monster "^#^"
+#define s_gamemaster     "GM "
+#define s_mystery "???"
 
 unordered_map<int, string> symbol_mapping = {
     {0, s_empty},
@@ -214,7 +216,9 @@ unordered_map<int, string> symbol_mapping = {
     {92, s_chair23},
     {93, s_lamp9},
     {94, s_lamp10},
-    {95, s_monster}
+    {95, s_monster},
+    {96, s_gamemaster},
+    {97, s_mystery}
 };
 
 // Draw instance
