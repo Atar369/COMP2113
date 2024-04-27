@@ -10,6 +10,10 @@ void Progress::save_progress(Player player) {
     fout << this->event_num << endl;
     fout << this->can_enterMonster << endl;
     fout << this->can_enterCastle << endl;
+    fout << this-> finish_intro << endl;
+    fout << this->first_time_entering_village << endl;
+    fout << this->first_time_entering_forest << endl;
+    fout << this->first_time_entering_back_village << endl;
     fout << this->first_time_entering_castle << endl;
     fout << this->first_time_entering_store << endl;
     fout << this->talked_to_oldman << endl;
@@ -64,6 +68,10 @@ void Progress::load_progress(Player &player) {
     fin >> this->event_num;
     fin >> this->can_enterMonster;
     fin >> this->can_enterCastle;
+    fin >> this->finish_intro;
+    fin >> this->first_time_entering_village;
+    fin >> this->first_time_entering_forest;
+    fin >> this->first_time_entering_back_village;
     fin >> this->first_time_entering_castle;
     fin >> this->first_time_entering_store;
     fin >> this->talked_to_oldman;
@@ -106,6 +114,10 @@ void Progress::reset_progress() {
     // for hero
     this->can_enterMonster = 1;
     this->can_enterCastle = 1;
+    this->finish_intro = 0;
+    this->first_time_entering_village = 1;
+    this->first_time_entering_forest = 1;
+    this->first_time_entering_back_village = 1;
     this->first_time_entering_castle = 1;
     this->first_time_entering_store = 1;
     this->talked_to_oldman = 0;
