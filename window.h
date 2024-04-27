@@ -11,6 +11,7 @@
 #include "maps.h"
 #include "player.h"
 #include "progress.h"
+#include "chat.h"
 
 using namespace std;
 
@@ -37,9 +38,8 @@ class Window {
         void intro_character_choice(Player &player);
         void handle_choice(Progress &progress, Player &player);
         void handle_save_choice(int &choice_button, int &map_code, Player &player);
+        void Print_fighting(string contents, Player &player, string color, int key_required);
         void Print_endings(vector<string> contents, string color);
-        void check_offsety(Player &player, int target_row, int &offsety);
-        void check_offsetx(Player &player, int target_col, int &offsetx);
 
 };
 
