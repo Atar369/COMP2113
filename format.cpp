@@ -5,7 +5,8 @@ unordered_map<short, string> effect_mapping = {
     {c_grass      ,   italic},
     {c_dragon     ,   bold},
     {c_key        ,   blink},
-    {c_lightoff   ,   dim}
+    {c_lightoff   ,   dim},
+    {c_gamemaster,  bold}
 }; 
 
 // Define effect pairs
@@ -104,7 +105,9 @@ unordered_map<short, string> color_mapping = {
     {c_chair23 ,  font_cyan},
     {c_lamp9 ,  font_yellow},
     {c_lamp10 ,  font_yellow},
-    {c_monster , font_cyan}
+    {c_monster , font_cyan},
+    {c_gamemaster , font_red},
+    {c_mystery, font_cyan}
 };
 
 unordered_map<int, string> Hero_ending_color_mapping = {
@@ -113,4 +116,5 @@ unordered_map<int, string> Hero_ending_color_mapping = {
     {3, font_cyan},
     {4, font_blue},
     {5, font_red},
+    {6, font_purple}, // hint voice, not ending
 };
