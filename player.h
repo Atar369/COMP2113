@@ -22,13 +22,16 @@ class Player {
     bool reach_ending = false;
     bool touch_monster = false;
     bool touch_oldman = false;
+    bool touch_librarian = false;
+    bool touch_penny = false;
+    bool touch_cooper = false;
     bool touch_robert = false;
     bool touch_dragon = false;
     bool touch_dragonnpc = false;
     
     
     // Player's inventory & states
-    bool have_key;
+    bool touch_key;
     bool open_treasure;
     bool turn_light_switch;
     bool investigate;
