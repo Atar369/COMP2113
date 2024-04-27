@@ -19,7 +19,8 @@ unordered_map<int, vector<string> > Hero_choice_map_b4 = { // event num mapping
         }
     },
     {2,   {
-        "Robert noticed you and said, 'I've been waiting for you.'",
+        "Robert, the blacksmith, stood in front of you.",
+        "He said, 'I've been waiting for you.'",
         "'The new journey begins...'",
         "'The new hero is being chosen...'",
         "He silently handed you a sword.",
@@ -118,8 +119,9 @@ unordered_map <int, vector<string> > Hero_button_choice2 = {
     {4, { "> TALK TO THE MONSTER <", "  Talk to the monster  ", } },
 };    
 
-unordered_map<int, vector<string> > Girl_choice_map_b4 = { // event num mapping
-    {1,   {
+// event num mapping
+unordered_map <int, vector<string> > Girl_choice_map_b4 = { 
+    {1,   { 
         "???: You are the chosen one.",
         "???: I will give a part of my power to you.",
         "???: Ummmmm......let me see.",
@@ -128,7 +130,7 @@ unordered_map<int, vector<string> > Girl_choice_map_b4 = { // event num mapping
         "...",
         "*** Woke up ***",
         "You: What was that? Was that a dream?",
-        "Super power... Time rewinding...'",
+        "'Super power... Time rewinding...'",
         "*** You tried to memorize the dream ***",
         "You: Such a weird dream...",
         "You: Whatever.",
@@ -144,19 +146,19 @@ unordered_map<int, vector<string> > Girl_choice_map_b4 = { // event num mapping
         "I can't let anyone know about this time rewinding power. I need to come up with a cover story.",
         "...",
         "Healing power... yes, that could work.",
-        "You quickly finished your breakfast and headed out of your room, ready to face the day.",
+        "You quickly finished your breakfast and headed out of your room, ready to face the day."
         }
     },
     {2,   {
         "You step out of your house, the sun shining brightly above you.",
         "You hear villagers chatting and children laughing in the distance.",
-        "Let's see what are they talking about.",
+        "Let's see what are they talking about."
         }
     },
     {3,   {
         "You step into the forest, the trees towering above you.",
         "Driven by curiosity, you really want to find out if the rumours are real.",
-        "However, there are multiple paths in the forest, and you don't know which ones lead to the castle.",
+        "However, there are multiple paths in the forest, and you don't know which ones lead to the castle."
         }
     },
     {4,   {
@@ -168,7 +170,7 @@ unordered_map<int, vector<string> > Girl_choice_map_b4 = { // event num mapping
         "The monster's body was covered in wounds—deep gashes and oozing cuts.",
         "You: Oh no... it's hurt... terribly hurt.",
         "As you neared, the monster recoiled, its red eyes narrowing with suspicion and defiance.",
-        "Will you...",
+        "Will you..."
         }
     },
     {5, { 
@@ -193,28 +195,9 @@ unordered_map<int, vector<string> > Girl_choice_map_b4 = { // event num mapping
         "???: In this case, I must warn you that you will have to sacrifice yourself to proceed with the power.",
         "???: That means you will forever vanish from this world.",
         "???: The world will be forever altered, and those you care for will lose the memories of your existence.",
-        "???: Are you willing to pay that price?",
+        "???: Are you willing to pay that price?"
         }
     },
-};
-
-unordered_map<int, vector<string> > Girl_choice_map_after = { // scn num mapping
-    {1, {
-        "Leave the monster.",     
-        },
-    },    
-    {2, {
-        "Save the monster.",     
-        }
-    },    
-}; 
-
-unordered_map <int, vector<string> > Girl_button_choice1 = {
-    {1, { "> LEAVE THE MONSTER <", "  Leave the monster  ", } },    
-};
-
-unordered_map <int, vector<string> > Girl_button_choice2 = {
-    {1, { "> SAVE THE MONSTER <", "  Save the monster  ", } },    
 };
 
 void Window::build_buffer(const string & content) {
@@ -355,9 +338,11 @@ void Window::intro_character_choice(Player &player) {
 
     if (choice_button == 0) {
         is_Hero = true;
+        player.color = font_blue;
     } 
     else {
         is_Girl = true;
+        player.color = font_purple;
     }
 
     reset_buffer();
@@ -377,7 +362,7 @@ void Window::handle_choice(Progress &progress, Player &player){
     }
     else {
         is_Girl = true;
-        content_b4 = Girl_choice_map_b4[event_num];     
+        content_b4 = Girl_choice_map_b4[progress.event_num];     
     } 
 
     int line = 0;
@@ -399,15 +384,10 @@ void Window::handle_choice(Progress &progress, Player &player){
 
         string choice_contents = "";
         
-        if (player.color == font_blue) {
-        this-> is_Hero = true;
-        choice1_content = Hero_button_choice1[event_num][select_choice_1];
-        choice2_content = Hero_button_choice2[event_num][select_choice_2];  
-        }
-        else {
-        choice1_content = Girl_button_choice1[event_num][select_choice_1];
-        choice2_content = Girl_button_choice2[event_num][select_choice_2];        
-        }
+
+        choice1_content = Hero_button_choice1[progress.event_num][select_choice_1];
+        choice2_content = Hero_button_choice2[progress.event_num][select_choice_2];        
+ 
 
         choice_contents = choice1_content + "         " + choice2_content;
 
@@ -503,7 +483,7 @@ void Window::handle_choice(Progress &progress, Player &player){
         content_after = Hero_choice_map_after[progress.scn_num];
     }
     else if (is_Girl) {
-        content_after = Girl_choice_map_after[scn_num];
+        //content_after = Girl_choice_map_after[scn_num];
     }
 
     line = 0;
@@ -575,6 +555,44 @@ void Window::handle_choice(Progress &progress, Player &player){
 
 }
 
+void Window::Print_fighting(string contents, Player &player, string color, int key_required) {
+    system("clear");
+    vector<vector<short> > fighting (31, vector<short>(36, 0));
+    vector<string> fightclass = Hero_chat_map.at(contents);
+    fighting[12][9] = i_hero;
+    fighting[12][27] = i_cooper;
+    for (int i = 0; i < fightclass.size(); i++) {
+        build_buffer(fightclass[i]);
+        Print_buffer(fighting, player, color);
+        if (i != fightclass.size() - 1) {
+            keyboard.get_userInput();
+            while (keyboard.key != KEY_SPACE) {
+                keyboard.get_userInput();
+            }
+        }
+    }
+
+    if (contents != "fight class7") {
+        keyboard.get_userInput();
+        while (keyboard.key != key_required) {
+            switch(chat.getRandomNumber(1, 3)) {
+                case 1:
+                    build_buffer("Cooper hits you on the head.");
+                    break;
+                case 2:
+                    build_buffer("'Pay attention, young hero! You need to focus!'");
+                    break;
+                case 3:
+                    build_buffer("'That's not the right move. Try again.'");
+                    break;
+            }
+            Print_buffer(fighting, player, font_red);
+            keyboard.get_userInput();
+        }
+    }
+    system("clear");    
+}
+
 void Window::Print_endings(vector<string> contents, string color) {
     system("clear");
     vector<vector<short> > endings (31, vector<short>(36, 0));
@@ -592,21 +610,6 @@ void Window::Print_endings(vector<string> contents, string color) {
     system("clear");
 }
 
-void Window::check_offsety (Player &player, int target_row, int &offsety) {
-    for (int i = -31; i < 32; i++) {
-        if (i + player.y == target_row) {
-            offsety = i;
-        }
-    }    
-} 
-
-void Window::check_offsetx (Player &player, int target_col, int &offsetx) {
-    for (int i = -35; i < 36; i++) {
-        if (i + player.x == target_col) {
-            offsetx = i;
-        }
-    }    
-}
 
 /*
 // testing
