@@ -102,8 +102,7 @@ void Player::player_collision(vector<vector<short> > &current_map) {
         break;
 
         case i_key:
-            current_map[this->y][this->x] = 0;
-            this->have_key = 1;
+            this->touch_key = 1;
         break;
 
         case i_npc:     // npc
@@ -123,6 +122,24 @@ void Player::player_collision(vector<vector<short> > &current_map) {
             this->y -= this->vtrl;
             this->touch_oldman = 1;
         break;
+
+        case i_librarian:
+            this->x -= this->hrz;
+            this->y -= this->vtrl;
+            this->touch_librarian = 1;
+        break;
+
+        case i_penny:
+            this->x -= this->hrz;
+            this->y -= this->vtrl;
+            this->touch_penny = 1;
+        break;    
+
+        case i_cooper:
+            this->x -= this->hrz;
+            this->y -= this->vtrl;
+            this->touch_cooper = 1;
+         break;
 
         case i_robert:
             this->x -= this->hrz;
