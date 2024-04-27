@@ -119,6 +119,8 @@ const short c_chair23 = 92;
 const short c_lamp9 = 93;
 const short c_lamp10 = 94;
 const short c_monster = 95;
+const short c_gamemaster = 96;
+const short c_mystery = 97;
 
 #define i_empty         0
 #define i_wall          1
@@ -216,3 +218,5 @@ const short c_monster = 95;
 #define i_lamp9         93
 #define i_lamp10        94
 #define i_monster       95
+#define i_gamemaster    96  
+#define i_mystery       97
