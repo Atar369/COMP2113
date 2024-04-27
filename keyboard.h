@@ -16,6 +16,14 @@
 #define KEY_ACTION 69
 #define KEY_EXIT 81 // ascii numbers
 
+//fighting class
+#define KEY_P 80
+#define KEY_G 71
+#define KEY_F 70
+#define KEY_K 75
+#define KEY_C 67
+#define KEY_J 74
+
 class Keyboard {
     public:
     int key;
