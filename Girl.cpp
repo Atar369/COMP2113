@@ -145,10 +145,11 @@ void Girl_run(Progress &progress, Player &player) {
                     offsety = - 31;
                 }
 
-                if (!progress.finish_intro && progress.scn_num == 0) 
+                if (!progress.finish_intro && progress.scn_num == 0) {
                     chat.loadChat("intro house", progress.map_code, progress.scn_num, player, font_cyan);
                     progress.finish_intro = 1;
                     progress.scn_num = 5;
+                }
 
             break;
 
@@ -181,9 +182,10 @@ void Girl_run(Progress &progress, Player &player) {
                     offsety = - 31;
                 }    
 
-                if (progress.first_time_entering_village && progress.scn_num == 5) 
-                chat.loadChat("enter village", progress.map_code, progress.scn_num, player, font_cyan);
-                progress.first_time_entering_village = false;
+                if (progress.first_time_entering_village && progress.scn_num == 5) {
+                    chat.loadChat("enter village", progress.map_code, progress.scn_num, player, font_cyan);
+                    progress.first_time_entering_village = false;
+                }
 
                 if (progress.scn_num == 9) { 
                     chat.loadChat("no one believe", progress.map_code, progress.scn_num, player, font_red);
