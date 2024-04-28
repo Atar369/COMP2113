@@ -36,15 +36,17 @@ Q - Exit
 List of Features:
 List of non-standard C/C++ libraries:
 
-#include <unordered_map>
-#include <random>
-#include <cstdlib>
-#include <ctime>
-#include <thread>
-#include <chrono>
-#include <unistd.h>
-#include <sys/ioctl.h>
-#include <termios.h>
+<unordered_map>: Provides an unordered associative container implementation of a hash map.
+<random>:  Provides facilities for generating random numbers.
+<cstdlib>:  Provides general-purpose functions in C, including memory allocation, random number generation, and string conversion.
+<ctime>:  Provides functions for manipulating time and date.
+<thread>:  Provides classes and functions for managing and synchronizing concurrent execution threads.
+<chrono>: Provides classes and functions for working with time durations and time points.
+<unistd.h>: Provides access to various POSIX operating system APIs, including system calls and constants.
+<sys/ioctl.h>: Provides access to I/O control operations on file descriptors.
+<termios.h>: Provides terminal I/O functionality, including terminal modes and control settings.
+
+
 
 Notes:
 - 
