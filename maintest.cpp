@@ -314,7 +314,7 @@ int main() {
                     progress.event_num = 0;
                     progress.ending_num = 0;
                     // Start game
-                    //Hero_run(progress.scn_num, progress.map_code, progress.event_num, player);
+                    Girl_run(progress, player);
                 }    
 
 
