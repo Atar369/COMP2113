@@ -136,19 +136,14 @@ unordered_map<int, vector<string> > Girl_choice_map_b4 = { // event num mapping
         }
     },
     {2, { 
-        "You step into the castle, the heavy doors creaking open...",
-        "It is strangely quiet...",
-        "*** Sniff, sniff ",
-        "You caught a whiff of something foul, a stench that made you wrinkle your nose in disgust.",
-        "As you cautiously made your way further inside, the scene before you left you in a state of utter disbelief and horror.",
-        "Blood. Everywhere. Bodies scattered across the floor, lifeless and still.",
         "Your heart pounded in your chest.",
         "You: Shit! NOOOOO WAYYYYYYYYY!",
-        "You rush towards the throne, where she always sat, the one I loved.",
-        "Your eyes lock onto her, lying there in a pool of blood, unconscious.",
+        "You rush towards the throne, where he always sat, the one I loved.",
+        "Your eyes lock onto him, lying there in a pool of blood, unconscious.",
         "You: Dragon. How could you leave me alone here, surviving without you?",
-        " The deadly silence ***",
-        "The memory of you and the dragon flows up to your mind. You remember how kindly she talked to you and shared.",
+        "*** The deadly silence ***",
+        "The memory of you and Dragon flows up to your mind...",
+        "...You remember how kindly he talked to you and shared.",
         "You: I would do whatever it takes, face any danger, to bring you back...",
         "You: TIME REWIND!!!!",
         "???: It's been a while since you last used your power.",
@@ -156,7 +151,8 @@ unordered_map<int, vector<string> > Girl_choice_map_b4 = { // event num mapping
         "???: The more changes you need to rewind, the greater the cost.",
         "???: In this case, I must warn you that you will have to sacrifice yourself to proceed with the power.",
         "???: That means you will forever vanish from this world.",
-        "???: The world will be forever altered, and those you care for will lose the memories of your existence.",
+        "???: The world will be forever altered...",
+        "...and those you care for will lose the memories of your existence.",
         "???: Are you willing to pay that price?",
         }
     },
@@ -164,36 +160,67 @@ unordered_map<int, vector<string> > Girl_choice_map_b4 = { // event num mapping
 
 unordered_map<int, vector<string> > Girl_choice_map_after = { // scn num mapping
 
-    {2, {
-        "You decided to leave the monster.",     
+    {1, {
+        "You decided to leave the monster.",
+        "Monster: Grrrrrr... RROOOOAAAAARRRRRRRRRR",
+        "The monster let out a deafening roar, and you felt a fear run down your spine.",
+        "You turned away and ran as fast as you could, escaping from this gloomy forest.",
         },
     },    
-    {3, {
+    {2, {
         "You decided to save the monster.",
-
+        "Monster: Grrrrrr... hissssssss",
+        "You: It's okay, I won't hurt you.",
+        "You carefully placed your hand on the monster's wound.",
+        "You: (murmering) time rewind",
+        "The deep gashes and oozing cuts on the monster's body began to enclose.",
+        "The monster's eyes widened in surprise, and it let out a soft growl.",
+        "Monster: Thank you...",
+        "Monster: I will complete one wish for you, as a token of my gratitude.",
+        "You: I am looking for the dragon, but I have no idea how to find her.",
+        "Monster: Ah, I see. I will help get you to her.",
         }
     },    
-    {9, {
-        "With a heavy heart, you turn away from the wounded dragon, knowing that your journey will continue without her by your side.",
+    {3, {
+        "With a heavy heart, you turn away from the wounded dragon, knowing that your journey will continue without him by your side.",
         "The castle, once a place of hope and love, now holds a bittersweet memory as you walk away.",
         "You: I will never forget you, my love.",
         },
     },    
-    {10, {
-        "Of course I will do everything to bring back you, my love.",
-        "TIME REWIND!!!",     
+    {4, {
+        "You: Of course I will do everything to bring back you, my love.",
+        "You: I could never survive without you.",
+        "You: Even if it means disappearing from this world...",
+        "You: Even if you forget about me...",
+        "You: I still want to do it, to bring you back to life, my love.",
+        "You: There will be another girl who will love you as much as I do.",
+        "You: She will find the kindness and love in you.",
+        "You: She will successfully persuade the villagers to accept you.",
+        "You: She will do everything I couldn't do for you.",
+        "You: She will be the one who will be with you forever.",
+        "...",
+        "...",
+        "...",
+        "...",
+        "You eyes closed, feeling the tears running down your cheeks.",
+        "You take a deep breath, and whisper...",
+        "You: I love you dragon...",
+        "You never have the chance to say it to him."
+        "You take one last look at the throne, the blood, the bodies, the memories...",
+        "You take one last breath...",
+        "You: TIME REWINDDDD!!!!!!!!!",     
         }
     },  
 }; 
 
 unordered_map <int, vector<string> > Girl_button_choice1 = {
     {1, { "> LEAVE THE MONSTER <", "  Leave the monster  ", } },    
-    {1, { "> DO NOTHING <", "  Do nothing  ", } }, 
+    {2, { "> DO NOTHING <", "  Do nothing  ", } }, 
 };
 
 unordered_map <int, vector<string> > Girl_button_choice2 = {
     {1, { "> SAVE THE MONSTER <", "  Save the monster  ", } },    
-    {1, { "> USE TIME REWIND <", "  Use time rewind  ", } },   
+    {2, { "> USE TIME REWIND <", "  Use time rewind  ", } },   
 };
 
 
@@ -388,6 +415,7 @@ void Window::handle_choice(Progress &progress, Player &player){
             choice2_content = Hero_button_choice2[progress.event_num][select_choice_2];  
         }
         else {
+            this->is_Girl = true;
             choice1_content = Girl_button_choice1[progress.event_num][select_choice_1];
             choice2_content = Girl_button_choice2[progress.event_num][select_choice_2];        
         }
@@ -484,13 +512,11 @@ void Window::handle_choice(Progress &progress, Player &player){
                     switch (progress.event_num) {
                         case 1:
                             if (choice_button == 0) {
-                                progress.scn_num = 2;
+                                progress.scn_num = 1;
                                 progress.event_num = 0;
-                                progress.ending_num = 1;
-                                player.reach_ending = true;
                             } 
                             else if (choice_button == 1) {
-                                progress.scn_num = 3;
+                                progress.scn_num = 2;
                                 progress.event_num = 0;
                             }
                         case 2: 
