@@ -30,6 +30,7 @@ D - Move Downwards
 E - Action
 Q - Exit
 
+To play the game, simply create a new game, choose to play the boy or the girl, and then follow the instructions shown on the bottom of the screen. Note that you have to click on an option when a decision needs to be made. Upon completion of the story for the first time, you can then return to the early stages of the game to change your decisions, ultimately altering the storyline. 
 
 List of Features:
 List of non-standard C/C++ libraries:
