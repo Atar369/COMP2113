@@ -597,7 +597,7 @@ string Chat::getRandomVillagerChat(string color, int scn_num) {
             case 1:
                 switch (randomNumber) {
                     case 1:
-                        return "";
+                        return "I can feel it.... The smell of the dragon...";
                     case 2:
                         return "The dragon took me... I'm scared...";
                     case 3:
