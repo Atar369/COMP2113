@@ -49,7 +49,7 @@ unordered_map<int, vector<string> > Hero_endings = {
         "You will make them all die.",
         "No matter how hard you tried to explain, you couldn't make them believe you.",
         "You are being hated by the villagers.",
-        "Suddenly, you realized that the real 'monsters' is ... ",
+        "Suddenly, you realized that the real 'monsters' are ... ",
         "... the villagers.",
         "Or maybe, it's humans.",
         "Biased, selfish, and ignorant.",
@@ -58,10 +58,10 @@ unordered_map<int, vector<string> > Hero_endings = {
         }
     },
     {5, {
-        "He decided to fight the monster.",
-        "He tried his best, but his attacks meant nothing to the monster.",
-        "The monster opened its mouth and swallowed him whole.",
-        "He was never seen again.",
+        "You decided to fight the monster.",
+        "You tried your best, but your attacks meant nothing to the monster.",
+        "The monster opened its mouth and swallowed you whole.",
+        "You were never seen again.",
         "Ending 5: Why you try?"     
         }
     },
