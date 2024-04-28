@@ -27,7 +27,8 @@ W - Move Upwards
 D - Move Downwards
 A - Move Leftwards
 S - Move Rightwards
-
+E - Action
+Q - Escape
 
 Notes:
 - 
