@@ -89,6 +89,7 @@ void Progress::load_progress(Player &player) {
     fin >> this->hero_know_fact;
     fin >> this->hero_killed_all;
 
+    fin >> this->finish_intro;
     fin >> this->first_time_entering_village;
     fin >> this->first_time_entering_forest;
     fin >> this->first_time_entering_back_village;
