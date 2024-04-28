@@ -63,6 +63,9 @@ extern unordered_map<short, string> color_mapping;
 // Define ending color pairs of Hero
 extern unordered_map<int, string> Hero_ending_color_mapping;
 
+// Define ending color pairs of Girl
+extern unordered_map<int, string> Girl_ending_color_mapping;
+
 /*
 const map<string, string> mod_map = {
     {"bold", bold}, 
