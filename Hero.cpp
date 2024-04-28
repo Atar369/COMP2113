@@ -34,25 +34,26 @@ unordered_map<int, vector<string> > Hero_endings = {
         }
     },
     {3, { // not yet done
-        "He decided to befriend the monster.",
-        "He offered the monster some food and they became friends.",
-        "The monster protected him from other dangers.",
-        "He lived happily ever after.",
+        "You decided to befriend the monster.",
+        "You offered the monster some food and you became friends.",
+        "The monster protected you from other dangers.",
+        "You lived happily ever after.",
+        "Ending 3 : Peace At Last"
         }
     },
     {4, {
         "After searching for days, you still couldn't find her and went back to the village.",
-        "But the villagers saw you talked to a monster happily.",
+        "But the villagers saw you talking to a monster happily.",
         "They think you betrayed them.",
         "You supported the evil side.",
         "You will make them all die.",
         "No matter how hard you tried to explain, you couldn't make them believe you.",
-        "You being hated by the villagers.",
-        "Suddenly, you realized that is the true 'monster' is ... ",
+        "You are being hated by the villagers.",
+        "Suddenly, you realized that the real 'monsters' is ... ",
         "... the villagers.",
-        "Or maybe, it's human.",
+        "Or maybe, it's humans.",
         "Biased, selfish, and ignorant.",
-        "'Monster' that you can't defeat.",
+        "'Monsters' that you can't defeat.",
         "Ending 4: 'Monster'"
         }
     },
