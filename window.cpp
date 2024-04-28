@@ -4,11 +4,10 @@ Window window;
 
 // Choice of character, girl or Hero
 const vector<string> player_button = {
-"/@\\", "\\@/", "/%\\", "\\%/", "Be the Boy", "Be the Girl"
+"  Be the Boy  ", "> BE THE BOY <", "  Be the Girl  ", "> BE THE GIRL <"
 };
 
 // content of choice window, match with event num
-//Hero
 unordered_map<int, vector<string> > Hero_choice_map_b4 = { // event num mapping
 
     {1,   {
@@ -119,6 +118,87 @@ unordered_map <int, vector<string> > Hero_button_choice2 = {
     {3, { "> RUN AWAY <", "  Run away  ", } },
     {4, { "> TALK TO THE MONSTER <", "  Talk to the monster  ", } },
 };    
+/*
+// event num mapping
+unordered_map <int, vector<string> > Girl_choice_map_b4 = { 
+    {1,   { 
+        "???: You are the chosen one.",
+        "???: I will give a part of my power to you.",
+        "???: Ummmmm......let me see.",
+        "???: Ok! Time rewinding. This will be your super power.",
+        "???: Remember, kid, use your power to do the right thing.",
+        "...",
+        "*** Woke up ***",
+        "You: What was that? Was that a dream?",
+        "'Super power... Time rewinding...'",
+        "*** You tried to memorize the dream ***",
+        "You: Such a weird dream...",
+        "You: Whatever.",
+        "*** stomach growling ***",
+        "You: I need some food.",
+        "You: Oh no! The apple is spoiled.",
+        "...",
+        "You: Time rewind... what if that was not a dream.",
+        "You: TIME REWIND!!!",
+        "The apple on your hand became a fresh, fragant apple in a flash.",
+        "You: Oh my goodness! It actually worked! The apple... it's fresh again! This power... it's real",
+        "But wait, what if someone finds out? What if they want me to use it for their own purposes?",
+        "I can't let anyone know about this time rewinding power. I need to come up with a cover story.",
+        "...",
+        "Healing power... yes, that could work.",
+        "You quickly finished your breakfast and headed out of your room, ready to face the day."
+        }
+    },
+    {2,   {
+        "You step out of your house, the sun shining brightly above you.",
+        "You hear villagers chatting and children laughing in the distance.",
+        "Let's see what are they talking about."
+        }
+    },
+    {3,   {
+        "You step into the forest, the trees towering above you.",
+        "Driven by curiosity, you really want to find out if the rumours are real.",
+        "However, there are multiple paths in the forest, and you don't know which ones lead to the castle."
+        }
+    },
+    {4,   {
+        "You got lost in the forest.",
+        "There is a monster in the distance.",
+        "It was a huge monster with sharp teeth and red eyes.",
+        "You: (whispering, voice trembling) What... what is that?",
+        "But as your initial terror subsided, curiosity compelled you to take a closer look.",
+        "The monster's body was covered in wounds—deep gashes and oozing cuts.",
+        "You: Oh no... it's hurt... terribly hurt.",
+        "As you neared, the monster recoiled, its red eyes narrowing with suspicion and defiance.",
+        "Will you..."
+        }
+    },
+    {5, { 
+        "You step into the castle, the heavy doors creaking open...",
+        "It is strangely quiet...",
+        "*** Sniff, sniff ",
+        "You caught a whiff of something foul, a stench that made you wrinkle your nose in disgust.",
+        "As you cautiously made your way further inside, the scene before you left you in a state of utter disbelief and horror.",
+        "Blood. Everywhere. Bodies scattered across the floor, lifeless and still.",
+        "Your heart pounded in your chest.",
+        "You: Shit! NOOOOO WAYYYYYYYYY!",
+        "You rush towards the throne, where she always sat, the one I loved.",
+        "Your eyes lock onto her, lying there in a pool of blood, unconscious.",
+        "You: Dragon. How could you leave me alone here, surviving without you?",
+        " The deadly silence ***",
+        "The memory of you and the dragon flows up to your mind. You remember how kindly she talked to you and shared.",
+        "You: I would do whatever it takes, face any danger, to bring you back...",
+        "You: TIME REWIND!!!!",
+        "???: It's been a while since you last used your power.",
+        "???: You need to understand that everything comes with a cost.",
+        "???: The more changes you need to rewind, the greater the cost.",
+        "???: In this case, I must warn you that you will have to sacrifice yourself to proceed with the power.",
+        "???: That means you will forever vanish from this world.",
+        "???: The world will be forever altered, and those you care for will lose the memories of your existence.",
+        "???: Are you willing to pay that price?"
+        }
+    },
+};*/
 
 //Girl
 unordered_map<int, vector<string> > Girl_choice_map_b4 = { // event num mapping
@@ -260,6 +340,16 @@ void Window::reset_buffer() {
 }
 
 void Window::Print_buffer(vector<vector<short> > current_map, Player &player, string color) { // position wanted to display
+    // Get the dimensions of the terminal window
+    struct winsize w;
+    ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
+    int rows = w.ws_row;
+    int cols = w.ws_col;
+
+    // centering
+    int xoffset = (cols - 36 * 3) / 2;
+    int yoffset = rows/2;
+
     system("clear");
     int k = 0;
 
@@ -273,6 +363,7 @@ void Window::Print_buffer(vector<vector<short> > current_map, Player &player, st
     //cout << "\033[" << y_coor << ";" << x_coor << "H"; // move cursor to the top left corner of the window
 
     for (int i = 0; i < height; i++) {
+        cout << default_format << yoffset + i << ";" << xoffset << "H";
         for (int j = 0; j < width; j++) {
             cout << color << window_buffer[i][j];
         }
@@ -287,7 +378,7 @@ void Window::intro_character_choice(Player &player) {
 
     build_buffer(intro);
 
-/*
+
     // Get the dimensions of the terminal window
     struct winsize w;
     ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
@@ -295,13 +386,11 @@ void Window::intro_character_choice(Player &player) {
     int cols = w.ws_col;
 
     // centering
-    int xoffset = (cols - window_buffer[0].size()) / 2 - 1;
-    int yoffset = (rows - window_buffer.size()) / 2 - 1;
-
-    cout << default_format << yoffset<< ";" << xoffset << "H" << endl;
-*/
+    int xoffset = (cols - 36*3) / 2;
+    int yoffset = (rows - window_buffer.size()) / 2;
 
     for (int i = 0; i < window_buffer.size(); i++) {
+        cout << default_format << yoffset + i << ";" << xoffset << "H" << endl;
         for (int j = 0; j < window_buffer[0].size(); j++) {
             cout << window_buffer[i][j];
         }
@@ -330,14 +419,12 @@ void Window::intro_character_choice(Player &player) {
         system("clear");
 
         for (int i = 0; i < window_buffer.size(); i++) {
+            cout << default_format << yoffset + i << ";" << xoffset << "H" << endl;
             for (int j = 0; j < window_buffer[0].size(); j++) {
                 cout << font_yellow << window_buffer[i][j];
             }
             cout << endl;
         }        
-
-        cout << default_format << 8 << ";" << 35 << "H" << font_blue << "Be the Boy" << endl;
-        cout << default_format << 8 << ";" << 63 << "H" << font_purple << "Be the girl" << reset << endl;
 
         keyboard.get_userInput();
         
@@ -408,18 +495,14 @@ void Window::handle_choice(Progress &progress, Player &player){
 
         string choice_contents = "";
         
-
-        if (player.color == font_blue) {
-            this-> is_Hero = true;
+        if (is_Hero) {
             choice1_content = Hero_button_choice1[progress.event_num][select_choice_1];
-            choice2_content = Hero_button_choice2[progress.event_num][select_choice_2];  
+            choice2_content = Hero_button_choice2[progress.event_num][select_choice_2];        
         }
         else {
-            this->is_Girl = true;
             choice1_content = Girl_button_choice1[progress.event_num][select_choice_1];
-            choice2_content = Girl_button_choice2[progress.event_num][select_choice_2];        
+            choice2_content = Girl_button_choice2[progress.event_num][select_choice_2];       
         }
-        
 
         choice_contents = choice1_content + "         " + choice2_content;
 
@@ -467,7 +550,7 @@ void Window::handle_choice(Progress &progress, Player &player){
                             progress.event_num = 2;
                         }
                     break;
-    
+
                     case 2: 
                         if (choice_button == 0) {
                             progress.scn_num = 3;
@@ -478,7 +561,7 @@ void Window::handle_choice(Progress &progress, Player &player){
                             progress.event_num = 0;
                         }
                     break;  
-    
+
                     case 3:  
                         if (choice_button == 0) {
                             progress.scn_num = 5;
@@ -489,7 +572,7 @@ void Window::handle_choice(Progress &progress, Player &player){
                             progress.event_num = 0; // reset effect num as no more choices can be made
                         }
                     break;
-    
+
                     case 4:
                         if (choice_button == 0) {
                             progress.scn_num = 7;
@@ -505,35 +588,35 @@ void Window::handle_choice(Progress &progress, Player &player){
                         }
                     break;        
                 }
-                break;
-            }
-                
-            else {
-                    switch (progress.event_num) {
-                        case 1:
-                            if (choice_button == 0) {
-                                progress.scn_num = 1;
-                                progress.event_num = 0;
-                            } 
-                            else if (choice_button == 1) {
-                                progress.scn_num = 2;
-                                progress.event_num = 0;
-                            }
-                        case 2: 
-                            if (choice_button == 0) {
-                                progress.scn_num = 9;
-                                progress.event_num = 0;
-                            } 
-                            else if (choice_button == 1) {
-                                progress.scn_num = 10;
-                                progress.event_num = 0;
-                                progress.ending_num = 4;
-                                player.reach_ending = true;
-                            }
-                        break;         
+        }
+        else {
+            switch (progress.event_num) {
+                case 1:
+                    if (choice_button == 0) {
+                        progress.scn_num = 1;
+                        progress.event_num = 0;
+                    } 
+                    else if (choice_button == 1) {
+                        progress.scn_num = 2;
+                        progress.event_num = 0;
                     }
                 break;
+                
+                case 2: 
+                    if (choice_button == 0) {
+                        progress.scn_num = 9;
+                        progress.event_num = 0;
+                    } 
+                    else if (choice_button == 1) {
+                        progress.scn_num = 10;
+                        progress.event_num = 0;
+                        progress.ending_num = 4;
+                        player.reach_ending = true;
+                    }
+                break;  
             }
+        }        
+        break;
         }
     }
 
