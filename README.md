@@ -7,31 +7,29 @@ Chung Ka Yi ()
 Kwok Yuen Wang (3036060329)
 Lam Wui Yan ()
 
-INTRODUCTION
+INTRODUCTION:
 Life Theatre is a text-based minigame which tells the story of a Hero and a Girl. The player is able to choose between the Hero or the Girl. During the journey, they will encounter multiple decisions, and each will lead to a different ending. Player can learn about the full story and the characters by playing through various storylines.
 Boy : A young male living in the village, determined to become a hero and save the lives of those around him. 
 Girl : A young female living in the village, although not wielding the power of a hero, has her own special adventure in the story.
 
+FEATURE:
+This game is a story-based game. Player can explore around the designed maps to trigger different interactions with the NPCs in the game. Some of the chats are designed to be random. So, some characters may chat to you with various dialogues. The core part of the entire gameplay is that player have to choose from the choices in different scenes. Each choice will lead to a different ending. Player can unlock 6 achievements by attaining to all the endings.
+
+HOW TO COMPILE AND RUN:
 
 *A text-based game is a console application that can be accessed using the Linux terminal and via SSH.*
-
-Current process:
-- Keyboard
-- Chat (in progress)
-- Map (in progress)
-- Format
-- ...
 
 - randomness
 - multiple endings, multiple characters
 
 HOW TO PLAY:
 W - Move Upwards
-D - Move Downwards
 A - Move Leftwards
 S - Move Rightwards
+D - Move Downwards
 E - Action
 Q - Exit
+
 
 List of Features:
 List of non-standard C/C++ libraries:
