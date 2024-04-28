@@ -46,7 +46,13 @@ void Player::player_move(int key, vector<vector<short> > &current_map) {
 
     // Reset player movement
     this->stopMovement();
-    this->symbol = "|@|";
+
+    if (this->color == font_blue) {
+        this->symbol = "|@|";
+    } 
+    else {
+        this->symbol = "|%|";
+    }
 
     // Animation and direction shoot
     //int dir_shoot = 0;
@@ -54,19 +60,39 @@ void Player::player_move(int key, vector<vector<short> > &current_map) {
 
     if (right) { 
         //dir_shoot = 1; 
-        this->symbol = "|@>";
+        if (this->color == font_blue) {
+            this->symbol = "|@>";
+        } 
+        else {
+            this->symbol = "|%>";
+        }
     }
     if (left) { 
         //dir_shoot = -1; 
-        this->symbol = "<@|"; 
+        if (this->color == font_blue) {
+            this->symbol = "<@|";
+        } 
+        else {
+            this->symbol = "<%|";
+        }
     }
     if (up) { 
         //dir_shoot = -2; 
-        this->symbol = "/@\\"; 
+        if (this->color == font_blue) {
+            this->symbol = "/@\\";
+        } 
+        else {
+            this->symbol = "/%\\";
+        }
     }
     if (down) { 
         //dir_shoot = 2; 
-        this->symbol = "\\@/"; 
+        if (this->color == font_blue) {
+            this->symbol = "\\@/";
+        } 
+        else {
+            this->symbol = "\\%/";
+        }
     }
 
 
