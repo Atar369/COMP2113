@@ -6,6 +6,7 @@
 #include <cstring>
 #include "keyboard.h"
 #include "constant.h"
+#include "format.h"
 
 
 using namespace std;
