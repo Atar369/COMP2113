@@ -8,7 +8,10 @@ Kwok Yuen Wang (3036060329)
 Lam Wui Yan ()
 
 INTRODUCTION
-We aim to create a text-based minigame which tells the story of a Hero and a Girl. The player is able to choose between the Hero or the Girl. During the journey, they will encounter multiple decisions, and each will lead to a different ending. Player can learn about the story and the characters in different ways by playing through various endings.
+Life Theatre is a text-based minigame which tells the story of a Hero and a Girl. The player is able to choose between the Hero or the Girl. During the journey, they will encounter multiple decisions, and each will lead to a different ending. Player can learn about the full story and the characters by playing through various storylines.
+Boy : A young male living in the village, determined to become a hero and save the lives of those around him. 
+Girl : A young female living in the village, although not wielding the power of a hero, has her own special adventure in the story.
+
 
 *A text-based game is a console application that can be accessed using the Linux terminal and via SSH.*
 
