@@ -352,7 +352,18 @@ int main() {
                 progress.load_progress(player);
                 
                 if (player.reach_ending) {
+                    progress.reset_progress();
                     window.intro_character_choice(player);
+                    if (player.color == font_blue) {
+                        player.x = 9;
+                        player.y = 9;
+                        progress.event_num = 1;
+                    }
+                    else if (player.color == font_purple) {
+                        player.x = 9;
+                        player.y = 9;
+                        progress.event_num = 0;
+                    }  
                     player.reach_ending = 0;
                 }
                 
@@ -374,17 +385,7 @@ int main() {
                 }
                 else {
                     // reset progress after reaching the ending
-                    progress.reset_progress();
-                    if (player.color == font_blue) {
-                        player.x = 9;
-                        player.y = 9;
-                        progress.event_num = 1;
-                    }
-                    else if (player.color == font_purple) {
-                        player.x = 9;
-                        player.y = 9;
-                        progress.event_num = 0;
-                    }    
+                    progress.reset_progress();  
                     progress.save_progress(player);
                     current_state = STATE_MENU; 
                 }
