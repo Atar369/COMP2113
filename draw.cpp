@@ -232,7 +232,7 @@ void draw_instance(int y, int x, int obj, string symbol) {
 
 // Draw Current Map
 void draw_map(vector<vector<short> > & current_map, Player &player) {
-/*
+
     // Get the dimensions of the terminal window
     struct winsize w;
     ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
@@ -240,13 +240,11 @@ void draw_map(vector<vector<short> > & current_map, Player &player) {
     int cols = w.ws_col;
 
     // centering
-    int xoffset = (cols - current_map[0].size()) / 2 - 1;
-    int yoffset = (rows - current_map.size()) / 2 - 1;
+    int xoffset = (cols - 36 * 3) / 2;
+    int yoffset = (rows - 32) / 2;
 
-    // print map at centre
-    cout << default_format << yoffset << ";" << xoffset << "H" << endl;
-*/
     for (int i = 0; i < current_map.size(); i++) {
+        cout << default_format << yoffset + i << ";" << xoffset << "H";
         for (int j = 0; j < current_map[0].size(); j++) {
             if (i == player.y && j == player.x) {
                 cout << player.color << player.symbol <<  "";
