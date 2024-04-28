@@ -310,7 +310,7 @@ int main() {
                     player.y = 9;
                     player.symbol = "|%|";
                     player.color = font_purple;
-                    progress.map_code = 2;
+                    progress.map_code = 1;
                     progress.event_num = 0;
                     progress.ending_num = 0;
                     // Start game
