@@ -118,3 +118,13 @@ unordered_map<int, string> Hero_ending_color_mapping = {
     {5, font_red},
     {6, font_purple}, // hint voice, not ending
 };
+
+
+unordered_map<int, string> Girl_ending_color_mapping = {
+    {1, font_green},
+    {2, font_red},
+    {3, font_cyan},
+    {4, font_blue},
+    {5, font_red},
+    {6, font_purple}, // hint voice, not ending
+};
