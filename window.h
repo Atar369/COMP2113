@@ -4,8 +4,6 @@
 #include <string>
 #include <vector>
 #include <unordered_map>
-//#include <unistd.h>
-//#include <sys/ioctl.h>
 #include "keyboard.h"
 #include "draw.h"
 #include "maps.h"
