@@ -4,17 +4,17 @@ unordered_map<int, vector<string> > Hero_endings = {
 
     {1, {
         "You saw monsters everywhere.",
-        "You was scared.",
+        "You were scared.",
         "You ran away.",
         "Ran as far as you could.",
         "Until you went back to the village.",
         "Rushed into your house.",
         "You was safe.",
         "..."
-        "You chosed to be a Hero.",
-        "But you scare to be a Hero.",
+        "You chose to be a Hero.",
+        "But you are scared to become a Hero.",
         "One day, you get out of your room. You saw another 'Hero'.",
-        "'He' was the one, you know it.",
+        "'He' was the one, you knew it.",
         "With 'his' powerful sword, shining under the sunlight.",
         "His eyes, full of courage and determination.",
         "Suddenly, you realized that you are just",
@@ -24,10 +24,13 @@ unordered_map<int, vector<string> > Hero_endings = {
         }
     },
     {2, { // not yet done
-        "He decided to hide from the monster.",
-        "He found a hiding spot and stayed there for hours.",
-        "The monster eventually found him and swallowed him whole.",
-        "He was never seen again.",
+        "You decided to hide from the monster.",
+        "You found a hiding spot and stayed there for hours.",
+        "You yelled in despair 'Why!!!!! I shouldn't die here!!! I... I am the ch...'",
+        "The monster located you by tracking your footsteps, staring at you at the moment.",
+        "The monster swallowed you before he finished talking.",
+        "You were never seen again.",
+        "Ending 2 : The Puny Hero"
         }
     },
     {3, { // not yet done
