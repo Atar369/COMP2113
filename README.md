@@ -33,5 +33,18 @@ S - Move Rightwards
 E - Action
 Q - Exit
 
+List of Features:
+List of non-standard C/C++ libraries:
+
+#include <unordered_map>
+#include <random>
+#include <cstdlib>
+#include <ctime>
+#include <thread>
+#include <chrono>
+#include <unistd.h>
+#include <sys/ioctl.h>
+#include <termios.h>
+
 Notes:
 - 
