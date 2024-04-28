@@ -398,7 +398,7 @@ unordered_map<string, vector<string> > Girl_chat_map = {
         "...",
         "*** Woke up ***",
         "You: What was that? Was that a dream?",
-        "Super power... Time rewinding...'",
+        "\"Super power... Time rewinding...\"",
         "*** You tried to memorize the dream ***",
         "You: Such a weird dream...",
         "You: Whatever.",
@@ -429,28 +429,93 @@ unordered_map<string, vector<string> > Girl_chat_map = {
         "However, there are multiple paths in the forest, and you don't know which ones lead to the castle.",
         }
     },
-    {"enter castle", { //incomplete
-        "You step into the forest, the trees towering above you.",
-        "Driven by curiosity, you really want to find out if the rumours are real.",
-        "However, there are multiple paths in the forest, and you don't know which ones lead to the castle.",
+    {"enter castle", {
+        "You found the castle."
+        "The castle stands tall and majestic."
+        "The beauty of the surroundings captivates your senses,"
+        "But your attention is quickly drawn to a figure standing in front of the throne..."
+        "...the one known for its fierceness, its fearsomeness..."
+        "...the evil Dragon."
+        "Although you have mentally prepared yourself for this moment,"
+        "The sight of the Dragon still sends a shiver down your spine."
+        "But you know that this is the moment you have been waiting for..."
+        "...the moment to find out the truth."
         }
     },
-    {"talk to dragon", { //incomplete
-        "You step into the forest, the trees towering above you.",
-        "Driven by curiosity, you really want to find out if the rumours are real.",
-        "However, there are multiple paths in the forest, and you don't know which ones lead to the castle.",
+    {"talk to dragon", {
+        "You: Dragon, at long last our paths have crossed.",
+        "Dragon: Human, do you dare to stand before me?",
+        "Dragon: Do you not fear me?",
+        "You: I heard that you have been searching for a girl with healing powers.",
+        "You: And here I am.",
+        "You: You can use my power for your own purposes. I won't object.",
+        "Dragon: If you believe I would harm you, why do you still stand here?",
+        "You: I have had enough of the life in the village...",
+        "You: With everyone telling me that I will be caught one day...",
+        "You: I am tired...",
+        "You: Instead of waiting for that day to come, I will face it now.",
+        "Dragon: You are very brave, my girl.",
+        "Dragon: I am sorry to hear about you life.",
+        "Dragon: But I can't use your power.",
+        "Dragon: It's your power, not mine. I have no right to use it.",
+        "Dragon: I am sorry for what my ancestor have done to your village.",
+        "Dragon: But I have no wish to repeat the history.",
+        "Dragon: It just saddens me to know that the villagers still fear me",
+        "At that moment, a realization dawns upon you —-",
+        "the girl with healing powers and the 'evil' dragon are not so different after all...",
+        "...living under the control of others' words, unable to live the life you truly desire.",
+        "You meet his gaze, feeling a profound sense of connection between you and him."
+        "He slowly steps closer to you, and you didn't step back...",
+        "His arms extend towards you, and you don't flinch..."
+        "You feel his embrace enveloping you...",
+        "you feel his warmth, his kindness, his sorrow, his loneliness...",
+        "...",
+        "Dragon: I understand you,",
+        "He whispers softly at your ear.",
+        "...",
+        "Something within you clicks..."
+        "You feel a sense of peace, a sense of understanding, a sense of acceptance...",
+        "A power that has the greatest healing effect of all...",
+        "A feeling that you have never felt before...",
+        "You hope that this moment will last forever...",
+        "Dragon: Come back whenever you want.",
+        "Dragon: I am always here for you.",
+        "Dragon: The sun is setting. You should go back to the village.",
         }
     },
-    {"back village", { //incomplete
-        "You step into the forest, the trees towering above you.",
-        "Driven by curiosity, you really want to find out if the rumours are real.",
-        "However, there are multiple paths in the forest, and you don't know which ones lead to the castle.",
+    {"back village", {
+        "You still can't believe what you have just experienced.",
+        "The sunset is particularly beautiful today, painting the sky in shades of red and purple.",
+        "You: I have to protect him."
+        "You: I must unveil the truth to the villagers.",
         }
     },
-    {"no one believe", { //incomplete
-        "You step into the forest, the trees towering above you.",
-        "Driven by curiosity, you really want to find out if the rumours are real.",
-        "However, there are multiple paths in the forest, and you don't know which ones lead to the castle.",
+    {"no one believe", { 
+        "You went to the village square, where the villagers were gathered.",
+        "You told them about the Dragon.",
+        "Villagers: She is seduced by the evil Dragon!",
+        "Villagers: She is trying to deceive us!",
+        }
+    },
+    {"all dead", {
+        "You step into the castle, the heavy doors creaking open...",
+        "It is strangely quiet...",
+        "*** Sniff, sniff ",
+        "You caught a whiff of something foul, a stench that made you wrinkle your nose in disgust.",
+        "As you cautiously made your way further inside...",
+        "the scene before you left you in a state of utter disbelief and horror...",
+        "Blood. Everywhere. Bodies scattered across the floor, lifeless and still.",
+        }
+    },
+    {"hero save you", {
+        "Hero walk into your eyesight.",
+        "Hero: Ah yes, you are here.",
+        "Hero: I have killed all them.",
+        "Hero: You are safe now.",
+        "You: ...",
+        "Hero: You must be very scared just now...",
+        "Hero: Let's go back to the village.",
+        "Hero: They are waiting for you.",        
         }
     },
 };                
