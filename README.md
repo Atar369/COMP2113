@@ -22,7 +22,7 @@ Current process:
 - randomness
 - multiple endings, multiple characters
 
-HOW TO PLAY
+HOW TO PLAY:
 W - Move Upwards
 D - Move Downwards
 A - Move Leftwards
