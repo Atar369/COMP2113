@@ -22,7 +22,7 @@ unordered_map<int, vector<string> > Hero_choice_map_b4 = { // event num mapping
         "Robert, the blacksmith, stood in front of you.",
         "He said, 'I've been waiting for you.'",
         "'The new journey begins...'",
-        "'The new hero is being chosen...'",
+        "'The new hero has been chosen...'",
         "He silently handed you a sword.",
         "'This sword is the key to your destiny.'",
         "'Once you take it, there is no turning back.'",
@@ -69,11 +69,11 @@ unordered_map<int, vector<string> > Hero_choice_map_after = { // scn num mapping
         }
     },
     {4, {
-        "You scare to take the responsibility of being a Hero.",
-        "You afraid of risking your life for others.",
+        "You are scared to take the responsibilities of being a Hero.",
+        "You are afraid of risking your life for others.",
         "You left the sword there.",
         "Robert was disappointed, but he understood.",
-        "You decided to go back to your normal life.",
+        "You decided to return to your normal life.",
         }
     },
     {5, {
