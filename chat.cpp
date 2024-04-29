@@ -423,6 +423,56 @@ unordered_map<string, vector<string> > Girl_chat_map = {
         "Let's see what are they talking about.",
         }
     },
+    {"librarian", {
+        "......",
+        "(the librarian is reading a book)",
+        "......",
+        "(turn another page of the book)",
+        "......?",
+        "Oh, I'm sorry. I didn't see you there.",
+        "Welcome to the library.",
+        "Please feel free to look around.",
+        "If you have any questions, I'll be happy to help.",
+        }
+    },
+    {"penny", {
+        "Welcome to the store.",
+        "I'm Penny, the store owner.",
+        "If you need anything, just let me know.",
+        "I have a wide selection of items for sale.",
+        "I'm sure you'll find something you like.",
+        "Feel free to look around.",
+        }
+    },
+    {"cooper", {
+        "......",
+        "...",
+        "......",
+        "...",
+        "...how long have you been staring at me?",
+        "......",
+        "...i have nothing to say to you...",
+        "......",
+        }
+    },
+    {"cooper the guider", {
+        "......",
+        "...",
+        "......",
+        "...",
+        "...you are the hero, aren't you?",
+        "...",
+        "I can see it in your eyes...",
+        "...",
+        "You have the determination...",
+        "just like the last hero...",
+        "......",
+        "You are not yet capable of the fighting skills.",
+        "Every act, every move, every steps... got its own meaning.",
+        "I shall teach you the art of combat.",
+        "Follow my lead.",
+        }
+    },
     {"enter forest", {
         "You step into the forest, the trees towering above you.",
         "Driven by curiosity, you really want to find out if the rumours are real.",
