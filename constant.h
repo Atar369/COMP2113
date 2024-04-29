@@ -8,20 +8,6 @@ using namespace std;
 #define COLS 36
 #define ROWS 32
 
-// Game Global var
-//short choice = 1;
-//short option = 0;
-//short Scn_num = 0;
-//short map_code = 0;
-// short lifes = 3;
-
-//int apples_in_level = 0;
-//int bullet_shoot = false;
-
-
-// Window width & Height
-//int w, h;
-
 // Color
 const short c_empty = 0;
 const short c_wall = 1;
