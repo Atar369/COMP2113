@@ -241,10 +241,11 @@ unordered_map<int, vector<string> > Girl_choice_map_b4 = { // event num mapping
 unordered_map<int, vector<string> > Girl_choice_map_after = { // scn num mapping
 
     {1, {
-        "You decided to leave the monster.",
-        "Monster: Grrrrrr... RROOOOAAAAARRRRRRRRRR",
-        "The monster let out a deafening roar, and you felt a fear run down your spine.",
-        "You turned away and ran as fast as you could, escaping from this gloomy forest.",
+        "You decided to leave the monster behind.",
+        "You: I can't help you now. I need to find the dragon.",
+        "Monster: Grrrrrr... hissssssss",
+        "As you moved, the monster let out a deafening roar, sending a wave of fear down your spine.",
+        "Without a second thought, you reach for your pocket knife to protect yourself.",
         },
     },    
     {2, {
