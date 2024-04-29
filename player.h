@@ -59,23 +59,4 @@ class Player {
 
 extern Player player; // temp
 
-/*
-struct objects {
-    int key = 0;
-    //int sword;
-    int treasure = 0;
-    int light_switch;
-    //int closet;
-    //int wall;
-    int npc = 0;
-    int monster = 0;
-}; */
-
-
-
-
-//void updatePlayercorr(short current_map[ROWS][COLS]);
-
-//void displayMap(short current_map[ROWS][COLS]);
-
 
