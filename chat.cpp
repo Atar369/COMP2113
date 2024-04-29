@@ -661,7 +661,7 @@ string Chat::getRandomVillagerChat(string color, int scn_num) {
                     case 6:
                         return "I'm so scared... Will anyone come to save me?";
                     case 7:
-                        return "Please, hurry! I don't know how much longer I can hold on!";
+                        return "What a wonderful day... I wonder what will happen tomorrow";
                     case 8:
                         return "I can't believe this is happening... Please, someone help me!";
                     case 9:
