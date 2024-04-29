@@ -604,14 +604,12 @@ void Window::handle_choice(Progress &progress, Player &player){
                 
                 case 2: 
                     if (choice_button == 0) {
-                        progress.scn_num = 9;
+                        progress.scn_num = 3;
                         progress.event_num = 0;
                     } 
                     else if (choice_button == 1) {
-                        progress.scn_num = 10;
+                        progress.scn_num = 4;
                         progress.event_num = 0;
-                        progress.ending_num = 4;
-                        player.reach_ending = true;
                     }
                 break;  
             }
