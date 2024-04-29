@@ -447,8 +447,3 @@ void Girl_run(Progress &progress, Player &player) {
 
     
 }    
-/* test
-int main() {
-    Hero_run();
-    cout << show_cursor;
-}  */ 
