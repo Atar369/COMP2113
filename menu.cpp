@@ -25,11 +25,3 @@ void draw_logo(int h, int w) {
     cout << reset;
 }
 
-
-/*
-int main() {
-    int h = 100;
-    int w = get_logo_w_size();
-    draw_logo(h, w);
-    return 0;
-} */
