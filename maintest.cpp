@@ -33,10 +33,6 @@ int main() {
     Window window;
     Player player;
 
-    ////////////////
-    // Main loop
-    ///////////////
-
     // Menu menu
     // Buttons
     const string button_start_game[2] = {
@@ -84,16 +80,7 @@ int main() {
         system("clear");
         std::cout << save_cursor_position; // Save cursor position
         std::cout << hide_cursor;  
-
-  /*     int check_waiting = keyboard.waiting(keyboard.key);
-
-        int check_pressed_key = keyboard.key_pressed(keyboard.key);
         
-        // Check if the key is pressed
-        while (check_pressed_key) {
-            keyboard.get_userInput();
-        }
-        */
 
        // Predine the variables
         int select_start_game = 1, select_HTP = 1, select_achieve = 1, select_exit = 1, select_continue = 1;
