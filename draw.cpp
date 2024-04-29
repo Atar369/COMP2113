@@ -1,25 +1,5 @@
 #include "draw.h"
 
-/* Set enemy and calck apple
-void set_map_param(short current_map[][COLS], int clx, int cly) {
-    static int i = 0;
-    for (int y = 0; y < cly; y++) {
-        for (int x = 0; x < clx; x++) {
-            if (current_map[y][x] == i_enemy_v) {
-                obj_init(&enemy[i], x, y, 1, "");
-                i++;
-            } else if (current_map[y][x] == i_enemy_h) {
-                obj_init(&enemy[i], x, y, 2, "");
-                i++;
-            }
-            if (i >= sizeof(enemy)/sizeof(enemy[0])) {
-                i = 0;
-            }
-        }
-    }
-
-}*/
-
 // Symbol map object
 #define s_empty        "   "
 #define s_wall "///"
@@ -251,62 +231,12 @@ void draw_map(vector<vector<short> > & current_map, Player &player) {
             } 
             else {
                 draw_instance(i, j, current_map[i][j], symbol_mapping[current_map[i][j]]);
-
-                    // Draw static object
-                    
-/*
-                // Draw dynamic object
-                default:
-                    
-                    // Check if player position matches the current position
-                    if (i == player.y && j == player.x) {
-                        draw_instance(i, j, c_player, player.symbol); // Use player.symbol to draw the player
-                    } 
-                    else {
-                        cout << current_map[i][j] << ""; // Print the current_map value if no object is present
-                    }
-                    break;
-
-for (int i = 0; i < ROWS; i++) {
-        for (int j = 0; j < COLS; j++) {
-            if (i == player.y && j == player.x) {
-                cout << player.symbol << "";
-            } else {
-                cout << current_map[i][j] << "";
             }
         }
         cout << endl;
-    }                    
-                     // Draw bullet
-                    if (x == bullet.x && y == bullet.y) {
-                        if (!bullet_shoot) {
-                            break;
-                        }
-                        draw_instance(y, x, c_bullet, bullet.symbol);
-                    } 
-
-                    // Draw enemy
-                    for (int i = 0; i < 5; i++) {
-                        if (x == enemy[i].x && y == enemy[i].y) {
-                            draw_instance(y, x, c_enemy, s_enemy);
-                            break;
-                        }
-                    }
-*/
-
-            }
-
-            // Open door if key is found
-            /* if (key) {
-                if (current_map[i][j] == i_door) {
-                    current_map[i][j] = 0;
-                }
-            }*/
-            }
-            cout << endl;
-        }
-        
     }
+        
+}
 
 void change_map(vector<vector<short> > & current_map, int target, int new_obj) {
     for (int i = 0; i < current_map.size(); i++) {
@@ -317,94 +247,3 @@ void change_map(vector<vector<short> > & current_map, int target, int new_obj) {
         }
     }
 }
-/*
-void change_after_touch (vector<vector<short> > & current_map, Player &player) {
-    if (player.touch_dragon) {
-        int row = player.y + player.vtrl;
-        int col = player.x + player.hrz;
-        current_map[row][col] = i_deaddragon;
-        player.touch_dragon = false;
-    }
-    if (player.touch_dragonnpc) {
-        int row = player.y + player.vtrl;
-        int col = player.x + player.hrz;
-        current_map[row][col] = i_deaddragonnpc;
-        player.touch_dragonnpc = false;
-    }    
-}  */  
- /*       
-// Check next map
-bool next_map(short current_map[ROWS][COLS], short &map_code) {
-    if (current_map[player.y][player.x] == i_door) {
-        map_code++; // further modify if we want transition to another map，go back/ go up/down
-        return true;
-    }
-    return false;
-} */
-
-/*
-class Map {
-public:
-    short current_map[ROWS][COLS];
-    int width;
-    int height;
-    int priority = 0;
-
-public:
-    Map() {}
-    Map(int width, int height);
-    Map(const vector<string>& ma, const short & current_map[][]);
-    Map(vector<string>& map);
-    void init(vector<string>& map, vector<string>& current_map);
-    void add_interact(int x, int y, char c);
-};*/
-
-/*
-Draw colored instance
-#define td_indent 2 // Top & down ident
-#define symbol_count 3
-
-
-void draw_instance(int y, int x, ColorPair &color, char name[]) {
-
-    // Ending offset
-    int ending_xoffset = COLS/2;
-    int ending_yoffset = ROWS/2;
-    
-    // Level offset
-    int map_xoffset = (COLS/2) * symbol_count + (COLS%2); // center of the screen
-    int map_yoffset = (ROWS+(td_indent*2))/2-(1 +(ROWS%2)); 
-
-    mvprintw(
-         ceil(ending_yoffset - map_yoffset) + (y+td_indent), // Y pos 
-         ceil(ending_xoffset - map_xoffset) + (x*symbol_count), // X pos 
-         name // S pos 
-    );
-} 
-
-int main() {
-    // Draw the map
-    ColorPair color = colorPairs.at(c_player);
-    draw_instance(0, 0, color, s_player);
-    return 0;
-}
-
-// testing
-int main() {
-    // Example usage
-    SetColor(c_player);
-    cout << "Player" << reset << endl;
-
-    SetColor(c_treasure);
-    cout << "Treasure" << reset << endl;
-
-    SetColor(42); // Default color
-    cout << "Default" << reset << endl;
-
-    return 0;
-} 
-
-int main() {
-    draw_instance(0, 0, c_player, s_player);
-} 
-*/
