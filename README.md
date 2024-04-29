@@ -1,9 +1,9 @@
 COMP2113 Group Project: Life Theatre (Group 15)
 
 Group Members
-Cheung Yat Ching ()
+Cheung Yat Ching (3036066438)
 Chow Lok King (3036216643)
-Chung Ka Yi ()
+Chung Ka Yi (3036058247)
 Kwok Yuen Wang (3036060329)
 Lam Wui Yan ()
 
@@ -13,7 +13,7 @@ Boy : A young male living in the village, determined to become a hero and save t
 Girl : A young female living in the village, although not wielding the power of a hero, has her own special adventure in the story.
 
 FEATURE:
-This game is a story-based game. Player can explore around the designed maps to trigger different interactions with the NPCs in the game. Some of the chats are designed to be random. So, some characters may chat to you with various dialogues. The core part of the entire gameplay is that player have to choose from the choices in different scenes. Each choice will lead to a different ending. Player can unlock 6 achievements by attaining to all the endings.
+This game is a story-based game. Player can explore around the designed maps to trigger different interactions with the NPCs in the game. The chats are designed to be random so characters may chat to you with various dialogues. The decision making dring scenarios of the player will me the core of the entire gameplay. Each choice will lead to a different ending. The Player can unlock 6 achievements by attaining to all the endings.
 
 HOW TO COMPILE AND RUN:
 
