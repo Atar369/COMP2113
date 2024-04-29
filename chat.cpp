@@ -427,11 +427,12 @@ unordered_map<string, vector<string> > Girl_chat_map = {
         "......",
         "(the librarian is reading a book)",
         "......",
-        "(turn another page of the book)",
+        "(Mumbling)",
         "......?",
-        "Oh, I'm sorry. I didn't see you there.",
+        "Oh, I'm sorry. I didn't see you there, pretty girl",
         "Welcome to the library.",
         "Please feel free to look around.",
+        "What do you want to know more about?"
         "If you have any questions, I'll be happy to help.",
         }
     },
@@ -441,6 +442,7 @@ unordered_map<string, vector<string> > Girl_chat_map = {
         "If you need anything, just let me know.",
         "I have a wide selection of items for sale.",
         "I'm sure you'll find something you like.",
+        "Are you finding something specific?"
         "Feel free to look around.",
         }
     },
@@ -642,7 +644,7 @@ string Chat::getRandomVillagerChat(string color, int scn_num) {
         }
     }
     else if (is_Girl) {
-        int randomNumber = getRandomNumber(1, 12); // Generate a random number between 1 and 4
+        int randomNumber = getRandomNumber(1, 12); // Generate a random number between 1 and 12
         switch (scn_num) {
             case 5:
                 switch (randomNumber) {
