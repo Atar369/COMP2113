@@ -16,10 +16,9 @@ class Player {
     public:
     int hrz, vtrl; // horizontal, vertical, -1, 0, 1
     int x, y;
-    int direction;
     string symbol;
     string color;
-    bool chat_npc;
+    bool chat_npc = false;
     bool reach_ending = false;
     bool touch_monster = false;
     bool touch_oldman = false;
@@ -32,10 +31,10 @@ class Player {
     
     
     // Player's inventory & states
-    bool touch_key;
-    bool open_treasure;
-    bool turn_light_switch;
-    bool investigate;
+    bool touch_key = false;
+    bool open_treasure = false;
+    bool turn_light_switch = false;
+    bool investigate = false;
     
 
 
@@ -54,6 +53,8 @@ class Player {
     void player_move(int key, vector<vector<short> > &current_map);
 
     void player_collision(vector<vector<short> > &current_map);
+
+    void reset_player();
 };
 
 extern Player player; // temp
