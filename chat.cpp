@@ -662,6 +662,7 @@ void Chat::loadChat(string charactor, int map_code, int scn_num, Player &player,
         }
         else if (this->is_Girl) {
             while (line < Girl_chat_map[charactor].size()) {
+                temp[9][27] = i_mistery;
                 window.build_buffer(Girl_chat_map[charactor][line]);
                 window.Print_buffer(temp, player, color);
                 keyboard.get_userInput();
