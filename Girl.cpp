@@ -3,7 +3,8 @@
 unordered_map<int, vector<string> > Girl_endings = {
 
     {1, { //killed by monster (not rescuing him)
-        "The monster started to chase you.",
+        "The monster thought you were going to attack it,",
+        "so it started to chase you.",
         "You tried to run away, but the monster was too fast.",
         "The monster caught you and killed you.",
         "Ending 1: Cold-Blooded Animal"
@@ -116,6 +117,12 @@ void Girl_run(Progress &progress, Player &player) {
         break;
     }
     
+    if (progress.event_num == 0) {
+        chat.loadChat("intro", 0, 0, player, font_white);
+    }
+
+    sleep(1);
+
     current_map = map_code_mapping.at(progress.map_code);
 
     while (!player.reach_ending) {
@@ -182,6 +189,16 @@ void Girl_run(Progress &progress, Player &player) {
                     offsety = - 31;
                 }    
 
+                if (player.touch_librarian) {
+                    chat.loadChat("librarian", progress.map_code, progress.scn_num, player, font_green);
+                    player.touch_librarian = 0;
+                }
+
+                if (player.touch_penny) {
+                    chat.loadChat("penny", progress.map_code, progress.scn_num, player, font_blue);
+                    player.touch_penny = 0;
+                }
+
                 if (progress.first_time_entering_village && progress.scn_num == 5) {
                     chat.loadChat("enter village", progress.map_code, progress.scn_num, player, font_cyan);
                     progress.first_time_entering_village = false;
@@ -243,9 +260,15 @@ void Girl_run(Progress &progress, Player &player) {
                         offsety = -30;
                 }
 
-                if (player.x >= 35) {
-                        map_state = castle;
-                        offsetx = -36;
+                if (progress.hero_killed_all == 0 && player.x >= 35) {
+                    map_state = castle;
+                    offsetx = -36;
+                }
+                
+                if (progress.hero_killed_all == 1 && player.x >= 35) {
+                    progress.scn_num = 10;
+                    map_state = all_dead;
+                    offsetx = -36;
                 }
 
                 if (progress.first_time_entering_forest && progress.scn_num == 5) {
@@ -264,10 +287,11 @@ void Girl_run(Progress &progress, Player &player) {
                     offsety = 31;
                 }
 
-                if (progress.scn_num == 5 && player.touch_monster) {
+                if (progress.scn_num == 5 && !progress.talked_to_monster && player.touch_monster) {
                     progress.scn_num = 6;                    
                     progress.event_num = 1;
                     player.touch_monster = 0;
+                    progress.talked_to_monster = 1;
                     window.handle_choice(progress, player);
                     if (progress.scn_num == 1) {
                         progress.ending_num = 1;
@@ -275,7 +299,7 @@ void Girl_run(Progress &progress, Player &player) {
                     }
                 }   
 
-                if (progress.scn_num == 2) {
+                if (progress.scn_num == 2 && progress.hero_killed_all == 0) {
                     progress.scn_num = 7;
                     map_state = castle; 
                     player.x = 18;
@@ -304,13 +328,16 @@ void Girl_run(Progress &progress, Player &player) {
                     //lock the door collision
                     progress.first_time_entering_castle = false;
                     progress.scn_num = 8;
+                    progress.girl_know_fact = 1;
                     //release door collision
                 }
 
                 if (!progress.talked_to_dragon && player.touch_dragon) {
-                        chat.loadChat("talk to dragon", progress.map_code, progress.scn_num, player, font_red);
+                        chat.loadChat("talk to dragon", progress.map_code, progress.scn_num, player, font_white);
                         player.touch_dragon = 0;
                         progress.talked_to_dragon = 1;
+                        progress.scn_num = 8;           
+                        progress.girl_know_fact = 1;             
                 }
                 
             break;
@@ -323,8 +350,9 @@ void Girl_run(Progress &progress, Player &player) {
                     offsetx = 31;
                 }
 
-                if (progress.first_time_entering_back_village && progress.scn_num == 8) { // add hero doesnt know truth
-                    chat.loadChat("back village", progress.map_code, progress.scn_num, player, font_red);
+                if (progress.first_time_entering_back_village && progress.scn_num == 8) {
+                    chat.loadChat("back village", progress.map_code, progress.scn_num, player, font_yellow);
+                    progress.first_time_entering_back_village = false;
                     progress.scn_num = 9;
                 }
 
@@ -332,11 +360,34 @@ void Girl_run(Progress &progress, Player &player) {
 
             case all_dead:
                 progress.map_code = 9;
+
                 if (player.y >= 31) {
                     map_state = back_village;
                     offsety = -16;
                 }
 
+                if (progress.scn_num == 10 && progress.hero_killed_all && progress.hero_know_fact == 0 && progress.girl_know_fact == 1) {
+                    progress.scn_num = 11;
+                    chat.loadChat("all dead", progress.map_code, progress.scn_num, player, font_red);
+                    chat.loadChat("hero save you", progress.map_code, progress.scn_num, player, font_yellow);
+                    progress.ending_num = 3;
+                    player.reach_ending = true;
+                }    
+
+                if (progress.scn_num == 10 && progress.hero_killed_all && progress.hero_know_fact == 1 && progress.girl_know_fact == 1) {
+                    chat.loadChat("all dead", progress.map_code, progress.scn_num, player, font_red);
+                    progress.event_num = 2;
+                    window.handle_choice(progress, player);
+                    if (progress.scn_num == 3) {
+                        chat.loadChat("hero save you", progress.map_code, progress.scn_num, player, font_yellow);
+                        progress.ending_num = 4;
+                        player.reach_ending = true;
+                    }
+                    else if (progress.scn_num == 4) {
+                        progress.ending_num = 5;
+                        player.reach_ending = true;
+                    }
+                }
             break; 
             } 
         
