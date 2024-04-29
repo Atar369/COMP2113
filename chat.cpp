@@ -592,9 +592,9 @@ string Chat::getRandomVillagerChat(string color, int scn_num) {
         }
     }
     else if (is_Girl) {
-        int randomNumber = getRandomNumber(1, 4); // Generate a random number between 1 and 4
+        int randomNumber = getRandomNumber(1, 12); // Generate a random number between 1 and 4
         switch (scn_num) {
-            case 1:
+            case 5:
                 switch (randomNumber) {
                     case 1:
                         return "I can feel it.... The smell of the dragon...";
@@ -604,29 +604,21 @@ string Chat::getRandomVillagerChat(string color, int scn_num) {
                         return "The days haven't been going well...";
                     case 4:
                         return "I don't want to be dragon food!";
-                }
-                break;
-            case 2:
-                switch (randomNumber) {
-                    case 1:
+                    case 5:
                         return "The dragon is getting closer. I can hear its roars!";
-                    case 2:
+                    case 6:
                         return "I'm so scared... Will anyone come to save me?";
-                    case 3:
+                    case 7:
                         return "Please, hurry! I don't know how much longer I can hold on!";
-                    case 4:
+                    case 8:
                         return "I can't believe this is happening... Please, someone help me!";
-                }
-                break;
-            case 3:
-                switch (randomNumber) {
-                    case 1:
+                    case 9:
                         return "Oh my goodness, you are back!";
-                    case 2:
+                    case 10:
                         return "Where have you been? I thought you have been eaten by evil dragon!";
-                    case 3:
+                    case 11:
                         return "I'm so glad you're here!";
-                    case 4:
+                    case 12:
                         return "Did you see the dragon? He's so scary!";
                 }
                 break;
