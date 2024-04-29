@@ -10,14 +10,6 @@ bool Keyboard::key_pressed() {
     return 1;
 }
 
-/*
-void Keyboard::action_loop() {
-    get_userInput();
-    while (key != KEY_EXIT || key != KEY_ENTER || key != KEY_ESC || key != KEY_SPACE || key != KEY_ACTION) {
-        get_userInput();
-    }
-}*/
-
 void Keyboard::get_userInput() {
     struct termios oldSettings, newSettings;
     tcgetattr(STDIN_FILENO, &oldSettings);
@@ -30,16 +22,16 @@ void Keyboard::get_userInput() {
     char userInput = getchar(); // get one character from the user
 
     switch (userInput) {
-        case 'W': case 'w': case KEY_UP:
+        case 'W': case 'w':
             this->key = KEY_UP;
             break;
-        case 'A': case 'a': case KEY_LEFT:
+        case 'A': case 'a':
             this->key = KEY_LEFT;
             break;
-        case 'S': case 's': case KEY_DOWN:
+        case 'S': case 's':
             this->key = KEY_DOWN;
             break;
-        case 'D': case 'd': case KEY_RIGHT:
+        case 'D': case 'd':
             this->key = KEY_RIGHT;
             break;
         case KEY_ENTER:
@@ -75,9 +67,6 @@ void Keyboard::get_userInput() {
         case 'J': case 'j':
             this->key = KEY_J;    
             break;                    
-        //default:
-            // Ignore invalid keys
-            //break;
     }
 
 }
