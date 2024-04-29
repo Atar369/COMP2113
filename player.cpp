@@ -24,18 +24,6 @@ void Player::stopMovement() {
     this->vtrl = 0;
 }
 
-/*
-void updatePlayercorr(vector<vector<short> > current_map) {
-    for (int i = 0; i < current_map.size(); i++) {
-        for (int j = 0; j < current_map[0].size(); j++) {
-            if (current_map[i][j] == i_player) {
-                player.x = j;
-                player.y = i;
-            }
-        }
-    }
-}   */ 
-
 
 void Player::player_move(int key, vector<vector<short> > &current_map) {
     // Key check
@@ -54,12 +42,8 @@ void Player::player_move(int key, vector<vector<short> > &current_map) {
         this->symbol = "|%|";
     }
 
-    // Animation and direction shoot
-    //int dir_shoot = 0;
-
 
     if (right) { 
-        //dir_shoot = 1; 
         if (this->color == font_blue) {
             this->symbol = "|@>";
         } 
@@ -68,7 +52,6 @@ void Player::player_move(int key, vector<vector<short> > &current_map) {
         }
     }
     if (left) { 
-        //dir_shoot = -1; 
         if (this->color == font_blue) {
             this->symbol = "<@|";
         } 
@@ -77,7 +60,6 @@ void Player::player_move(int key, vector<vector<short> > &current_map) {
         }
     }
     if (up) { 
-        //dir_shoot = -2; 
         if (this->color == font_blue) {
             this->symbol = "/@\\";
         } 
@@ -86,7 +68,6 @@ void Player::player_move(int key, vector<vector<short> > &current_map) {
         }
     }
     if (down) { 
-        //dir_shoot = 2; 
         if (this->color == font_blue) {
             this->symbol = "\\@/";
         } 
@@ -191,19 +172,3 @@ void Player::player_collision(vector<vector<short> > &current_map) {
         break;     
     }
 }
-
-/*
- testing
-void displayMap(vector<vector<short> > current_map[ROWS][COLS]) {
-    for (int i = 0; i < ROWS; i++) {
-        for (int j = 0; j < COLS; j++) {
-            if (i == player.y && j == player.x) {
-                cout << player.symbol << "";
-            } else {
-                cout << current_map[i][j] << "";
-            }
-        }
-        cout << endl;
-    }
-}  */
-
