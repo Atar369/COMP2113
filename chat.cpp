@@ -601,7 +601,7 @@ string Chat::getRandomVillagerChat(string color, int scn_num) {
                     case 2:
                         return "The dragon took me... I'm scared...";
                     case 3:
-                        return "Please, someone save me!";
+                        return "The days haven't been going well...";
                     case 4:
                         return "I don't want to be dragon food!";
                 }
