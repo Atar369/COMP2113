@@ -53,8 +53,6 @@ class Player {
     void player_move(int key, vector<vector<short> > &current_map);
 
     void player_collision(vector<vector<short> > &current_map);
-
-    void reset_player();
 };
 
 extern Player player; // temp
