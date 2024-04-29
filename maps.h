@@ -7,26 +7,6 @@
 #include <vector>
 using namespace std;
 
-/*
-map<int, string> symbol_mapping = {
-    { 0, "   " },
-    { 1, "///" },
-    { 2, "[$]" },
-    { 3, "{ }" },
-    { 4, "|-|" },
-    { 5, "/N\\" },
-    { 6, "/@\\" },
-    { 7, "(-)" },
-    { 8, "(?)" },
-    { 9, "www" },
-    { 10, "[=]" },
-    { 11, "^@^" },
-    { 12, "[*]" },
-    { 13, "[T]" },
-    { 14, "===" },
-    { 15, "[']" },
-    { 16, "[`]" }
-}; */
 
 extern unordered_map <int, vector<vector<short> > > map_code_mapping;
 
