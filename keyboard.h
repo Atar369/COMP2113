@@ -6,7 +6,7 @@
 #include <string>
 
 
-#define KEY_UP 650 // hv bugs for arrows
+#define KEY_UP 650 
 #define KEY_DOWN 660
 #define KEY_LEFT 680
 #define KEY_RIGHT 670 
@@ -30,9 +30,7 @@ class Keyboard {
 
     public:
     bool key_pressed();
-    //void action_loop();
     void get_userInput();
-    //void stop();
 };
 
 extern Keyboard keyboard;
