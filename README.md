@@ -5,7 +5,7 @@ Cheung Yat Ching (3036066438)
 Chow Lok King (3036216643)
 Chung Ka Yi (3036058247)
 Kwok Yuen Wang (3036060329)
-Lam Wui Yan ()
+Lam Wui Yan (3036002420)
 
 INTRODUCTION:
 Life Theatre is a text-based minigame which tells the story of a Hero and a Girl. The player is able to choose between the Hero or the Girl. During the journey, they will encounter multiple decisions, and each will lead to a different ending. Player can learn about the full story and the characters by playing through various storylines.
