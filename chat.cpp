@@ -464,7 +464,7 @@ unordered_map<string, vector<string> > Girl_chat_map = {
         "I am busy healing people, don't disturb me.",
         "...",
         "What do you want from me? I am busy.",
-        "You: I may help you.",
+        "You: I thought I may lend you a hand.",
         "What? Wait... You are the girl with healing power?",
         "Okay. Come here quick. Here's the way."
         }
@@ -494,6 +494,13 @@ unordered_map<string, vector<string> > Girl_chat_map = {
         "Now, let's move on to the third patient.", 
         }
     }, 
+    {"after healing", {
+        "Wow! You have done a pretty good job.",
+        "Here's your certicate.",
+        "You really help me a lot!", 
+        "Have you seen Hero coming? I need to talk to him.",
+        }
+    }, 
     {"enter forest", {
         "You step into the forest, the trees towering above you.",
         "Driven by curiosity, you really want to find out if the rumours are real.",
@@ -501,16 +508,16 @@ unordered_map<string, vector<string> > Girl_chat_map = {
         }
     },
     {"enter castle", {
-        "You found the castle."
-        "The castle stands tall and majestic."
-        "The beauty of the surroundings captivates your senses,"
-        "But your attention is quickly drawn to a figure standing in front of the throne..."
-        "...the one known for its fierceness, its fearsomeness..."
-        "...the evil Dragon."
-        "Although you have mentally prepared yourself for this moment,"
-        "The sight of the Dragon still sends a shiver down your spine."
-        "But you know that this is the moment you have been waiting for..."
-        "...the moment to find out the truth."
+        "You found the castle.",
+        "The castle stands tall and majestic.",
+        "The beauty of the surroundings captivates your senses,",
+        "But your attention is quickly drawn to a figure standing in front of the throne...",
+        "...the one known for its fierceness, its fearsomeness...",
+        "...the evil Dragon.",
+        "Although you have mentally prepared yourself for this moment,",
+        "The sight of the Dragon still sends a shiver down your spine.",
+        "But you know that this is the moment you have been waiting for...",
+        "...the moment to find out the truth.",
         }
     },
     {"talk to dragon", {
