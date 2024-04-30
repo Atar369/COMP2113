@@ -457,22 +457,16 @@ unordered_map<string, vector<string> > Girl_chat_map = {
         "......",
         }
     },
-    {"cooper the guider", {
+    {"cooper the healer", {
         "......",
         "...",
         "......",
+        "I am busy healing people, don't disturb me.",
         "...",
-        "...you are the hero, aren't you?",
-        "...",
-        "I can see it in your eyes...",
-        "...",
-        "You have the determination...",
-        "just like the last hero...",
-        "......",
-        "You are not yet capable of the fighting skills.",
-        "Every act, every move, every steps... got its own meaning.",
-        "I shall teach you the art of combat.",
-        "Follow my lead.",
+        "What do you want from me? I am busy.",
+        "You: I may help you.",
+        "What? Wait... You are the girl with healing power?",
+        "Okay. Come here quick. Here's the way."
         }
     },
     {"patient1", {
