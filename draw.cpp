@@ -207,7 +207,7 @@ void draw_instance(int y, int x, int obj, string symbol) {
     string color = color_mapping[obj];
     if (effect_mapping.find(obj) != effect_mapping.end())
         effect = effect_mapping.at(obj);
-    cout << color << effect << symbol << reset << "";
+    cout << color << effect << symbol << reset_format << "";
 }
 
 // Draw Current Map
