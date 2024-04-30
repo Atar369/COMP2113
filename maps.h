@@ -10,10 +10,9 @@ using namespace std;
 
 extern unordered_map <int, vector<vector<short> > > map_code_mapping;
 
-
+// Build the map with object numbers
 // Map of Hero's house
 // map code 0
-// Map of Hero's house
 const vector<vector<short> > Hero_house = {
     {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
     {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
