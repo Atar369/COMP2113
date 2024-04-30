@@ -10,10 +10,6 @@ void print_if_true(bool test, string str) {
 }
 
 
-bool isTrue() {
-  return ture;
-}
-
 bool HeroEnding[5] = {false, false, false, false, false}; 
 bool GirlEnding[4] = {false, false, false, false};
 
