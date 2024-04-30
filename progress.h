@@ -6,6 +6,7 @@
 #include "format.h"
 using namespace std;
 
+// Progress class, used to save and load game progress for both characters
 class Progress {
 
     public: 
