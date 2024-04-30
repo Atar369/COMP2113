@@ -669,34 +669,18 @@ string Chat::getRandomVillagerChat(string color, int scn_num) {
         }
     }
     else if (is_Girl) {
-        int randomNumber = getRandomNumber(1, 12); // Generate a random number between 1 and 12
+        int randomNumber = getRandomNumber(1, 4); // Generate a random number between 1 and 4
         switch (scn_num) {
             case 5:
                 switch (randomNumber) {
                     case 1:
-                        return "I can feel it.... The smell of the dragon...";
+                        return "You will be caught by the Dragon one day.";
                     case 2:
-                        return "The dragon took me... I'm scared...";
+                        return "You are the girl with healing power? Ughhh...";
                     case 3:
-                        return "The days haven't been going well...";
+                        return "How dare you talk about the you-know-who. I hate him.";
                     case 4:
-                        return "I don't want to be dragon food!";
-                    case 5:
-                        return "The dragon is getting closer. I can hear its roars!";
-                    case 6:
-                        return "I'm so scared... Will anyone come to save me?";
-                    case 7:
-                        return "What a wonderful day... I wonder what will happen tomorrow";
-                    case 8:
-                        return "I can't believe this is happening... Please, someone help me!";
-                    case 9:
-                        return "Oh my goodness, you are back!";
-                    case 10:
-                        return "Where have you been? I thought you have been eaten by evil dragon!";
-                    case 11:
-                        return "I'm so glad you're here!";
-                    case 12:
-                        return "Did you see the dragon? He's so scary!";
+                        return "Why are you here? Shouldn't you be healing people right now?";
                 }
                 break;
         }
