@@ -104,7 +104,7 @@ int main() {
         std::cout << hide_cursor;  
 
        // Predine the variables
-        int select_start_game = 1, select_HTP = 1, select_achieve = 1, select_exit = 1, select_continue = 1;
+        int select_start_game = 1, select_HTP = 1, select_exit = 1, select_continue = 1;
         int choice_button = 0;
 
         // In menu state
