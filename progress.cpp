@@ -34,6 +34,7 @@ void Progress::save_progress(Player player) {
     fout << this->first_time_entering_village << endl;
     fout << this->first_time_entering_forest << endl;
     fout << this->first_time_entering_back_village << endl;
+    fout << this->get_certificate << endl;
     fout << this->talked_to_monster << endl;
     fout << this->talked_to_dragon << endl;
     fout << this->girl_know_fact << endl;
@@ -94,6 +95,7 @@ void Progress::load_progress(Player &player) {
     fin >> this->first_time_entering_village;
     fin >> this->first_time_entering_forest;
     fin >> this->first_time_entering_back_village;
+    fin >> this->get_certificate;
     fin >> this->talked_to_monster;
     fin >> this->talked_to_dragon;
     fin >> this->girl_know_fact;
@@ -140,6 +142,7 @@ void Progress::reset_progress() {
     this->first_time_entering_village = 1;
     this->first_time_entering_forest = 1;
     this->first_time_entering_back_village = 1;
+    this->get_certificate = 0;
     this->talked_to_monster = 0;
     this->talked_to_dragon = 0;
 }
