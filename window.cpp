@@ -288,7 +288,7 @@ void Window::Print_buffer(vector<vector<short> > current_map, Player &player, st
         for (int j = 0; j < width; j++) {
             cout << color << window_buffer[i][j];
         }
-        cout << reset << endl;
+        cout << reset_format << endl;
     }
 
     reset_buffer();
