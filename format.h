@@ -12,7 +12,7 @@ using namespace std;
 #define default_format "\033[" // ansi escape code
 
 // define format codes
-#define reset "\033[0m"
+#define reset_format "\033[0m"
 #define bold "\033[1m"
 #define dim "\033[2m"
 #define italic "\033[3m"
