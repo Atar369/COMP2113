@@ -201,12 +201,12 @@ void Girl_run(Progress &progress, Player &player) {
 
                 if (player.touch_robert) {
                     chat.loadChat("robert", progress.map_code, progress.scn_num, player, font_yellow);
-                    player.touch_cooper = 0;
+                    player.touch_robert = 0;
                 }
 
                 if (player.touch_cooper && progress.talked_to_cooper) {
                     chat.loadChat("cooper", progress.map_code, progress.scn_num, player, font_yellow);
-                    player.touch_robert = 0;
+                    player.touch_cooper = 0;
                 }
 
                 if (!progress.talked_to_cooper && player.touch_cooper) {
@@ -215,7 +215,7 @@ void Girl_run(Progress &progress, Player &player) {
                     window.Print_healing("patient1", player, font_yellow);
                     window.Print_healing("patient2", player, font_yellow); 
                     window.Print_healing("patient3", player, font_yellow); 
-                    progress.get_treasure1 = 1;
+                    progress.get_certificate = 1;
                     player.touch_cooper = 0;
                     progress.talked_to_cooper = 1;
                 }
