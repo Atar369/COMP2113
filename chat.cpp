@@ -609,7 +609,7 @@ unordered_map<string, vector<string> > Girl_chat_map = {
         "At that moment, a realization dawns upon you —-",
         "the girl with healing powers and the 'evil' dragon are not so different after all...",
         "...living under the control of others' words, unable to live the life you truly desire.",
-        "You meet his gaze, feeling a profound sense of connection between you and him."
+        "You meet his gaze, feeling a profound sense of connection between you and him.",
         "He slowly steps closer to you, and you didn't step back...",
         "His arms extend towards you, and you don't flinch...",
         "You feel his embrace enveloping you...",
@@ -618,7 +618,7 @@ unordered_map<string, vector<string> > Girl_chat_map = {
         "Dragon: I understand you,",
         "He whispers softly at your ear.",
         "...",
-        "Something within you clicks..."
+        "Something within you clicks...",
         "You feel a sense of peace, a sense of understanding, a sense of acceptance...",
         "A power that has the greatest healing effect of all...",
         "A feeling that you have never felt before...",
