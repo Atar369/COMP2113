@@ -11,8 +11,8 @@ unordered_map<int, vector<string> > Hero_endings = {
         "Rushed into your house.",
         "You was safe.",
         "..."
-        "You chose to be a Hero.",
-        "But you are scared to become a Hero.",
+        "You stayed in your room forever.",
+        "As there is the safest place.",
         "One day, you get out of your room. You saw another 'Hero'.",
         "'He' was the one, you knew it.",
         "With 'his' powerful sword, shining under the sunlight.",
@@ -43,7 +43,7 @@ unordered_map<int, vector<string> > Hero_endings = {
         "Ending 2: Killer"
         }
     },
-    {3, { // not yet done
+    {3, { 
         "You found the girl.",
         "She was in the monster's lair.",
         "She fell in love with the dragon.",
