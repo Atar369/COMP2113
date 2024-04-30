@@ -429,7 +429,7 @@ void Girl_run(Progress &progress, Player &player) { //start of the program
 
         current_map = map_code_mapping.at(progress.map_code); 
 
-        //amendment of map 
+        // Amendment of map if needed 
         if (progress.scn_num == 7) {
             change_map(current_map, i_leftdoor, i_bed);
             change_map(current_map, i_rightdoor, i_bed);
@@ -444,9 +444,11 @@ void Girl_run(Progress &progress, Player &player) { //start of the program
 
         draw_map(current_map, player);
 
+        //change location of player when transiting to different map
         player.x += offsetx;
         player.y += offsety;
 
+        //corporate with the keyboard
         while (keyboard.key_pressed()) {
             keyboard.get_userInput();
         }
