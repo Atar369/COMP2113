@@ -1,5 +1,26 @@
 #include "format.h"
 
+/*
+unordered_map<string, string> effect_string_map = {
+    {"reset", reset}, 
+    {"dim", dim}, 
+    {"italic", italic}, 
+    {"bold", bold}, 
+    {"underline", underline}, 
+    {"blink", blink},
+};
+
+unordered_map<string, string> font_string_map = {
+    {"font_black", font_black}, 
+    {"font_red", font_red}, 
+    {"font_green", font_green}, 
+    {"font_yellow", font_yellow}, 
+    {"font_blue", font_blue}, 
+    {"font_purple", font_purple}, 
+    {"font_cyan", font_cyan}, 
+    {"font_white", font_white}
+};*/
+
 // Define color pairs 
 unordered_map<short, string> effect_mapping = {
     {c_grass      ,   italic},
@@ -107,7 +128,8 @@ unordered_map<short, string> color_mapping = {
     {c_lamp10 ,  font_yellow},
     {c_monster , font_cyan},
     {c_gamemaster , font_red},
-    {c_mystery, font_cyan}
+    {c_mystery, font_cyan},
+    {c_mysterygirl, font_purple}
 };
 
 unordered_map<int, string> Hero_ending_color_mapping = {
@@ -117,8 +139,8 @@ unordered_map<int, string> Hero_ending_color_mapping = {
     {4, font_blue},
     {5, font_red},
     {6, font_purple}, // hint voice, not ending
+    {7, font_white} // true ending
 };
-
 
 unordered_map<int, string> Girl_ending_color_mapping = {
     {1, font_green},
