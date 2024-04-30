@@ -68,6 +68,7 @@ unordered_map<int, vector<string> > Girl_endings = {
         "Girl: I'm glad that you made it here.",
         "Girl: Until we meet again.",
         "Girl: ...",
+        "Ending 5: True Ending"
         }
     },
 };
