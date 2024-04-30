@@ -20,8 +20,7 @@ void draw_logo(int h, int w) {
     // Draw
     for (int i = 0; i < logo_h_size; i++) {
         string line = menu_logo[i];
-        cout << font_yellow << default_format << h/logo_h_size + logo_h_size + i << ";" << w/2 - (22 + 363/3)/2 << "H" << line << endl;
+        cout << font_yellow << default_format << h/logo_h_size + logo_h_size + i << ";" << w/2 - (22 + 363/3)/2 << "H" << line << endl; // the later calculation is to center the logo, it the the width of the logo
     }
     cout << reset_format;
 }
-
