@@ -40,7 +40,7 @@ A - Move Leftwards
 S - Move Rightwards
 D - Move Downwards
 E - Action
-Q - Exit
+Q - Exit to menu
 
 To play the game, simply create a new game, choose to play the boy or the girl, and then follow the instructions shown on the bottom of the screen. Note that you have to click on an option when a decision needs to be made. Upon completion of the story for the first time, you can then return to the early stages of the game to change your decisions, ultimately altering the storyline. 
 
@@ -55,3 +55,5 @@ LIST OF NON-STANDARD C/C++ LIBRARIES:
 <sys/ioctl.h>: Provides access to I/O control operations on file descriptors.
 <termios.h>: Provides terminal I/O functionality, including terminal modes and control settings.
 
+Gameplay Link:
+https://youtu.be/doiV--H5Byk
