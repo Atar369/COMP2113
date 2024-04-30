@@ -70,7 +70,6 @@ void Progress::load_progress(Player &player) {
     fin >> this->event_num;
     fin >> this->can_enterMonster;
     fin >> this->can_enterCastle;
-    fin >> this->finish_intro;
     fin >> this->first_time_entering_castle;
     fin >> this->first_time_entering_store;
     fin >> this->talked_to_oldman;
