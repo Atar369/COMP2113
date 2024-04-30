@@ -134,11 +134,10 @@ void Girl_run(Progress &progress, Player &player) { //start of the program
         break;
     }
     
-    if (progress.event_num == 0) { //load intro
+    if (progress.scn_num == 0) { //load intro
         chat.loadChat("intro", 0, 0, player, font_white);
+        sleep(1);
     }
-
-    sleep(1);
 
     current_map = map_code_mapping.at(progress.map_code);
 
