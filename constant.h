@@ -107,7 +107,9 @@ const short c_lamp10 = 94;
 const short c_monster = 95;
 const short c_gamemaster = 96;
 const short c_mystery = 97;
+const short c_mysterygirl = 98;
 
+// index
 #define i_empty         0
 #define i_wall          1
 #define i_hero          2
@@ -206,3 +208,4 @@ const short c_mystery = 97;
 #define i_monster       95
 #define i_gamemaster    96  
 #define i_mystery       97
+#define i_mysterygirl       98
