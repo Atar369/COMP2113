@@ -1,9 +1,8 @@
 #include "player.h"
 
-// temp
 Player player;
 
-// calculate player's move
+// player movement
 void Player::moveUp() {
     this->vtrl = -1;
 }
@@ -25,6 +24,7 @@ void Player::stopMovement() {
     this->vtrl = 0;
 }
 
+// print movement with animation
 void Player::player_move(int key, vector<vector<short> > &current_map) {
     // Key check
     bool left  = ( key == KEY_LEFT ) ? 1 : 0;
@@ -44,6 +44,7 @@ void Player::player_move(int key, vector<vector<short> > &current_map) {
 
 
     if (right) { 
+        //dir_shoot = 1; 
         if (this->color == font_blue) {
             this->symbol = "|@>";
         } 
@@ -52,6 +53,7 @@ void Player::player_move(int key, vector<vector<short> > &current_map) {
         }
     }
     if (left) { 
+        //dir_shoot = -1; 
         if (this->color == font_blue) {
             this->symbol = "<@|";
         } 
@@ -60,6 +62,7 @@ void Player::player_move(int key, vector<vector<short> > &current_map) {
         }
     }
     if (up) { 
+        //dir_shoot = -2; 
         if (this->color == font_blue) {
             this->symbol = "/@\\";
         } 
@@ -68,6 +71,7 @@ void Player::player_move(int key, vector<vector<short> > &current_map) {
         }
     }
     if (down) { 
+        //dir_shoot = 2; 
         if (this->color == font_blue) {
             this->symbol = "\\@/";
         } 
@@ -75,7 +79,6 @@ void Player::player_move(int key, vector<vector<short> > &current_map) {
             this->symbol = "\\%/";
         }
     }
-
 
     // Move player
     this->hrz = int(right) - int(left);
@@ -104,7 +107,6 @@ void Player::player_collision(vector<vector<short> > &current_map) {
             break;
 
         case i_treasure:
-            current_map[this->y][this->x] = 0;
             this->open_treasure = 1;
         break;
 
@@ -172,3 +174,21 @@ void Player::player_collision(vector<vector<short> > &current_map) {
         break;     
     }
 }
+ 
+// reset status 
+void Player::reset_player() {
+    this->touch_cooper = 0;
+    this->touch_robert = 0;
+    this->touch_penny = 0;
+    this->touch_librarian = 0;
+    this->touch_oldman = 0;
+    this->touch_monster = 0;
+    this->touch_dragon = 0;
+    this->touch_dragonnpc = 0;
+    this->chat_npc = 0;
+    this->open_treasure = 0;
+    this->touch_key = 0;
+    this->reach_ending = 0;
+}
+
+
