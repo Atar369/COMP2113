@@ -349,12 +349,8 @@ void Girl_run(Progress &progress, Player &player) {
 
                 if (progress.first_time_entering_castle && (progress.scn_num == 5 || progress.scn_num == 7)) {
                     progress.scn_num = 7;
-                    change_map(current_map, i_leftdoor, i_bed);
-                    change_map(current_map, i_rightdoor, i_bed);
-                    change_map(current_map, i_door, i_bed);
                     chat.loadChat("enter castle", progress.map_code, progress.scn_num, player, font_white);
                     progress.first_time_entering_castle = false;
-                    progress.scn_num = 8;
                     progress.girl_know_fact = 1;
                 }
 
@@ -363,10 +359,7 @@ void Girl_run(Progress &progress, Player &player) {
                     player.touch_dragon = 0;
                     progress.talked_to_dragon = 1;
                     progress.scn_num = 8;           
-                    progress.girl_know_fact = 1;  
-                    change_map(current_map, i_bed, i_leftdoor);
-                    change_map(current_map, i_bed, i_rightdoor);
-                    change_map(current_map, i_bed, i_door);           
+                    progress.girl_know_fact = 1;            
                 }
 
                 if (progress.talked_to_dragon && player.touch_dragon) {
@@ -436,20 +429,17 @@ void Girl_run(Progress &progress, Player &player) {
 
         current_map = map_code_mapping.at(progress.map_code); 
 
-        if (progress.map_code == 6 && progress.monster_killed) {
-            change_map(current_map, i_monster, i_deaddragonnpc);
+        if (progress.scn_num == 7) {
+            change_map(current_map, i_leftdoor, i_bed);
+            change_map(current_map, i_rightdoor, i_bed);
+            change_map(current_map, i_door, i_bed);
         }
-/*
-        if (progress.map_code == 7 && progress.scn_num == 3) {
-            if (player.touch_dragon) {
-                change_map(current_map, i_dragon, i_deaddragon);
-                player.touch_dragon = 0;
-            }
-            else if (player.touch_dragonnpc) {
-                change_map(current_map, i_dragonnpc, i_deaddragonnpc);
-                player.touch_dragonnpc = 0;
-            }    
-        }*/
+
+        if (progress.scn_num == 8) {
+            change_map(current_map, i_bed, i_leftdoor);
+            change_map(current_map, i_bed, i_rightdoor);
+            change_map(current_map, i_bed, i_door); 
+        }
 
         draw_map(current_map, player);
 
