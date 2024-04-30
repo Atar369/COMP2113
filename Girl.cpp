@@ -344,25 +344,34 @@ void Girl_run(Progress &progress, Player &player) {
                 }
                 if (player.x < 0) {
                     map_state = forest;
-                    offsetx = 36;
+                    offsetx = 35;
                 }
 
                 if (progress.first_time_entering_castle && (progress.scn_num == 5 || progress.scn_num == 7)) {
                     progress.scn_num = 7;
+                    change_map(current_map, i_leftdoor, i_bed);
+                    change_map(current_map, i_rightdoor, i_bed);
+                    change_map(current_map, i_door, i_bed);
                     chat.loadChat("enter castle", progress.map_code, progress.scn_num, player, font_white);
-                    //lock the door collision
                     progress.first_time_entering_castle = false;
                     progress.scn_num = 8;
                     progress.girl_know_fact = 1;
-                    //release door collision
                 }
 
                 if (!progress.talked_to_dragon && player.touch_dragon) {
-                        chat.loadChat("talk to dragon", progress.map_code, progress.scn_num, player, font_white);
-                        player.touch_dragon = 0;
-                        progress.talked_to_dragon = 1;
-                        progress.scn_num = 8;           
-                        progress.girl_know_fact = 1;             
+                    chat.loadChat("talk to dragon", progress.map_code, progress.scn_num, player, font_yellow);
+                    player.touch_dragon = 0;
+                    progress.talked_to_dragon = 1;
+                    progress.scn_num = 8;           
+                    progress.girl_know_fact = 1;  
+                    change_map(current_map, i_bed, i_leftdoor);
+                    change_map(current_map, i_bed, i_rightdoor);
+                    change_map(current_map, i_bed, i_door);           
+                }
+
+                if (progress.talked_to_dragon && player.touch_dragon) {
+                    chat.loadChat("dragon", progress.map_code, progress.scn_num, player, font_yellow);
+                    player.touch_dragon = 0;
                 }
                 
             break;
