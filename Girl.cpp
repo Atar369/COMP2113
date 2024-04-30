@@ -37,6 +37,39 @@ unordered_map<int, vector<string> > Girl_endings = {
         "Ending 4: The Untold Truth",
         }
     },
+    {5, { //girl use time rewind and save dragon //true ending reveals
+        "......",
+        "...................",
+        "....................................",
+        "You: Where is this?"
+        "You: Hello? Is anyone here?",
+        "???: Girl, we meet again.",
+        "???: I am the one who gave you the power of time rewinding.",
+        "You: Why am I here?",
+        "???: I've noticed that you have been using your power to help others.",
+        "???: You have used it well.",
+        "???: Really really well.",
+        "???: I am proud of you.",
+        "You: Who are you?",
+        "You: Why did you give me this power?",
+        "???: Don't you know who I am?",
+        "???: You should know me very well.",
+        "...",
+        "......",
+        ".........................?",
+        "Girl: I am you.",
+        "You: You am I?",
+        "Girl: You do notice you were have been repeatedly sent back to the past, right?",
+        "Girl: The same story happened again and again...",
+        "Girl: The same people, the same events...",
+        "Girl: Amidst this endless loop,",
+        "Girl: One day, I suddenly discovered my ability to rewind time.",
+        "Girl: So at the beginning of every story, I remind myself of this power.",
+        "Girl: I'm glad that you made it here.",
+        "Girl: Until we meet again.",
+        "Girl: ...",
+        }
+    },
 };
 
 void Girl_run(Progress &progress, Player &player) { //start of the program
@@ -416,6 +449,8 @@ void Girl_run(Progress &progress, Player &player) { //start of the program
                     }
                     else if (progress.scn_num == 4) {
                         progress.girl_rewind = 1;
+                        progress.ending_num = 5;
+                        player.reach_ending = true;
                     }
                 }
             break; 
