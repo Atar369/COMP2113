@@ -673,9 +673,9 @@ void Window::Print_healing(string contents, Player &player, string color) {
             keyboard.get_userInput();
         }
     }
-    bool success = false;
+
     int spc = 0, j = 8;
-    while (!success) {
+    while (true) {
         if (keyboard.key == KEY_SPACE) {
             spc++; 
             if (contents == "patient1") {
@@ -691,7 +691,7 @@ void Window::Print_healing(string contents, Player &player, string color) {
                         }
                     }
             }
-            if (contents == "patient 2") {
+            if (contents == "patient2") {
                     if (spc % 7 == 0) {
                         healing[12][j] = i_castlewall;
                         j++;
@@ -704,7 +704,7 @@ void Window::Print_healing(string contents, Player &player, string color) {
                         }
                     }
             }
-            if (contents == "patient 3") {
+            if (contents == "patient3") {
                 if (spc % 5 == 0) {
                     healing[12][j] = i_castlewall;
                     j++;
@@ -717,41 +717,40 @@ void Window::Print_healing(string contents, Player &player, string color) {
                     }
                 }
             }
-
-            Print_buffer(healing, player, color);
-
-          if (keyboard.key == KEY_ENTER) {
-                if (contents == "patient1") {
-                    if (spc == 63) {
-                        for (int k = 8; k < 29; k++) {
-                            healing[12][k] = i_empty;
-                        }
-                        success = true;
-                    }
-                }
-
-                if (contents == "patient 2") {
-                    if (spc == 147) {
-                        for (int k = 8; k < 29; k++) {
-                            healing[12][k] = i_empty;
-                        }
-                        success = true;
-                    }
-                }
-
-                if (contents == "patient 3") {
-                    if (spc == 105) {
-                        for (int k = 8; k < 29; k++) {
-                            healing[12][k] = i_empty;
-                        }
-                        success = true;
-                    }
-                }
-            }                 
+        }
+        Print_buffer(healing, player, color);
         keyboard.get_userInput();
-        }   
-    } 
-    Print_healing("patient2", player, font_yellow); 
+        if (keyboard.key == KEY_ENTER) {
+            if (contents == "patient1") {
+                if (spc == 63) {
+                    for (int k = 8; k < 29; k++) {
+                        healing[12][k] = i_empty;
+                    }
+                    break;
+                }
+            }
+
+            if (contents == "patient2") {
+                if (spc == 147) {
+                    for (int k = 8; k < 29; k++) {
+                        healing[12][k] = i_empty;
+                    }
+                    break;
+                }
+            }
+
+            if (contents == "patient3") {
+                if (spc == 105) {
+                    for (int k = 8; k < 29; k++) {
+                        healing[12][k] = i_empty;
+                    }
+                    break;
+                }
+            }
+
+            keyboard.get_userInput();
+        }                 
+    }   
     system("clear");    
 }
 
