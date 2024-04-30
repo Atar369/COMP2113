@@ -203,21 +203,23 @@ void Girl_run(Progress &progress, Player &player) {
                     chat.loadChat("robert", progress.map_code, progress.scn_num, player, font_yellow);
                     player.touch_robert = 0;
                 }
-
-                if (player.touch_cooper && progress.talked_to_cooper) {
-                    chat.loadChat("cooper", progress.map_code, progress.scn_num, player, font_yellow);
+                if (player.touch_cooper) {            
+                    if (!progress.talked_to_cooper) {
+                        chat.loadChat("cooper the healer", progress.map_code, progress.scn_num, player, font_green);
+                        sleep(1);
+                        window.Print_healing("patient1", player, font_yellow);
+                        window.Print_healing("patient2", player, font_yellow); 
+                        window.Print_healing("patient3", player, font_yellow); 
+                        progress.get_certificate = 1;
+                        progress.talked_to_cooper = 1;
+                    }
+                    else if (progress.talked_to_cooper) {
+                        chat.loadChat("after healing", progress.map_code, progress.scn_num, player, font_yellow);
+                    }
+                    else {    
+                        chat.loadChat("cooper", progress.map_code, progress.scn_num, player, font_green);
+                    }
                     player.touch_cooper = 0;
-                }
-
-                if (!progress.talked_to_cooper && player.touch_cooper) {
-                    chat.loadChat("cooper the healer", progress.map_code, progress.scn_num, player, font_green);
-                    sleep(1);
-                    window.Print_healing("patient1", player, font_yellow);
-                    window.Print_healing("patient2", player, font_yellow); 
-                    window.Print_healing("patient3", player, font_yellow); 
-                    progress.get_certificate = 1;
-                    player.touch_cooper = 0;
-                    progress.talked_to_cooper = 1;
                 }
 
                 if (progress.first_time_entering_village && progress.scn_num == 5) {
@@ -258,7 +260,6 @@ void Girl_run(Progress &progress, Player &player) {
 
                 if (player.y <= 0) {
                     map_state = village;
-                    progress.scn_num = 5;
                     offsety = 31;
                 }
 
@@ -375,6 +376,10 @@ void Girl_run(Progress &progress, Player &player) {
                 if (progress.first_time_entering_back_village && progress.scn_num == 8) {
                     chat.loadChat("back village", progress.map_code, progress.scn_num, player, font_yellow);
                     progress.first_time_entering_back_village = false;
+                    progress.scn_num = 9;
+                }
+
+                if (progress.scn_num == 8) {
                     progress.scn_num = 9;
                 }
 
