@@ -1,5 +1,6 @@
 #include <iostream>
 #include "
+
 using namespace std;
 
 void print_if_true(bool test, string str) {
@@ -8,41 +9,26 @@ void print_if_true(bool test, string str) {
   }
 }
 
-void randomFn(&bool[] arr) {
-  arr[1] = true;
-}
 
 bool isTrue() {
   return ture;
 }
 
-bool ending[9] = {false, false, false, false, false, false, false, false, false};
+bool HeroEnding[5] = {false, false, false, false, false}; 
+bool GirlEnding[4] = {false, false, false, false};
 
 int main(){
-  bool HeroEnding1, HeroEnding2, HeroEnding3, HeroEnding4, HeroEnding5, 
-  bool GirlEnding1, GirlEnding2, GirlEnding3, GirlEnding4;
-  randomFn(ending);
-  ending[2] = isTrue();
-  int num = 6;
-  int i;
   cout << "Hero:" << endl;
-  for ( i = 0; i < num; i++ ){
-    print_if_true
-    cout << "Ending 1: Dreamer" << endl;
-    cout << "Ending 2: Killer" << endl;
-    cout << "Ending 3: Crazy" << endl;
-    cout << "Ending 4: 'Monster'" << endl;
-    cout << "Ending 5: Why you try?" << endl;
-  }
-  num = 5;
+  print_if_true(HeroEnding[1], "Ending 1: Dreamer");
+  print_if_true(HeroEnding[2], "Ending 2: Killer");
+  print_if_true(HeroEnding[3], "Ending 3: Crazy");
+  print_if_true(HeroEnding[4], "Ending 4: 'Monster'");
+  print_if_true(HeroEnding[5], "Ending 5: Why you try?";
   cout << "Girl:" << endl;
-  for ( i = 0; i < num; i++ ){
-    cout << "Ending 1: Cold-Blooded Animal" << endl;
-    cout << "Ending 2: 'Three People Become Tigers'" << endl;
-    cout << "Ending 3: Happy Ending?" << endl;
-    cout << "Ending 4: The Untold Truth" << endl;
-  }
-
+  print_if_true(GirlEnding[1], "Ending 1: Cold-Blooded Animal");
+  print_if_true(GirlEnding[2], "Ending 2: 'Three People Become Tigers'");
+  print_if_true(GirlEnding[3], "Ending 3: Happy Ending?");
+  print_if_true(GirlEnding[4], "Ending 4: The Untold Truth");
   
 
   return 0;
