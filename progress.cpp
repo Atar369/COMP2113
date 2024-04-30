@@ -34,8 +34,9 @@ void Progress::save_progress(Player player) {
     fout << this->first_time_entering_village << endl;
     fout << this->first_time_entering_forest << endl;
     fout << this->first_time_entering_back_village << endl;
+    fout << this->talked_to_monster << endl;
     fout << this->talked_to_dragon << endl;
-    fout << this->girl_saved_monster << endl;
+    fout << this->girl_know_fact << endl;
     fout << this->girl_rewind << endl;
 
     fout << player.x << endl;
@@ -89,12 +90,13 @@ void Progress::load_progress(Player &player) {
     fin >> this->hero_know_fact;
     fin >> this->hero_killed_all;
 
-    fin >> this->finish_intro;
+    fin >>this->finish_intro;
     fin >> this->first_time_entering_village;
     fin >> this->first_time_entering_forest;
     fin >> this->first_time_entering_back_village;
+    fin >> this->talked_to_monster;
     fin >> this->talked_to_dragon;
-    fin >> this->girl_saved_monster;
+    fin >> this->girl_know_fact;
     fin >> this->girl_rewind;
 
     fin >> player.x;
@@ -138,6 +140,7 @@ void Progress::reset_progress() {
     this->first_time_entering_village = 1;
     this->first_time_entering_forest = 1;
     this->first_time_entering_back_village = 1;
+    this->talked_to_monster = 0;
     this->talked_to_dragon = 0;
 }
 
@@ -146,7 +149,7 @@ void Progress::delete_progress() {
     this->reset_progress();
     this->hero_know_fact = 0;
     this->hero_killed_all = 0;
-    this->girl_saved_monster = 0;
+    this->girl_know_fact = 0;
     this->girl_rewind = 0;
 }
 
