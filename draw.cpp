@@ -100,6 +100,7 @@
 #define s_gamemaster     "GM "
 #define s_mystery "???"
 
+//Map the object number to symbol
 unordered_map<int, string> symbol_mapping = {
     {0, s_empty},
     {1, s_wall},
@@ -238,6 +239,7 @@ void draw_map(vector<vector<short> > & current_map, Player &player) {
         
 }
 
+// change map if particular scene requires
 void change_map(vector<vector<short> > & current_map, int target, int new_obj) {
     for (int i = 0; i < current_map.size(); i++) {
         for (int j = 0; j < current_map[0].size(); j++) {
