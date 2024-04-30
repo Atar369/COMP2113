@@ -1,7 +1,7 @@
 #include "Hero.h"
 
+// Hero endings
 unordered_map<int, vector<string> > Hero_endings = {
-
     {1, {
         "You saw monsters everywhere.",
         "You were scared.",
@@ -89,7 +89,7 @@ unordered_map<int, vector<string> > Hero_endings = {
         "Ending 5: Why you try?"     
         }
     },
-    {6, {
+    {6, { // hint voice
         "                    ",
         "                    ",
         "???: ... hey",
@@ -103,7 +103,7 @@ unordered_map<int, vector<string> > Hero_endings = {
         }
 
     },
-    {7, {
+    {7, { // hidden ending
         "Hero: ...",
         "Hero: Hey, I know you, the player.",
         "Hero: You are the one who control me.",
@@ -126,6 +126,7 @@ unordered_map<int, vector<string> > Hero_endings = {
 };
 
 void Hero_run(Progress &progress, Player &player) {
+    // enum for map transition
     typedef enum {
     hero_house,
     girl_house,
@@ -147,6 +148,7 @@ void Hero_run(Progress &progress, Player &player) {
 
     bool key_pressed = 0;
 
+    // map code to map state
     switch(progress.map_code) {
         case 0:
             map_state = hero_house;
@@ -189,6 +191,7 @@ void Hero_run(Progress &progress, Player &player) {
         break;
     }
 
+    // intro printing
     if (progress.event_num == 1) {
         chat.loadChat("intro", 0, 0, player, font_white);
         sleep(1);
@@ -232,6 +235,8 @@ void Hero_run(Progress &progress, Player &player) {
             
             case girl_house: // girl's house
                 progress.map_code = 1;
+
+                // door transition
                 if (current_map[player.y][player.x] == i_door || current_map[player.y][player.x] == i_leftdoor || current_map[player.y][player.x] == i_rightdoor)  {
                     map_state = village; 
                     offsety = - 31;
@@ -241,11 +246,14 @@ void Hero_run(Progress &progress, Player &player) {
 
             case oldman_house: 
                 progress.map_code = 2;
+
+                // map transition
                 if (player.y <= 0) {
                     map_state = outside_village;
                     offsety = 30;
                 }
 
+                // old man chat based on progress
                 if (player.touch_oldman) {
                     if (!progress.talked_to_oldman && progress.scn_num == 2){
                         chat.loadChat("old man hero", progress.map_code, progress.scn_num, player, font_cyan);
@@ -285,6 +293,7 @@ void Hero_run(Progress &progress, Player &player) {
             case village:
                 progress.map_code = 3; 
 
+                // map transitions based on player's position
                 if (player.y <= 0 && player.x <= 24 && player.x >= 22) {
                     map_state = hero_house;
                     offsety = 31;
@@ -300,11 +309,13 @@ void Hero_run(Progress &progress, Player &player) {
                     offsety = - 31;
                 }    
 
+                // store chat based on progress
                 if (player.x == 25 && player.y >= 4 && player.y <= 13 && progress.first_time_entering_store && progress.scn_num == 2 && progress.talked_to_oldman) { // enter store after talked to old man, finding sword
                     chat.loadChat("enter store", progress.map_code, progress.scn_num, player, font_white); // enter store under the hint of oldman
                     progress.first_time_entering_store = false; 
                 }
 
+                // conversation with NPCs
                 if (player.touch_librarian) {
                     chat.loadChat("librarian", progress.map_code, progress.scn_num, player, font_green);
                     player.touch_librarian = 0;
@@ -315,6 +326,7 @@ void Hero_run(Progress &progress, Player &player) {
                     player.touch_penny = 0;
                 }
 
+                // a special event for the hero, fight class
                 if (player.touch_cooper) {
                     if ((progress.scn_num == 2 || progress.scn_num == 3) && !progress.talked_to_cooper) {
                         chat.loadChat("cooper the guider", progress.map_code, progress.scn_num, player, font_green);
@@ -338,6 +350,7 @@ void Hero_run(Progress &progress, Player &player) {
                     player.touch_cooper = 0;
                 }
 
+                // choice with Robert, or normal chat
                 if (player.touch_robert) {
                     if (progress.event_num == 2) {
                         window.handle_choice(progress, player);
@@ -352,24 +365,14 @@ void Hero_run(Progress &progress, Player &player) {
                     player.touch_robert = 0;
                 }
                 
-
+                // ending 1, which the player chose to run away when encountering the monster
                 if (progress.scn_num == 6) {
                     progress.ending_num = 1;
                     player.reach_ending = true;
                 }        
-/*
-                if (player.x >= 32) {
-                    map_state = forest;
-                    //player.x = 1;
-                }
 
-                if (player.y >= 324) {
-                    //player.y = 1;
-                    map_state = monster;
-                }
-*/
+                // chating with villagers, random chat
                 if (player.chat_npc) {
-                    
                     keyboard.key = KEY_SPACE;
 
                     while (keyboard.key == KEY_SPACE) {
@@ -417,9 +420,11 @@ void Hero_run(Progress &progress, Player &player) {
                     if (player.y >= 31) {
                         player.y = 30;
                         if (progress.scn_num == 2) {
+                            // if player not yet have sword, return to the forest, temporarily cannot enter the monster's lair
                             chat.loadChat("no sword", progress.map_code, progress.scn_num, player, font_red);
                         }
                         else if (progress.scn_num == 6) {
+                            // if player chose to escape, return to the forest, cannot enter the monster's lair
                             chat.loadChat("scare", progress.map_code, progress.scn_num, player, font_red);
                         }
                     }
@@ -440,6 +445,7 @@ void Hero_run(Progress &progress, Player &player) {
                     if (player.x >= 35) {
                         player.x = 34;
                         if (progress.scn_num == 2) {
+                            // if player not yet have sword, return to the forest, temporarily cannot enter the castle
                             chat.loadChat("no sword", progress.map_code, progress.scn_num, player, font_red);
                         }
                     }
@@ -604,6 +610,7 @@ void Hero_run(Progress &progress, Player &player) {
             break; 
         } 
         
+        // check if the player reach the ending then print it
         if (player.reach_ending) {
             string color = Hero_ending_color_mapping.at(progress.ending_num);
             window.Print_endings(Hero_endings.at(progress.ending_num), color);
@@ -612,6 +619,7 @@ void Hero_run(Progress &progress, Player &player) {
 
         current_map = map_code_mapping.at(progress.map_code); 
         
+        // in map monster, if the player killed the monster, it turn dead
         if (progress.map_code == 6 && progress.monster_killed) {
             change_map(current_map, i_monster, i_deaddragonnpc);
         }
@@ -619,16 +627,20 @@ void Hero_run(Progress &progress, Player &player) {
         if (progress.map_code == 5 && progress.talked_to_oldman && !progress.get_treasure2) {
 
             if (progress.key_take_count == 0) {
+                // first key
                 current_map[17][5] = i_key;
             }
             else if (progress.key_take_count == 1) {
                 if (!progress.saw_key) {
+                    // chat for the first key
                     chat.loadChat("saw key", progress.map_code, progress.scn_num, player, font_yellow);
                     progress.saw_key = 1;
                 }
+                // next key
                 current_map[26][26] = i_key;
             }
             else if (progress.key_take_count == 2) {
+                // next key
                 current_map[3][32] = i_key;
             }
 
@@ -636,6 +648,7 @@ void Hero_run(Progress &progress, Player &player) {
                 if(!progress.saw_treasure) {
                     chat.loadChat("saw treasure", progress.map_code, progress.scn_num, player, font_yellow);
                     progress.saw_treasure = 1;
+                    // animation for the keys leading to the treasure
                     for (int i = 0; i < 32 - 8; i++) {
                         current_map[3][31 - i] = i_key;
                         draw_map(current_map, player);
@@ -647,12 +660,14 @@ void Hero_run(Progress &progress, Player &player) {
                 current_map[2][8] = i_treasure;
             }
 
+            // open treasure
             if (player.open_treasure) {
                 chat.loadChat("open treasure", progress.map_code, progress.scn_num, player, font_yellow);
                 progress.get_treasure2 = 1;
             }
         }    
-         
+        
+        // after touching the npc, all of them turn dead -> the player killed all the monsters, 
         if (progress.map_code == 7 && progress.scn_num == 3) {
             if (player.touch_dragonnpc) 
                 change_map(current_map, i_dragonnpc, i_deaddragonnpc);
@@ -660,10 +675,8 @@ void Hero_run(Progress &progress, Player &player) {
 
         draw_map(current_map, player);
 
+        // Ending 6, hint voice, check if the player has all the treasure but haven't play the rewind ending
         if (progress.all_treasure && !progress.girl_rewind) {
-            /*
-            change_map(current_map, i_oldman, i_gamemaster);
-            current_map[9][17] = i_gamemaster;*/
             chat.loadChat("boss no rewind", progress.map_code, progress.scn_num, player, font_red);
             sleep(1);
             progress.ending_num = 6;
@@ -674,6 +687,7 @@ void Hero_run(Progress &progress, Player &player) {
             sleep(1);
             return;
         }
+        // Ending 7, hidden ending, when player unlocks all the endings and know all the facts
         else if (progress.all_treasure && progress.girl_rewind) {
             chat.loadChat("boss rewind", progress.map_code, progress.scn_num, player, font_red);
             sleep(1);
@@ -686,9 +700,12 @@ void Hero_run(Progress &progress, Player &player) {
             return;
         }
 
+        // Update player position, without direct change of player's position, 
+        // such that it won't have the case that the user have to move first then the map changes
         player.x += offsetx;
         player.y += offsety;
 
+        // Get user input
         while (keyboard.key_pressed()) {
             keyboard.get_userInput();
         }
@@ -709,7 +726,7 @@ void Hero_run(Progress &progress, Player &player) {
             player.moveRight();
         }
 
-        // Move the player
+        // Move the player & check collision
         player.player_move(keyboard.key, current_map);
         player.player_collision(current_map);
 
@@ -717,8 +734,3 @@ void Hero_run(Progress &progress, Player &player) {
 
     
 }    
-/* test
-int main() {
-    Hero_run();
-    cout << show_cursor;
-}  */ 
