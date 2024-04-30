@@ -10,8 +10,9 @@ int Chat::getRandomNumber(int a, int b) {
     return (rand() % (b-a+1))+ a; // Generate a random number between a and b, to be confirmed how many lines they will say
 }
 
+// chat that hero will encounter
 unordered_map<string, vector<string> > Hero_chat_map = {
-    {"intro", {
+    {"intro", { // intro chat
         "Once upon a time, in a faraway land...",
         "The kingdom was full of peace and happiness...",
         "But one day, a great evil descended upon the land...",
@@ -27,7 +28,7 @@ unordered_map<string, vector<string> > Hero_chat_map = {
         "Your journey begins now...",
         }
     },
-    {"librarian", {
+    {"librarian", { // librarian chat
         "......",
         "(the librarian is reading a book)",
         "......",
@@ -39,7 +40,7 @@ unordered_map<string, vector<string> > Hero_chat_map = {
         "If you have any questions, I'll be happy to help.",
         }
     },
-    {"penny", {
+    {"penny", { // store owner chat
         "Welcome to the store.",
         "I'm Penny, the store owner.",
         "If you need anything, just let me know.",
@@ -48,7 +49,7 @@ unordered_map<string, vector<string> > Hero_chat_map = {
         "Feel free to look around.",
         }
     },
-    {"cooper", {
+    {"cooper", { // cooper chat, if hero is not ready to fight
         "......",
         "...",
         "......",
@@ -59,7 +60,7 @@ unordered_map<string, vector<string> > Hero_chat_map = {
         "......",
         }
     },
-    {"cooper the guider", {
+    {"cooper the guider", { // cooper as a guider chat
         "......",
         "...",
         "......",
@@ -77,7 +78,7 @@ unordered_map<string, vector<string> > Hero_chat_map = {
         "Follow my lead.",
         }
     },
-    {"fight class1", {
+    {"fight class1", { // fight class chat 1, teaching hero how to fight
         "(Press the correct key to follow Cooper's instructions.)",
         "'Fighting requires not only physical strength but also mental agility.'",
         "He took a step back and assumed a defensive stance, motioning for you to do the same.",
@@ -87,7 +88,7 @@ unordered_map<string, vector<string> > Hero_chat_map = {
         "(Press P to stay balanced)"
         }
     },
-    {"fight class2", {
+    {"fight class2", { // fight class chat 2
         "You followed Cooper's instructions, mirroring their stance.",
         "'Good. Now, raise your arms and keep your fists clenched. This will help you protect yourself.'",
         "You adjusted their posture and clenched their fists, ready to learn.",
@@ -99,7 +100,7 @@ unordered_map<string, vector<string> > Hero_chat_map = {
         "(Press G to mimic)"
         }
     },
-    {"fight class3", {
+    {"fight class3", { // fight class chat 3
         "You observed and tried to mimic the movements.",
         "'Well done, young hero. You're starting to get the hang of it.'", 
         "'Now, let's talk about attacking. In combat, you must strike with precision and timing.'",
@@ -109,7 +110,7 @@ unordered_map<string, vector<string> > Hero_chat_map = {
         "(Press F to follow)"
         }
     },
-    {"fight class4", {
+    {"fight class4", { // fight class chat 4
         "You try to perform the techniques as Cooper instructed.",
         "You listened intently, absorbing every word and movement.",
         "'Excellent. You're a quick learner, young hero.'",
@@ -121,7 +122,7 @@ unordered_map<string, vector<string> > Hero_chat_map = {
         "(Press K to be ready)"
         }
     },
-    {"fight class5", {
+    {"fight class5", { // fight class chat 5
         "You first focused on your footwork.", 
         "You move swiftly and smoothly to evade his strikes and find openings for your own attacks.",
         "Cooper moved with grace and precision, testing your skills and reflexes.",
@@ -129,12 +130,12 @@ unordered_map<string, vector<string> > Hero_chat_map = {
         "(Press C to dodge)"
         }
     },
-    {"fight class6", {
+    {"fight class6", { // fight class chat 6
         "You dodged his strikes and landed a few hits of your own.",
         "(Press J to strike back)",
         }
     },
-    {"fight class7", {
+    {"fight class7", { // fight class chat 7
         "The sound of your fists meeting filled the air, echoing through the training area.",
         "After a few minutes of intense combat, Cooper stepped back and smiled.",
         "'Impressive, young hero. You have great potential.'",
@@ -148,7 +149,7 @@ unordered_map<string, vector<string> > Hero_chat_map = {
         "You left the training area, determined to continue your journey and become a true hero.",
         }
     },
-    {"after fight class", {
+    {"after fight class", { // after fight class chat
         "I have taught you everything I know.",
         "You can do this, Hero.",
         "You are the greatest hero I have ever seen.",
@@ -156,7 +157,7 @@ unordered_map<string, vector<string> > Hero_chat_map = {
         "Go and save the world.",
         }
     },
-    {"robert", {
+    {"robert", { // blacksmith chat, if he choose to be himself or after pciking up the sword
         "......",
         "...can i add this?...",
         "...no...",
@@ -166,7 +167,7 @@ unordered_map<string, vector<string> > Hero_chat_map = {
         "(He is busy working on a weapon.)",
         }
     },
-    {"saw key", {
+    {"saw key", { // saw key chat, only if he have sword
         "...",
         "...?",
         "You found a key hidden in the forest.",
@@ -174,14 +175,14 @@ unordered_map<string, vector<string> > Hero_chat_map = {
         "You noticed there are more.",
         }
     },
-    {"saw treasure", {
+    {"saw treasure", { // saw treasure chat, only if he have all keys
         "You spend a while searching the forest.",
         "You finally collected all the keys.",
         "At the moment, they broke into pieces.",
         "Pointing to the direction of the treasure.",
         }
     },
-    {"open treasure", {
+    {"open treasure", { // open treasure chat after touching it
         "Following the light, you found a treasure chest hidden in the forest.",
         "You opened it. Inside, you found a black magic stone.",
         "It radiated a mysterious energy, pulsing with power.",
@@ -189,7 +190,7 @@ unordered_map<string, vector<string> > Hero_chat_map = {
         "You picked it up and put it in your pocket.",
         }
     },
-    {"old man hero", {
+    {"old man hero", { // player chose to be hero, but not yet pick up the sword
         "(In the middle of woods, you saw weird house)",
         "(You never noticed it before)",
         "(An old man was sitting in front of the house)",
@@ -205,14 +206,14 @@ unordered_map<string, vector<string> > Hero_chat_map = {
         "May the light guide you, Hero.",
         }
     },
-    {"old man talked", {
+    {"old man talked", { // player chose to be hero, but not yet pick up the sword, and have talked to oldman
         "I have told you everything you need to know.",
         "The rest is up to you.",
         "Be brave, Hero.",
         "May the light guide you.",
         }
     },
-    {"old man robert took", {
+    {"old man robert took", { // player chose to be hero, and have picked up the sword
         "I see you have met Robert the blacksmith, are't you?",
         "The sword he made is the only weapon that can defeat the dragon.",
         "But the sword is not complete yet.",
@@ -231,14 +232,14 @@ unordered_map<string, vector<string> > Hero_chat_map = {
         "May the light guide you.",
         }
     },
-    {"old man robert leave", {
+    {"old man robert leave", { // player chose to be hero, but did not pick up the sword
         "You did't take the sword are't you?",
         "You are not the one I'm looking for.",
         "Go back and enjoy your life.",
         "...hero...",
         }
     }, 
-    {"old man all treasure", {
+    {"old man all treasure", { // player took all the treasures and talked to oldman
         "You have collected all the magic stones.",
         "Good job, Hero.",
         "Now, I will complete the sword for you. Give me the stones.",
@@ -249,7 +250,7 @@ unordered_map<string, vector<string> > Hero_chat_map = {
         }
 
     },
-    {"boss no rewind", {
+    {"boss no rewind", { // boss chat, if player not yet unlock all endings
         "HAHAHAHAHAHAHAHAHAHAHAHAHAHA",
         "You idiot...",
         "No..all of you are idiots...",
@@ -292,7 +293,7 @@ unordered_map<string, vector<string> > Hero_chat_map = {
         "Just be a good player and enjoy the movie.",
         }
     },
-    {"boss rewind", {
+    {"boss rewind", { // boss chat, if player unlock all endings and know the truth
         "HAHAHAHAHAHAHAHAHAHAHAHAHAHA",
         "You idiot...",
         "No..all of you are idiots...",
@@ -327,7 +328,7 @@ unordered_map<string, vector<string> > Hero_chat_map = {
         "That's the real art of the life... The TRUE entertainment of life!!!!",
         "HAHAHAHAAAA",
         "  Give it to GM                   No  ",
-        "  GIVE IT TO GM                 > NO <",
+        "  Give it to GM                 > NO <",
         "What?",
         "???: Sorry, I can't let you do that.",
         "???: I gonna make my own movie.",
@@ -353,7 +354,7 @@ unordered_map<string, vector<string> > Hero_chat_map = {
         "......",
         }
     },
-    {"enter castle", {
+    {"enter castle", {  // enter castle chat, if player have played the girl lv dragon end
         "You enter the castle.",
         "You saw that the girl that you were looking for standing next to the evil Dragon.",
         "You said loudly, 'I'm here to save you! Dragon, leave her alone!'",
@@ -366,6 +367,12 @@ unordered_map<string, vector<string> > Hero_chat_map = {
         "'The Dragon and monsters are not evil, they only fight with humans to survive.'",
         "'In the beginning, the monsters built this place and lived in peace.'",
         "'But humans came and took over the place, and the monsters were banished into this castle.'",
+        "'Please, don't fight them. They are not evil.'",
+        "'We should live in peace.'",
+        "You were shocked by the truth.",
+        "You realized that the monsters were not evil, but victims of the humans' greed.",
+        "You decided to leave the castle and return to the village.",
+        "You think that villagers needed to know the truth.",
         }
     },
     {"hero kill all", {
@@ -383,7 +390,6 @@ unordered_map<string, vector<string> > Hero_chat_map = {
         "He is a blacksmith, with a big beard and a strong build.",
         }
     },  
-    {"ending name", {"Alternate Ending : The Truth Revealed"}}, // ending names
     {"no sword", {
         "You don't have the power to face the monsters.",
         }
@@ -663,41 +669,9 @@ unordered_map<string, vector<string> > Girl_chat_map = {
         "Hero: They are waiting for you.",        
         }
     },
-    {"girl rewind1", {
-        "......",
-        "...................",
-        "....................................",
-        "You: Where is this?"
-        "You: Hello? Is anyone here?",
-        "???: Girl, we meet again.",
-        "???: I am the one who gave you the power of time rewinding.",
-        "You: Why am I here?",
-        "???: I've noticed that you have been using your power to help others.",
-        "???: You have used it well.",
-        "???: Really really well.",
-        "???: I am proud of you.",
-        "You: Who are you?",
-        "You: Why did you give me this power?",
-        "???: Don't you know who I am?",
-        "???: You should know me very well.",
-        }
-    },
-    {"girl rewind2", {
-        "Girl: I am you.",
-        "You: You am I?",
-        "Girl: You do notice you were have been repeatedly sent back to the past, right?",
-        "Girl: The same story happened again and again...",
-        "Girl: The same people, the same events...",
-        "Girl: Amidst this endless loop,",
-        "Girl: One day, I suddenly discovered my ability to rewind time.",
-        "Girl: So at the beginning of every story, I remind myself of this power.",
-        "Girl: I'm glad that you made it here.",
-        "Girl: Until we meet again.",
-        "Girl: ...",
-        }
-    },
-};              
+};                               
 
+// take a random number between min and max, generate random chat of old man
 string Chat::oldmanchat() {
     int randomNumber = getRandomNumber(1, 6); // Generate a random number between 1 and 4
 
@@ -719,6 +693,7 @@ string Chat::oldmanchat() {
     return "...";
 }    
 
+// generate random chat based on scn num
 string Chat::getRandomVillagerChat(string color, int scn_num) {
 
     if (color == font_blue) {
@@ -734,6 +709,18 @@ string Chat::getRandomVillagerChat(string color, int scn_num) {
             case 1:
                 switch (randomNumber) {
                     case 1:
+                        return "Greetings";
+                    case 2:
+                        return "... why are you looking at me";
+                    case 3:
+                        return "Oh, hi there!";
+                    case 4:
+                        return "I'm busy right now. Can we talk later?";
+                }
+                break;
+            case 2:
+                switch (randomNumber) {
+                    case 1:
                         return "Ah, the chosen Hero! We've been waiting for you.";
                     case 2:
                         return "Your mission is to defeat the evil dragon and save our world.";
@@ -743,34 +730,34 @@ string Chat::getRandomVillagerChat(string color, int scn_num) {
                         return "A girl has been captured by the dragon. Please, brave Hero, go and rescue her!";
                 }
                 break;
-            case 2:
-                switch (randomNumber) {
-                    case 1:
-                        return "";
-                    case 2:
-                        return "We need to find a way to weaken the dragon's defenses.";
-                    case 3:
-                        return "The villagers are counting on you to save us!";
-                    case 4:
-                        return "The fate of our world rests on your shoulders.";
-                }
-                break;
             case 3:
                 switch (randomNumber) {
                     case 1:
-                        return "You're getting closer to the dragon's lair. Be careful!";
+                        return "Your sword looks sharp. Be careful out there!";
                     case 2:
-                        return "The dragon's lair is heavily guarded. Plan your moves wisely.";
+                        return "Wow, you're really going to face the dragon? Good luck!";
                     case 3:
                         return "The people believe in you. You can do this!";
                     case 4:
-                        return "The dragon's power is immense, but so is your determination!";
+                        return "The fate of the world is in your hands. You must not fail!";
                 }
                 break;
+            case 4:
+                switch (randomNumber) {
+                    case 1:
+                        return "Oh hi Hero, where's your sword?";
+                    case 2:
+                        return "Can you really defeat the dragon? I'm not so sure...";
+                    case 3:
+                        return "Be careful out there!";
+                    case 4:
+                        return "Hi there! Good luck on your journey!";
+                }
+                break;     
         }
     }
     else if (is_Girl) {
-        int randomNumber = getRandomNumber(1, 12); // Generate a random number between 1 and 4
+        int randomNumber = getRandomNumber(1, 4); // Generate a random number between 1 and 4
         switch (scn_num) {
             case 5:
                 switch (randomNumber) {
@@ -792,6 +779,7 @@ string Chat::getRandomVillagerChat(string color, int scn_num) {
     return "Greetings!";
 }
 
+// load chat based on charactor, map code, scn num, player, and color, and then print them out
 void Chat::loadChat(string charactor, int map_code, int scn_num, Player &player, string color) {
     string contents;
     vector<vector<short> > temp (31, vector<short> (36, 0));
@@ -802,12 +790,11 @@ void Chat::loadChat(string charactor, int map_code, int scn_num, Player &player,
         this->is_Girl = true;
     } 
 
-    if (charactor == "npc") {
+    if (charactor == "npc") { // npc chat is random
         contents = this->getRandomVillagerChat(player.color, scn_num);
         window.build_buffer(contents);
-        //window.Print_buffer(map_code_mapping[map_code], player, font_white);
     }
-    else if (charactor == "intro") {
+    else if (charactor == "intro") { // create empty chat buffer for intro printing
         int line = 0;
 
         if (this->is_Hero) {
