@@ -274,13 +274,13 @@ int main() {
 
            // Game
             case STATE_GAME:
-
                 // Clear previous progress
                 progress.delete_progress();
                 player.reach_ending = 0;
-
+                window.is_Hero = false;
+                window.is_Girl = false;
                 window.intro_character_choice(player);
-
+                
                 if (window.is_Hero) {
                     player.x = 9;
                     player.y = 9;
