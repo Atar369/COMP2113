@@ -475,6 +475,31 @@ unordered_map<string, vector<string> > Girl_chat_map = {
         "Follow my lead.",
         }
     },
+    {"patient1", {
+        "(Press the correct key to follow Cooper's instructions.)",
+        "There are 3 patients here, suffering from different diseases.",
+        "You should carefully treat them, giving them the right length of treatment.",
+        "If you treat them too long, they will get worse.",
+        "And most importantly, your patients are suffering in pain.",
+        "You should treat them as fast as you can.",
+        "Let's start with the first patient.",
+        "Hold SPACE to begin the treatment.",
+        "You will see the healing progress bar.",
+        "Release SPACE when the bar reaches the end.",
+        "Remember, even a slight overrun in treatment duration can have negative consequences.",
+        "When you're done, press ENTER and I'll come and check.",   
+        }
+    },
+    {"patient2", {
+        "Well done, you've successfully treated the first patient.",
+        "Now, let's move on to the second patient.", 
+        }
+    },    
+    {"patient3", {
+        "Well done, you've successfully treated the second patient.",
+        "Now, let's move on to the third patient.", 
+        }
+    }, 
     {"enter forest", {
         "You step into the forest, the trees towering above you.",
         "Driven by curiosity, you really want to find out if the rumours are real.",
