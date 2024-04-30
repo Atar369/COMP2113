@@ -30,7 +30,7 @@ void Progress::save_progress(Player player) {
     fout << this->hero_know_fact << endl;
     fout << this->hero_killed_all << endl;
     
-    fout << this-> finish_intro << endl;
+    fout << this->finish_intro << endl;
     fout << this->first_time_entering_village << endl;
     fout << this->first_time_entering_forest << endl;
     fout << this->first_time_entering_back_village << endl;
@@ -48,6 +48,7 @@ void Progress::save_progress(Player player) {
     fout.close();
 }
 
+// check if the file exists, if it does, return true
 bool Progress::checking_loading() {
 
     ifstream fin("2113_Gp15_mini_game_saving.txt");
@@ -90,7 +91,7 @@ void Progress::load_progress(Player &player) {
     fin >> this->hero_know_fact;
     fin >> this->hero_killed_all;
 
-    fin >>this->finish_intro;
+    fin >> this->finish_intro;
     fin >> this->first_time_entering_village;
     fin >> this->first_time_entering_forest;
     fin >> this->first_time_entering_back_village;
@@ -109,12 +110,11 @@ void Progress::load_progress(Player &player) {
 
 }
 
-
+// reset the progress, but keep the file for player to choose another character but able to keep the progress
 void Progress::reset_progress() {
     this->scn_num = 0;
     this->map_code = 0;
     this->event_num = 0;
-    this->ending_num = 0;
 
     // for hero
     this->can_enterMonster = 1;
@@ -146,6 +146,7 @@ void Progress::reset_progress() {
     this->talked_to_dragon = 0;
 }
 
+// delete the file and reset the progress
 void Progress::delete_progress() {
     remove("2113_Gp15_mini_game_saving.txt");
     this->reset_progress();
@@ -153,5 +154,5 @@ void Progress::delete_progress() {
     this->hero_killed_all = 0;
     this->girl_know_fact = 0;
     this->girl_rewind = 0;
+    this->ending_num = 0;
 }
-
