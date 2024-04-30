@@ -10,6 +10,7 @@ int main() {
         STATE_HTP,
         STATE_GAME,
         STATE_CONTIN,
+        STATE_ACHIEVE,
         STATE_EXIT,
     } game_states;
 
@@ -32,6 +33,7 @@ int main() {
     Keyboard keyboard;
     Window window;
     Player player;
+    Achievements Achievements;  
 
     // load progress
     if (progress.checking_loading()) {
@@ -74,10 +76,10 @@ int main() {
         "> HOW TO PLAY <",
         "  How to Play  ",
     };
-
-    const string button_achieve[2] = {
+    
+    const string button_acieve[2] = {
         "> ACHIEVEMENTS <",
-        "  Acheivements  ",
+        "  Achievements  ",
     };
 
     const string button_exit[2] = {
@@ -139,8 +141,8 @@ int main() {
 
                     // if the player saved, will have continue button
                     if (progress.checking_loading()) {
-                        if (menu_button >= 3) {
-                            menu_button = 3;
+                        if (menu_button >= 4) {
+                            menu_button = 4;
                         }
 
                         // check the button
@@ -148,24 +150,35 @@ int main() {
                             select_start_game = 0;
                             select_continue = 1;
                             select_HTP = 1;
+                            select_achieve = 1;
                             select_exit = 1;
                         } 
                         else if (menu_button == 1) {
                             select_start_game = 1;
                             select_continue = 0;
                             select_HTP = 1;
+                            select_achieve = 1;
                             select_exit = 1;
                         }
                         else if (menu_button == 2) {
                             select_start_game = 1;
                             select_continue = 1;
                             select_HTP = 0;
+                            select_achieve = 1;
                             select_exit = 1;
                         }
-                        else if (menu_button == 3){
+                        else if (menu_button == 3) {
                             select_start_game = 1;
                             select_continue = 1;
                             select_HTP = 1;
+                            select_achieve = 0;
+                            select_exit = 1;
+                        }
+                        else if (menu_button == 4){
+                            select_start_game = 1;
+                            select_continue = 1;
+                            select_HTP = 1;
+                            select_achieve = 1;
                             select_exit = 0;
                         }
 
@@ -176,7 +189,9 @@ int main() {
 
                         std::cout << default_format << startRow - logo_h_size + 13 << ";" << startCol - (button_HTP[select_HTP].length())/2 << "H" << button_HTP[select_HTP] << endl;
 
-                        std::cout << default_format << startRow - logo_h_size + 15 << ";" << startCol - (button_exit[select_exit].length())/2 << "H" << button_exit[select_exit] << endl;
+                        std::cout << default_format << startRow - logo_h_size + 15 << ";" << startCol - (button_acieve[select_achieve].length())/2 << "H" << button_acieve[select_achieve] << endl;
+
+                        std::cout << default_format << startRow - logo_h_size + 17 << ";" << startCol - (button_exit[select_exit].length())/2 << "H" << button_exit[select_exit] << endl;
 
                         // Click handler
                         switch(menu_button) {
@@ -190,29 +205,41 @@ int main() {
                                 current_state = STATE_HTP;
                                 break;
                             case 3:
+                                current_state = STATE_ACHIEVE;
+                                break;    
+                            case 4:
                                 current_state = STATE_EXIT;
                                 break;    
                         }
                     }
 
                     else {
-                        if (menu_button >= 2) {
-                            menu_button = 2;
+                        if (menu_button >= 3) {
+                            menu_button = 3;
                         }
                         // check the button
                         if (menu_button == 0) {
                             select_start_game = 0;
                             select_HTP = 1;
+                            select_achieve = 1;
                             select_exit = 1;
                         } 
                         else if (menu_button == 1) {
                             select_start_game = 1;
                             select_HTP = 0;
+                            select_achieve = 1;
                             select_exit = 1;
                         }
                         else if (menu_button == 2) {
                             select_start_game = 1;
                             select_HTP = 1;
+                            select_achieve = 0;
+                            select_exit = 1;
+                        }
+                        else if (menu_button == 3) {
+                            select_start_game = 1;
+                            select_HTP = 1;
+                            select_achieve = 1;
                             select_exit = 0;
                         }
 
@@ -221,7 +248,9 @@ int main() {
 
                         std::cout << default_format << startRow - logo_h_size + 11 << ";" << startCol - (button_HTP[select_HTP].length())/2 << "H" << button_HTP[select_HTP] << endl;
 
-                        std::cout << default_format << startRow - logo_h_size + 13 << ";" << startCol - (button_exit[select_exit].length())/2 << "H" << button_exit[select_exit] << endl;
+                        std::cout << default_format << startRow - logo_h_size + 13 << ";" << startCol - (button_acieve[select_achieve].length())/2 << "H" << button_acieve[select_achieve] << endl;
+
+                        std::cout << default_format << startRow - logo_h_size + 15 << ";" << startCol - (button_exit[select_exit].length())/2 << "H" << button_exit[select_exit] << endl;
 
                         // Click handler
                     switch(menu_button) {
@@ -231,7 +260,10 @@ int main() {
                         case 1:
                             current_state = STATE_HTP;
                             break;
-                        case 2:
+                        case 2: 
+                            current_state = STATE_ACHIEVE;
+                            break;    
+                        case 3:
                             current_state = STATE_EXIT;
                             break;    
                     }
@@ -325,6 +357,7 @@ int main() {
                 else if (progress.ending_num != 7){
                     // reset progress after reaching the ending, return to menu directly without choice
                     progress.reset_progress();
+                    progress.store_ending(player);
                     if (player.color == font_blue) {
                         player.x = 9;
                         player.y = 9;
@@ -356,6 +389,7 @@ int main() {
                 // Check if the player has reached the ending
                 if (player.reach_ending) {
                     progress.reset_progress();
+                    progress.store_ending(player);
                     window.is_Girl = false;
                     window.is_Hero = false;
                     window.intro_character_choice(player);
@@ -427,6 +461,17 @@ int main() {
                 
                 // reset progress
                 current_state = STATE_MENU;     
+                
+                break;
+            case STATE_ACHIEVE:
+                // Achievements
+                Achievements.print_achievements();
+
+                keyboard.get_userInput();
+
+                // Exit to menu
+                if (keyboard.key == KEY_EXIT)
+                    current_state = STATE_MENU;
                 
                 break;
 
