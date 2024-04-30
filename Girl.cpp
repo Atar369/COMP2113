@@ -199,9 +199,30 @@ void Girl_run(Progress &progress, Player &player) {
                     player.touch_penny = 0;
                 }
 
+                if (player.touch_robert) {
+                    chat.loadChat("robert", progress.map_code, progress.scn_num, player, font_yellow);
+                    player.touch_cooper = 0;
+                }
+
+                if (player.touch_cooper) {
+                    chat.loadChat("cooper", progress.map_code, progress.scn_num, player, font_yellow);
+                    player.touch_robert = 0;
+                }
+
                 if (progress.first_time_entering_village && progress.scn_num == 5) {
                     chat.loadChat("enter village", progress.map_code, progress.scn_num, player, font_cyan);
                     progress.first_time_entering_village = false;
+                }
+
+                if (!progress.talked_to_cooper && player.touch_cooper) {
+                    chat.loadChat("cooper the healer", progress.map_code, progress.scn_num, player, font_green);
+                    sleep(1);
+                    window.Print_healing("patient1", player, font_yellow);
+                    window.Print_healing("patient2", player, font_yellow); 
+                    window.Print_healing("patient3", player, font_yellow); 
+                    progress.get_treasure1 = 1;
+                    player.touch_cooper = 0;
+                    progress.talked_to_cooper = 1;
                 }
 
                 if (progress.scn_num == 9) { 
@@ -237,6 +258,7 @@ void Girl_run(Progress &progress, Player &player) {
 
                 if (player.y <= 0) {
                     map_state = village;
+                    progress.scn_num = 5;
                     offsety = 31;
                 }
 
@@ -447,3 +469,8 @@ void Girl_run(Progress &progress, Player &player) {
 
     
 }    
+/* test
+int main() {
+    Hero_run();
+    cout << show_cursor;
+}  */ 
