@@ -683,7 +683,7 @@ void Window::Print_healing(string contents, Player &player, string color) {
                         healing[12][j] = i_castlewall;
                         j++;
                     }
-                    if (spc > 64) {
+                    if (spc > 63) {
                         spc = 0;
                         j = 8;
                         for (int k = 8; k < 29; k++) {
