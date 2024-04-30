@@ -23,3 +23,4 @@ public:
 extern Chat chat;
 
 extern unordered_map<string, vector<string> > Hero_chat_map;
+extern unordered_map<string, vector<string> > Girl_chat_map;
