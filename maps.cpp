@@ -1,5 +1,6 @@
 #include "maps.h"
 
+// map map code with map design
 unordered_map <int, vector<vector<short> > > map_code_mapping = {
     {0, Hero_house},
     {1, Girl_house},
