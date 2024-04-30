@@ -129,7 +129,7 @@ unordered_map<int, vector<string> > Girl_choice_map_b4 = { // event num mapping
         "It was a huge monster with sharp teeth and red eyes.",
         "You: (whispering, voice trembling) What... what is that?",
         "But as your initial terror subsided, curiosity compelled you to take a closer look.",
-        "The monster's body was covered in wounds—deep gashes and oozing cuts.",
+        "The monster's body was covered in wounds-deep gashes and oozing cuts.",
         "You: Oh no... it's hurt... terribly hurt.",
         "As you neared, the monster recoiled, its red eyes narrowing with suspicion and defiance.",
         "Will you...",
