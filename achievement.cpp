@@ -2,14 +2,27 @@
 #include "
 using namespace std;
 
-void print_if_true(bool test, std::string str) {
+void print_if_true(bool test, string str) {
   if (test) {
-    std::cout << str << std::endl;
+    cout << str << endl;
   }
 }
 
+void randomFn(&bool[] arr) {
+  arr[1] = true;
+}
+
+bool isTrue() {
+  return ture;
+}
+
+bool ending[9] = {false, false, false, false, false, false, false, false, false};
+
 int main(){
-  bool HeroEnding1, HeroEnding2, HeroEnding3, HeroEnding4, HeroEnding5, GirlEnding1, GirlEnding2, GirlEnding3, GirlEnding4;
+  bool HeroEnding1, HeroEnding2, HeroEnding3, HeroEnding4, HeroEnding5, 
+  bool GirlEnding1, GirlEnding2, GirlEnding3, GirlEnding4;
+  randomFn(ending);
+  ending[2] = isTrue();
   int num = 6;
   int i;
   cout << "Hero:" << endl;
