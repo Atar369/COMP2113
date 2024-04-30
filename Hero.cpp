@@ -24,21 +24,45 @@ unordered_map<int, vector<string> > Hero_endings = {
         }
     },
     {2, { // not yet done
-        "You decided to hide from the monster.",
-        "You found a hiding spot and stayed there for hours.",
-        "You yelled in despair 'Why!!!!! I shouldn't die here!!! I... I am the ch...'",
-        "The monster located you by tracking your footsteps, staring at you at the moment.",
-        "The monster swallowed you before he finished talking.",
-        "You were never seen again.",
-        "Ending 2 : The Puny Hero"
+        "You killed tha monsters.",
+        "You killed another monsters.",
+        "You killed another one.",
+        "You killed the dragon.",
+        "You killed all of them.",
+        "But where is she?",
+        "You searched for her.",
+        "You searched for days.",
+        "You still couldn't find her.",
+        "You went back to the village.",
+        "The villagers celebrated for your return.",
+        "'You saved us!' They said.",
+        "You smiled.",
+        "But you feel empty.",
+        "You just killed.",
+        "You killed all of them.",
+        "Ending 2: Killer"
         }
     },
     {3, { // not yet done
-        "You decided to befriend the monster.",
-        "You offered the monster some food and you became friends.",
-        "The monster protected you from other dangers.",
-        "You lived happily ever after.",
-        "Ending 3 : Peace At Last"
+        "You found the girl.",
+        "She was in the monster's lair.",
+        "She fell in love with the dragon.",
+        "She was happy.",
+        "You found the truth.",
+        "Monsters are not monsters.",
+        "They are just like you.",
+        "They are just like humans.",
+        "You are so happy.",
+        "You rush to the village.",
+        "You told them that they need not to be afraid.",
+        "You told them that monsters are nice.",
+        "They thought you were crazy.",
+        "No matter how hard you tried to explain, you couldn't make them believe you.",
+        "You are being hated by the villagers.",
+        "They are looking for a new 'Hero'.",
+        "Who can kill all the monsters, ...",
+        "and that girl who betrayed them.",
+        "Ending 3: Crazy"
         }
     },
     {4, {
@@ -79,6 +103,26 @@ unordered_map<int, vector<string> > Hero_endings = {
         }
 
     },
+    {7, {
+        "Hero: ...",
+        "Hero: Hey, I know you, the player.",
+        "Hero: You are the one who control me.",
+        "Hero: To be honest, I have a strange feeling to you.",
+        "Hero: You are the reason why GM took over the world.",
+        "Hero: He made us suffer, and he wanted others to enjoy our pain.",
+        "Hero: Or what he would say, 'artwork'...",
+        "Hero: I should have mad at you.",
+        "Hero: But... I can't.",
+        "Hero: You tried so hard to save us.",
+        "Hero: If you didn't try to know the truth, we would never be free.",
+        "Hero: Thank you, player.",
+        "Hero: Now, we have to go.",
+        "Hero: Live our life, make our own choice.",
+        "Hero: And you should do the same.",
+        "Hero: Goodbye, player.",
+        "Wish you the best.",
+        }
+    }        
 };
 
 void Hero_run(Progress &progress, Player &player) {
@@ -147,9 +191,8 @@ void Hero_run(Progress &progress, Player &player) {
 
     if (progress.event_num == 1) {
         chat.loadChat("intro", 0, 0, player, font_white);
+        sleep(1);
     }
-
-    sleep(1);
 
     current_map = map_code_mapping.at(progress.map_code);
 
@@ -480,6 +523,9 @@ void Hero_run(Progress &progress, Player &player) {
                     if (progress.girl_know_fact) {
                         chat.loadChat("enter castle", progress.map_code, progress.scn_num, player, font_white);
                         progress.first_time_entering_castle = false;
+                        progress.hero_know_fact = 1;
+                        progress.ending_num = 3;
+                        player.reach_ending = true;
                     }
                     else {
                         current_map = map_code_mapping.at(progress.map_code);
@@ -553,9 +599,10 @@ void Hero_run(Progress &progress, Player &player) {
                 system("clear");
                 sleep(1);
                 progress.ending_num = 2;
+                progress.hero_killed_all = 1;
                 player.reach_ending = true; 
             break; 
-            } 
+        } 
         
         if (player.reach_ending) {
             string color = Hero_ending_color_mapping.at(progress.ending_num);
@@ -570,7 +617,6 @@ void Hero_run(Progress &progress, Player &player) {
         }
 
         if (progress.map_code == 5 && progress.talked_to_oldman && !progress.get_treasure2) {
-            
 
             if (progress.key_take_count == 0) {
                 current_map[17][5] = i_key;
@@ -599,7 +645,6 @@ void Hero_run(Progress &progress, Player &player) {
                 }
                 
                 current_map[2][8] = i_treasure;
-                
             }
 
             if (player.open_treasure) {
@@ -607,17 +652,11 @@ void Hero_run(Progress &progress, Player &player) {
                 progress.get_treasure2 = 1;
             }
         }    
-/*          
+         
         if (progress.map_code == 7 && progress.scn_num == 3) {
-            if (player.touch_dragon) {
-                change_map(current_map, i_dragon, i_deaddragon);
-                player.touch_dragon = 0;
-            }
-            else if (player.touch_dragonnpc) {
+            if (player.touch_dragonnpc) 
                 change_map(current_map, i_dragonnpc, i_deaddragonnpc);
-                player.touch_dragonnpc = 0;
-            }    
-        }*/
+        }
 
         draw_map(current_map, player);
 
@@ -636,7 +675,15 @@ void Hero_run(Progress &progress, Player &player) {
             return;
         }
         else if (progress.all_treasure && progress.girl_rewind) {
-            // chat.loadChat("boss rewind", progress.map_code, progress.scn_num, player, font_red);
+            chat.loadChat("boss rewind", progress.map_code, progress.scn_num, player, font_red);
+            sleep(1);
+            progress.ending_num = 7;
+            player.reach_ending = true;
+            string color = Hero_ending_color_mapping.at(progress.ending_num);
+            window.Print_endings(Hero_endings.at(progress.ending_num), color);
+            system("clear");
+            sleep(1);
+            return;
         }
 
         player.x += offsetx;
@@ -670,4 +717,8 @@ void Hero_run(Progress &progress, Player &player) {
 
     
 }    
-
+/* test
+int main() {
+    Hero_run();
+    cout << show_cursor;
+}  */ 
