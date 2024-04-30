@@ -581,6 +581,12 @@ unordered_map<string, vector<string> > Girl_chat_map = {
         "...the moment to find out the truth.",
         }
     },
+    {"dragon", {
+        "Dragon: Oh, my love, did you miss me?",
+        "Dragon: I miss you too.",
+        "Dragon: I'm glad you came.",
+        }
+    },
     {"talk to dragon", {
         "You: Dragon, at long last our paths have crossed.",
         "Dragon: Human, do you dare to stand before me?",
@@ -605,7 +611,7 @@ unordered_map<string, vector<string> > Girl_chat_map = {
         "...living under the control of others' words, unable to live the life you truly desire.",
         "You meet his gaze, feeling a profound sense of connection between you and him."
         "He slowly steps closer to you, and you didn't step back...",
-        "His arms extend towards you, and you don't flinch..."
+        "His arms extend towards you, and you don't flinch...",
         "You feel his embrace enveloping you...",
         "you feel his warmth, his kindness, his sorrow, his loneliness...",
         "...",
@@ -657,7 +663,40 @@ unordered_map<string, vector<string> > Girl_chat_map = {
         "Hero: They are waiting for you.",        
         }
     },
-};                 
+    {"girl rewind1", {
+        "......",
+        "...................",
+        "....................................",
+        "You: Where is this?"
+        "You: Hello? Is anyone here?",
+        "???: Girl, we meet again.",
+        "???: I am the one who gave you the power of time rewinding.",
+        "You: Why am I here?",
+        "???: I've noticed that you have been using your power to help others.",
+        "???: You have used it well.",
+        "???: Really really well.",
+        "???: I am proud of you.",
+        "You: Who are you?",
+        "You: Why did you give me this power?",
+        "???: Don't you know who I am?",
+        "???: You should know me very well.",
+        }
+    },
+    {"girl rewind2", {
+        "Girl: I am you.",
+        "You: You am I?",
+        "Girl: You do notice you were have been repeatedly sent back to the past, right?",
+        "Girl: The same story happened again and again...",
+        "Girl: The same people, the same events...",
+        "Girl: Amidst this endless loop,",
+        "Girl: One day, I suddenly discovered my ability to rewind time.",
+        "Girl: So at the beginning of every story, I remind myself of this power.",
+        "Girl: I'm glad that you made it here.",
+        "Girl: Until we meet again.",
+        "Girl: ...",
+        }
+    },
+};              
 
 string Chat::oldmanchat() {
     int randomNumber = getRandomNumber(1, 6); // Generate a random number between 1 and 4
