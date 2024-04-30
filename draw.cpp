@@ -99,6 +99,7 @@
 #define s_monster "^#^"
 #define s_gamemaster     "GM "
 #define s_mystery "???"
+#define s_mysterygirl "???"
 
 //Map the object number to symbol
 unordered_map<int, string> symbol_mapping = {
@@ -199,7 +200,8 @@ unordered_map<int, string> symbol_mapping = {
     {94, s_lamp10},
     {95, s_monster},
     {96, s_gamemaster},
-    {97, s_mystery}
+    {97, s_mystery},
+    {98, s_mysterygirl}    
 };
 
 // Draw instance
