@@ -37,22 +37,6 @@ unordered_map<int, vector<string> > Girl_endings = {
         "Ending 4: The Untold Truth",
         }
     },
-    {5, { //true ending //incomplete
-        "After searching for days, you still couldn't find her and went back to the village.",
-        "But the villagers saw you talked to a monster happily.",
-        "They think you betrayed them.",
-        "You supported the evil side.",
-        "You will make them all die.",
-        "No matter how hard you tried to explain, you couldn't make them believe you.",
-        "You being hated by the villagers.",
-        "Suddenly, you realized that is the true 'monster' is ... ",
-        "... the villagers.",
-        "Or maybe, it's human.",
-        "Biased, selfish, and ignorant.",
-        "'Monster' that you can't defeat.",
-        "Ending 5: 'Monster'"
-        }
-    },
 };
 
 void Girl_run(Progress &progress, Player &player) {
@@ -210,11 +194,9 @@ void Girl_run(Progress &progress, Player &player) {
                         window.Print_healing("patient1", player, font_yellow);
                         window.Print_healing("patient2", player, font_yellow); 
                         window.Print_healing("patient3", player, font_yellow); 
+                        chat.loadChat("after healing", progress.map_code, progress.scn_num, player, font_yellow);
                         progress.get_certificate = 1;
                         progress.talked_to_cooper = 1;
-                    }
-                    else if (progress.talked_to_cooper) {
-                        chat.loadChat("after healing", progress.map_code, progress.scn_num, player, font_yellow);
                     }
                     else {    
                         chat.loadChat("cooper", progress.map_code, progress.scn_num, player, font_green);
@@ -329,6 +311,11 @@ void Girl_run(Progress &progress, Player &player) {
                     player.y = 30;
                 }
 
+                if (progress.scn_num == 2 && progress.hero_killed_all == 1) {
+                    progress.scn_num = 10;
+                    map_state = all_dead;
+                    offsety = 30;
+                }   
  
 
             break;
@@ -411,8 +398,7 @@ void Girl_run(Progress &progress, Player &player) {
                         player.reach_ending = true;
                     }
                     else if (progress.scn_num == 4) {
-                        progress.ending_num = 5;
-                        player.reach_ending = true;
+                        progress.girl_rewind = 1;
                     }
                 }
             break; 
