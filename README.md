@@ -55,5 +55,16 @@ LIST OF NON-STANDARD C/C++ LIBRARIES:
 <sys/ioctl.h>: Provides access to I/O control operations on file descriptors.
 <termios.h>: Provides terminal I/O functionality, including terminal modes and control settings.
 
+CONTRIBUTION
+Cheung Yat Ching (3036066438): Readme, villager chat design, menu design
+
+Chow Lok King (3036216643): Chats design, modification on code, ending design, stories in Hero.cpp & window.cpp, Hero mini-game ideas
+
+Chung Ka Yi (3036058247): Most of the code designs, including player, keyboard, Hero, window, chat, maintest, menu, format, draw,     Makefile...... part of the story design
+
+Kwok Yuen Wang (3036060329): Girl chat and transition, dialogue, storyline mindmap, achievements (we decided to drop it at last)
+
+Lam Wui Yan (3036002420): Maps design and self-developing a Python file to generate the <short> map, Girl.cpp, mini-game in girl's part, most of the girl's part design, story design
+
 Gameplay Link:
 https://youtu.be/doiV--H5Byk
