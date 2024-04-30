@@ -320,6 +320,7 @@ int main() {
                         player.x = 9;
                         player.y = 9;
                         progress.event_num = 0;
+                        progress.map_code = 1;
                     }    
                     progress.save_progress(player);
                     current_state = STATE_MENU; 
@@ -350,6 +351,7 @@ int main() {
                         player.x = 9;
                         player.y = 9;
                         progress.event_num = 0;
+                        progress.map_code = 1;
                     }  
                     player.reach_ending = 0;
                 }
