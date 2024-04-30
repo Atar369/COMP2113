@@ -477,7 +477,7 @@ void Hero_run(Progress &progress, Player &player) {
                 progress.map_code = 7; 
 
                 if (progress.first_time_entering_castle && (progress.scn_num == 1 || progress.scn_num == 6)) {
-                    if (progress.girl_saved_monster) {
+                    if (progress.girl_know_fact) {
                         chat.loadChat("enter castle", progress.map_code, progress.scn_num, player, font_white);
                         progress.first_time_entering_castle = false;
                     }
