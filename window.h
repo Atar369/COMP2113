@@ -37,6 +37,7 @@ class Window {
         void handle_choice(Progress &progress, Player &player);
         void handle_save_choice(int &choice_button, int &map_code, Player &player);
         void Print_fighting(string contents, Player &player, string color, int key_required);
+        void Print_healing(string contents, Player &player, string color);
         void Print_endings(vector<string> contents, string color);
 
 };
