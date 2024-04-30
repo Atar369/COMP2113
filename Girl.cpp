@@ -151,6 +151,21 @@ void Girl_run(Progress &progress, Player &player) {
                     offsety = 30;
                 }
 
+                if (player.touch_oldman) {
+                    
+                    keyboard.key = KEY_SPACE;
+
+                    while (keyboard.key == KEY_SPACE) {
+                        string contents = chat.oldmanchat();
+                        window.build_buffer(contents);
+                        window.Print_buffer(current_map, player, font_cyan);
+                        keyboard.get_userInput();
+                        }
+                        system("clear");
+                    
+                    player.touch_oldman = 0;
+                }
+
             break;
 
             case village:
