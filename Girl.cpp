@@ -39,7 +39,7 @@ unordered_map<int, vector<string> > Girl_endings = {
     },
 };
 
-void Girl_run(Progress &progress, Player &player) {
+void Girl_run(Progress &progress, Player &player) { //start of the program
     typedef enum {
     hero_house,
     girl_house,
@@ -59,7 +59,7 @@ void Girl_run(Progress &progress, Player &player) {
 
     keyboard.key = 0;
 
-    switch(progress.map_code) {
+    switch(progress.map_code) { //map transition
         case 0:
             map_state = hero_house;
         break;
@@ -101,7 +101,7 @@ void Girl_run(Progress &progress, Player &player) {
         break;
     }
     
-    if (progress.event_num == 0) {
+    if (progress.event_num == 0) { //load intro
         chat.loadChat("intro", 0, 0, player, font_white);
     }
 
@@ -109,7 +109,7 @@ void Girl_run(Progress &progress, Player &player) {
 
     current_map = map_code_mapping.at(progress.map_code);
 
-    while (!player.reach_ending) {
+    while (!player.reach_ending) { //start of the loop
         int offsety = 0;
         int offsetx = 0;
         // Clear screen
@@ -117,7 +117,7 @@ void Girl_run(Progress &progress, Player &player) {
         
         switch(map_state) {
 
-            case hero_house: // hero house
+            case hero_house: // hero's house
                 progress.map_code = 0;
                 
                 // door transition
@@ -144,7 +144,7 @@ void Girl_run(Progress &progress, Player &player) {
 
             break;
 
-            case oldman_house: 
+            case oldman_house: //oldman's house
                 progress.map_code = 2;
                 if (player.y <= 0) {
                     map_state = outside_village;
@@ -168,7 +168,7 @@ void Girl_run(Progress &progress, Player &player) {
 
             break;
 
-            case village:
+            case village: 
                 progress.map_code = 3; 
 
 
@@ -369,7 +369,7 @@ void Girl_run(Progress &progress, Player &player) {
                 
             break;
 
-            case back_village:
+            case back_village: //the path back to village
                 progress.map_code = 8;
 
                 if (player.x <= 0) {
@@ -429,6 +429,7 @@ void Girl_run(Progress &progress, Player &player) {
 
         current_map = map_code_mapping.at(progress.map_code); 
 
+        //amendment of map 
         if (progress.scn_num == 7) {
             change_map(current_map, i_leftdoor, i_bed);
             change_map(current_map, i_rightdoor, i_bed);
