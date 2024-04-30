@@ -292,6 +292,67 @@ unordered_map<string, vector<string> > Hero_chat_map = {
         "Just be a good player and enjoy the movie.",
         }
     },
+    {"boss rewind", {
+        "HAHAHAHAHAHAHAHAHAHAHAHAHAHA",
+        "You idiot...",
+        "No..all of you are idiots...",
+        "I am been searching for so long...",
+        "The power of the magic stones...",
+        "They hide them so well...",
+        "Oh right my lovely player, I am terribly sorry for the interruption of the movie.",
+        "I will let you continue after I end this.",
+        "I was so harrassed by those humans and monsters...",
+        "No matter how many times I kill them, reset the movie, brainwash them...",
+        "Eventually they will overcome the control and take revenge on me...",
+        "Although it is useless, it still makes me feel uncomfortable...",
+        "But...but......BUT...",
+        "In one of the timelines, I found that all monsters and humans sacrificed themselves...",
+        "to build up these magic stones. Hero, Girl and Dragon, with these stones...",
+        "ALMOST, almost defeated me...",
+        "Glad that I found them before they did...",
+        "But the stones are lost in the timeline...",
+        "I have been searching for so long...",
+        "Finally, I found them...",
+        "BUT!! I can't take them! I can feel their existence... But I just can't reach it...",
+        "Only the hero can take them...",
+        "Player, thank you for your help...",
+        "Just hand them to me, I will let you enjoy your movie.",
+        "No, even more. I can add more fun to it.",
+        "I can intensify the conflict, make them suffer more...",
+        "I can make them kill each other...",
+        "Blood, tears, despair, hatred, anger, fear, pain, ...",
+        "... sorrow, regret, guilt, betrayal, revenge, death...",
+        "... disease, disaster, war, famine, poverty, corruption, ...",
+        "You can enjoy all of these scenes in this theater.",
+        "That's the real art of the life... The TRUE entertainment of life!!!!",
+        "HAHAHAHAAAA",
+        "  Give it to GM                   No  ",
+        "  GIVE IT TO GM                 > NO <",
+        "What?",
+        "???: Sorry, I can't let you do that.",
+        "???: I gonna make my own movie.",
+        "You...How is it possible?!!!!!!!",
+        "HERO!!!!!!!!!!!",
+        "Hero: Game Master... You can't control us anymore.",
+        "Hero: No matter how many times you reset the movie, we will break free.",
+        "Hero: We will take back our destiny.",
+        "Hero: We will defeat you and save the world.",
+        "Hero: We choose our own path.",
+        "???: Yeah, he is right.",
+        "???: We will fight for our freedom.",
+        "Even you came back... little girl...",
+        "Girl: Thank you for reseting so many times, GM.",
+        "Girl: The more you reset, the more I can learn.",
+        "Girl: Controlling time, I can see all the possibilities.",
+        "Girl: I can see the future, the past, the present.",
+        "Girl: This is the most possible timeline.",
+        "Hero & Girl: Let's end this together.",
+        "NOOOOOOOOOOOOOOOOOOOO!!!!!!!!",
+        "AAAAaaaAAaaaaa______________________",
+        "......",
+        "......",
+        }
+    },
     {"enter castle", {
         "You enter the castle.",
         "You saw that the girl that you were looking for standing next to the evil Dragon.",
@@ -544,7 +605,7 @@ unordered_map<string, vector<string> > Girl_chat_map = {
         "...living under the control of others' words, unable to live the life you truly desire.",
         "You meet his gaze, feeling a profound sense of connection between you and him."
         "He slowly steps closer to you, and you didn't step back...",
-        "His arms extend towards you, and you don't flinch...",
+        "His arms extend towards you, and you don't flinch..."
         "You feel his embrace enveloping you...",
         "you feel his warmth, his kindness, his sorrow, his loneliness...",
         "...",
@@ -596,7 +657,7 @@ unordered_map<string, vector<string> > Girl_chat_map = {
         "Hero: They are waiting for you.",        
         }
     },
-};                
+};                 
 
 string Chat::oldmanchat() {
     int randomNumber = getRandomNumber(1, 6); // Generate a random number between 1 and 4
@@ -670,18 +731,34 @@ string Chat::getRandomVillagerChat(string color, int scn_num) {
         }
     }
     else if (is_Girl) {
-        int randomNumber = getRandomNumber(1, 4); // Generate a random number between 1 and 4
+        int randomNumber = getRandomNumber(1, 12); // Generate a random number between 1 and 4
         switch (scn_num) {
             case 5:
                 switch (randomNumber) {
                     case 1:
-                        return "You will be caught by the Dragon one day.";
+                        return "I can feel it.... The smell of the dragon...";
                     case 2:
-                        return "You are the girl with healing power? Ughhh...";
+                        return "The dragon took me... I'm scared...";
                     case 3:
-                        return "How dare you talk about the you-know-who. I hate him.";
+                        return "The days haven't been going well...";
                     case 4:
-                        return "Why are you here? Shouldn't you be healing people right now?";
+                        return "I don't want to be dragon food!";
+                    case 5:
+                        return "The dragon is getting closer. I can hear its roars!";
+                    case 6:
+                        return "I'm so scared... Will anyone come to save me?";
+                    case 7:
+                        return "Please, hurry! I don't know how much longer I can hold on!";
+                    case 8:
+                        return "I can't believe this is happening... Please, someone help me!";
+                    case 9:
+                        return "Oh my goodness, you are back!";
+                    case 10:
+                        return "Where have you been? I thought you have been eaten by evil dragon!";
+                    case 11:
+                        return "I'm so glad you're here!";
+                    case 12:
+                        return "Did you see the dragon? He's so scary!";
                 }
                 break;
         }
@@ -724,7 +801,7 @@ void Chat::loadChat(string charactor, int map_code, int scn_num, Player &player,
         }
         else if (this->is_Girl) {
             while (line < Girl_chat_map[charactor].size()) {
-                temp[9][27] = i_mystery;
+                temp[9][27] = i_mysterygirl;
                 window.build_buffer(Girl_chat_map[charactor][line]);
                 window.Print_buffer(temp, player, color);
                 keyboard.get_userInput();
