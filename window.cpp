@@ -4,7 +4,7 @@ Window window;
 
 // Choice of character, girl or Hero
 const vector<string> player_button = {
-"  Be the Boy  ", "> BE THE BOY <", "  Be the Girl  ", "> BE THE GIRL <"
+"  Be the Boy  ", "> BE THE BOY <", "  Be the Girl  ", "> BE THE GIRL <",
 };
 
 // content of choice window, match with event num
@@ -49,6 +49,7 @@ unordered_map<int, vector<string> > Hero_choice_map_b4 = { // event num mapping
 
 };
 
+// scn num referring to what choice have been made
 unordered_map<int, vector<string> > Hero_choice_map_after = { // scn num mapping
 
     {1, {
@@ -129,7 +130,7 @@ unordered_map<int, vector<string> > Girl_choice_map_b4 = { // event num mapping
         "It was a huge monster with sharp teeth and red eyes.",
         "You: (whispering, voice trembling) What... what is that?",
         "But as your initial terror subsided, curiosity compelled you to take a closer look.",
-        "The monster's body was covered in wounds-deep gashes and oozing cuts.",
+        "The monster's body was covered in wounds—deep gashes and oozing cuts.",
         "You: Oh no... it's hurt... terribly hurt.",
         "As you neared, the monster recoiled, its red eyes narrowing with suspicion and defiance.",
         "Will you...",
@@ -225,6 +226,7 @@ unordered_map <int, vector<string> > Girl_button_choice2 = {
 };
 
 
+// build buffer for the window
 void Window::build_buffer(const string & content) {
 
     // Resize the window_buffer vector to the required dimensions
@@ -252,6 +254,7 @@ void Window::build_buffer(const string & content) {
     }
 }
 
+// reset buffer, to all empty
 void Window::reset_buffer() {
     for (int i = 0; i < height; i++) {
         for (int j = 0; j < width; j++) {
@@ -260,6 +263,7 @@ void Window::reset_buffer() {
     }
 }
 
+// print buffer on the screen
 void Window::Print_buffer(vector<vector<short> > current_map, Player &player, string color) { // position wanted to display
     // Get the dimensions of the terminal window
     struct winsize w;
@@ -280,8 +284,6 @@ void Window::Print_buffer(vector<vector<short> > current_map, Player &player, st
     }
 
     draw_map(current_map, player);
-    // print buffer window on top of current map, x, y are the top left corner of the window
-    //cout << "\033[" << y_coor << ";" << x_coor << "H"; // move cursor to the top left corner of the window
 
     for (int i = 0; i < height; i++) {
         cout << default_format << yoffset + i << ";" << xoffset << "H";
@@ -294,7 +296,9 @@ void Window::Print_buffer(vector<vector<short> > current_map, Player &player, st
     reset_buffer();
 }
 
+// intro character choice
 void Window::intro_character_choice(Player &player) {
+    
     string intro = "Choose your character: ";
 
     build_buffer(intro);
@@ -335,10 +339,14 @@ void Window::intro_character_choice(Player &player) {
         }  
 
         reset_buffer();
-        build_buffer(player_button[select_hero] + "                         " + player_button[select_girl]);
-
+        if (!progress.girl_rewind) {
+            build_buffer(player_button[select_hero] + "                         " + player_button[select_girl]);
+        }
+        else {
+            build_buffer(player_button[select_hero] + "                         " + + "               ");
+        }
         system("clear");
-
+        
         for (int i = 0; i < window_buffer.size(); i++) {
             cout << default_format << yoffset + i << ";" << xoffset << "H" << endl;
             for (int j = 0; j < window_buffer[0].size(); j++) {
@@ -357,11 +365,16 @@ void Window::intro_character_choice(Player &player) {
             }
         }
             
-        if (keyboard.key == KEY_RIGHT) {
-            choice_button++;
-            if (choice_button >= 1) {
-                choice_button = 1;
+        if (!progress.girl_rewind) {
+            if (keyboard.key == KEY_RIGHT) {
+                choice_button++;
+                if (choice_button >= 1) {
+                    choice_button = 1;
+                }
             }
+        }
+        else {
+            choice_button = 0;
         }
 
         if (keyboard.key == KEY_ENTER) 
@@ -380,6 +393,7 @@ void Window::intro_character_choice(Player &player) {
     reset_buffer();
 }
 
+// handle choice
 void Window::handle_choice(Progress &progress, Player &player){
     string choice1_content;
     string choice2_content;
@@ -388,6 +402,7 @@ void Window::handle_choice(Progress &progress, Player &player){
 
     vector<string> content_b4;
 
+    // based on the player color (character chose), load the content
     if (player.color == font_blue) {
         is_Hero = true;
         content_b4 = Hero_choice_map_b4[progress.event_num];     
@@ -510,7 +525,7 @@ void Window::handle_choice(Progress &progress, Player &player){
                     break;        
                 }
         }
-        else {
+        else { // for girl case
             switch (progress.event_num) {
                 case 1:
                     if (choice_button == 0) {
@@ -565,8 +580,8 @@ void Window::handle_choice(Progress &progress, Player &player){
 }
 
 
-
- void Window::handle_save_choice(int &choice_button, int &map_code, Player &player) {
+// handle save choice, user can choose to save or not
+void Window::handle_save_choice(int &choice_button, int &map_code, Player &player) {
 
     vector<vector<short> > temp_map (32, vector<short>(36, 0));
     
@@ -618,6 +633,7 @@ void Window::handle_choice(Progress &progress, Player &player){
 
 }
 
+// a fighting scene if the player choose to be a hero
 void Window::Print_fighting(string contents, Player &player, string color, int key_required) {
     system("clear");
     vector<vector<short> > fighting (31, vector<short>(36, 0));
@@ -656,6 +672,7 @@ void Window::Print_fighting(string contents, Player &player, string color, int k
     system("clear");    
 }
 
+// a healing scene if the player choose
 void Window::Print_healing(string contents, Player &player, string color) {
     system("clear");
     vector<vector<short> > healing (31, vector<short>(36, 0));
@@ -754,6 +771,7 @@ void Window::Print_healing(string contents, Player &player, string color) {
     system("clear");    
 }
 
+// print endings
 void Window::Print_endings(vector<string> contents, string color) {
     system("clear");
     vector<vector<short> > endings (31, vector<short>(36, 0));
@@ -770,4 +788,3 @@ void Window::Print_endings(vector<string> contents, string color) {
     sleep(1);
     system("clear");
 }
-
