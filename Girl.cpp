@@ -1,5 +1,4 @@
 #include "Girl.h"
-#include "variables.cpp"
 
 unordered_map<int, vector<string> > Girl_endings = {
 
