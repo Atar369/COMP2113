@@ -3,6 +3,7 @@
 // temp
 Player player;
 
+// calculate player's move
 void Player::moveUp() {
     this->vtrl = -1;
 }
@@ -23,7 +24,6 @@ void Player::stopMovement() {
     this->hrz = 0;
     this->vtrl = 0;
 }
-
 
 void Player::player_move(int key, vector<vector<short> > &current_map) {
     // Key check
