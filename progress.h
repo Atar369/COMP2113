@@ -42,6 +42,7 @@ class Progress {
     bool first_time_entering_village;
     bool first_time_entering_forest;
     bool first_time_entering_back_village;
+    bool get_certificate;
     bool talked_to_monster;
     bool talked_to_dragon;
     bool girl_know_fact;
