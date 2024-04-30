@@ -204,14 +204,9 @@ void Girl_run(Progress &progress, Player &player) {
                     player.touch_cooper = 0;
                 }
 
-                if (player.touch_cooper) {
+                if (player.touch_cooper && progress.talked_to_cooper) {
                     chat.loadChat("cooper", progress.map_code, progress.scn_num, player, font_yellow);
                     player.touch_robert = 0;
-                }
-
-                if (progress.first_time_entering_village && progress.scn_num == 5) {
-                    chat.loadChat("enter village", progress.map_code, progress.scn_num, player, font_cyan);
-                    progress.first_time_entering_village = false;
                 }
 
                 if (!progress.talked_to_cooper && player.touch_cooper) {
@@ -223,6 +218,11 @@ void Girl_run(Progress &progress, Player &player) {
                     progress.get_treasure1 = 1;
                     player.touch_cooper = 0;
                     progress.talked_to_cooper = 1;
+                }
+
+                if (progress.first_time_entering_village && progress.scn_num == 5) {
+                    chat.loadChat("enter village", progress.map_code, progress.scn_num, player, font_cyan);
+                    progress.first_time_entering_village = false;
                 }
 
                 if (progress.scn_num == 9) { 
