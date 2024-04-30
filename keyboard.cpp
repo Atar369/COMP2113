@@ -2,6 +2,7 @@
 
 Keyboard keyboard;
 
+// check if the key is pressed
 bool Keyboard::key_pressed() {
     this->get_userInput();
     if (this->key != 0 && (this->key != KEY_EXIT || this->key != KEY_ENTER || this->key != KEY_ESC || this->key != KEY_SPACE || this->key != KEY_ACTION || this->key != KEY_UP || this->key != KEY_DOWN || this->key != KEY_LEFT || this->key != KEY_RIGHT) ) {
@@ -10,6 +11,7 @@ bool Keyboard::key_pressed() {
     return 1;
 }
 
+// get the user input
 void Keyboard::get_userInput() {
     struct termios oldSettings, newSettings;
     tcgetattr(STDIN_FILENO, &oldSettings);
@@ -21,11 +23,12 @@ void Keyboard::get_userInput() {
 
     char userInput = getchar(); // get one character from the user
 
+    // map the user input to the key
     switch (userInput) {
         case 'W': case 'w':
             this->key = KEY_UP;
             break;
-        case 'A': case 'a':
+        case 'A': case 'a': 
             this->key = KEY_LEFT;
             break;
         case 'S': case 's':
