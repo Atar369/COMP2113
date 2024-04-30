@@ -11,6 +11,7 @@
 
 using namespace std;
 
+// Player class for player movement and collision
 class Player {
     
     public:
@@ -18,6 +19,8 @@ class Player {
     int x, y;
     string symbol;
     string color;
+
+    // player status
     bool chat_npc = false;
     bool reach_ending = false;
     bool touch_monster = false;
@@ -28,15 +31,9 @@ class Player {
     bool touch_robert = false;
     bool touch_dragon = false;
     bool touch_dragonnpc = false;
-    
-    
-    // Player's inventory & states
     bool touch_key = false;
     bool open_treasure = false;
-    bool turn_light_switch = false;
-    bool investigate = false;
     
-
 
     public:
 
@@ -53,8 +50,10 @@ class Player {
     void player_move(int key, vector<vector<short> > &current_map);
 
     void player_collision(vector<vector<short> > &current_map);
+
+    void reset_player();
 };
 
-extern Player player; // temp
+extern Player player; 
 
 
