@@ -71,6 +71,7 @@ void Keyboard::get_userInput() {
             this->key = KEY_J;    
             break;                    
     }
-
+    oldSettings.c_lflag |= ECHO;
+    tcsetattr(0, TCSANOW, &oldSettings);
 }
 
